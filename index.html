@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <title>Home - MokeSell</title>
+    <!--normalize.css-->
+    <link rel="stylesheet" href="css/normalize.css">
+    <!--custom styles-->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <!--top promo bar-->
+        <div class="promo-bar">
+            10% OFF - On all purchases above $5000.
+        </div>
+        <!--navbar-->
+        <nav class="navbar">
+            <div class="nav-container">
+                <!--menu button-->
+                <button class="menu-btn" id="openSidebarButton">☰</button>
+                <!--logo-->
+                <div class="logo">
+                    <a href="index.html"><img src="images/others/mokesell-logo.png" alt="mokesell logo"></a>
+                </div>
+                <!--search bar-->
+                <div class="search-container">
+                    <img src="images/icons/search-icon.png" alt="search icon" id="search-icon">
+                    <input type="search" id="search-bar" placeholder="Search for products ...">
+                    <ul id="suggestions-list" class="suggestions-list"></ul>
+                </div>
+                <!--right buttons-->
+                <div class="nav-buttons">
+                    <button class="sell-btn">Sell an item</button>
+                    <a href="#" class="auth-button">Sign in</a>
+                    <a href="#" class="auth-button">Sign up</a>
+                    <a href="#" class="cart-icon">
+                        <img src="images/icons/cart-icon.png" alt="cart icon">
+                        <span class="cart-badge">0</span>
+                    </a>
+                </div>
+            </div>
+            <!--collapsible menu-->
+            <ul class="nav-links">
+                <li><a href="#" class="link">All</a></li>
+                <li class="dropdown">
+                    <a href="#" class="link">Sofas
+                    <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Fabric Sofas</a></li>
+                        <li><a href="#">Leather Sofas</a></li>
+                        <li><a href="#">Metal Sofas</a></li>
+                        <li><a href="#">Fabric Sofas</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="link">Tables
+                    <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Dining Tables</a></li>
+                        <li><a href="#">Side Tables</a></li>
+                        <li><a href="#">Coffee Tables</a></li>
+                        <li><a href="#">Study Tables</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="link">Chairs
+                    <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Dining Chairs</a></li>
+                        <li><a href="#">Stools</a></li>
+                        <li><a href="#">Benches</a></li>
+                        <li><a href="#">Office Chairs</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="link">Beds
+                    <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Bed Frames</a></li>
+                        <li><a href="#">Mattresses</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="link">Decors
+                    <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">Lamps</a></li>
+                        <li><a href="#">Mirrors</a></li>
+                        <li><a href="#">Pillow Cushions</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="link">Spaces
+                    <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Living Room</a></li>
+                        <li><a href="#">Dining Room</a></li>
+                        <li><a href="#">Bed Room</a></li>
+                        <li><a href="#">Study Room</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="link">Second-hand</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- main content -->
+    <main class="main-content">
+        <!--footer section-->
+        <footer class="footer">
+            <!--footer left section-->
+            <div class="footer-left">
+                <img src="images/others/mokesell-logo.png" alt="mokesell logo">
+                <p>Where Style Meets Comfort - Redefining Your Furniture Journey.</p>
+                <!--social links-->
+                <div class="social-icons">
+                    <a href="#" target="_blank" class="icon"><img src="images/icons/instagram-icon.png" alt="Instagram"></a>
+                    <a href="#" target="_blank" class="icon"><img src="images/icons/twitter-icon.png" alt="Twitter"></a>
+                    <a href="#" target="_blank" class="icon"><img src="images/icons/facebook-icon.png" alt="Facebook"></a>
+                </div>
+                <!--copyright-->
+                <div class="copyright">
+                    <p>© 2025 MokeSell. All Rights Reserved.</p>
+                </div>
+            </div> 
+            <!--footer right section-->
+            <div class="footer-right">
+                <!--shop section-->
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html">Shop All</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Second-Hand Furniture</a></li>
+                </div>
+                <!--discover section-->
+                <div class="footer-section">
+                    <h4>Discover</h4>
+                    <li><a href="#">Games and Rewards</a></li>
+                    <li><a href="#">How it Works</a></li>
+                    <li><a href="#">Showrooms</a></li>
+                </div>
+                <!--support section-->
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Terms and Conditions</a></li>
+                    <li><a href="#">Return and Exchange</a></li>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="js/script.js"></script>
+</body>
+</html>

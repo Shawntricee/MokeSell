@@ -1,0 +1,30 @@
+/*GLOBAL STYLES*/
+/*resetting margin and padding for cross-browser compatibility*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*font styles*/
+.nunito-sans-font {
+    font-family: "Nunito Sans", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100,
+      "YTLC" 500;
+  }
+  /*header*/
+  .header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #F7F5EF;
+    z-index: 2;
+  }
+  .nav{
+    height: auto;
+  }
