@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - MokeSell</title>
+    <!--importing existing styles-->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!--google font-->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <!--order confirmation specific styles-->
+    <style>
+        /*container styles*/
+        .confirmation-container {
+            max-width: 800px;
+            margin: 120px auto 40px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /*confirmation image placeholder*/
+        .confirmation-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        /*thank you message styles*/
+        .thank-you-title {
+            font-size: 28px;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .confirmation-message {
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        /*order details card styles*/
+        .order-details-card {
+            border: 1px solid #E0E0E0;
+            padding: 30px;
+            margin: 0 auto;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .detail-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+        }
+
+        .detail-value {
+            color: #000;
+            font-weight: 500;
+        }
+
+        /*payment method image placeholder*/
+        .payment-image {
+            width: 60px;
+            height: 40px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        /*order line items styles*/
+        .order-line {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .product-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+
+        .product-image {
+            width: 100px;
+            height: 100px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        .product-details {
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .product-size {
+            display: inline-block;
+            padding: 2px 8px;
+            background-color: #7A6145;
+            color: #F7F5EF;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .product-price {
+            font-weight: 500;
+        }
+
+        /*continue shopping button*/
+        .continue-shopping {
+            display: inline-block;
+            background-color: #7A6145;
+            color: #F7F5EF;
+            padding: 12px 30px;
+            border: none;
+            cursor: pointer;
+            margin-top: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .continue-shopping:hover {
+            background-color: #65503A;
+        }
+    </style>
+</head>
+<body>
+    <!--reusing the existing header from index.html-->
+    <header class="header">
+        <!--copy the entire header content from index.html-->
+    </header>
+
+    <main>
+        <div class="confirmation-container">
+            <!--confirmation circle image-->
+            <div class="confirmation-image">image</div>
+
+            <!--thank you message-->
+            <h1 class="thank-you-title">Thank you for your purchase!</h1>
+            <p class="confirmation-message">You will receive an confirmation letter through your email</p>
+
+            <!--order details card-->
+            <div class="order-details-card">
+                <!--order information-->
+                <div class="detail-row">
+                    <div class="detail-label">
+                        <img src="images/icons/calendar-icon.png" alt="Date">
+                        Date
+                    </div>
+                    <div class="detail-value">19/1/2025</div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">
+                        <img src="images/icons/user-icon.png" alt="Customer">
+                        Customer
+                    </div>
+                    <div class="detail-value">Shawntrice Yip</div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">
+                        <img src="images/icons/payment-icon.png" alt="Payment">
+                        Payment Method
+                    </div>
+                    <div class="payment-image">image</div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">
+                        <img src="images/icons/order-icon.png" alt="Order">
+                        Order Number
+                    </div>
+                    <div class="detail-value">202581596</div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">
+                        <img src="images/icons/total-icon.png" alt="Total">
+                        Total
+                    </div>
+                    <div class="detail-value">$3,699</div>
+                </div>
+
+                <!--order line items-->
+                <div class="order-line">
+                    <div class="product-card">
+                        <div class="product-image">image</div>
+                        <div class="product-details">
+                            <div class="product-title">Sven 88" Tufted Leather Sofa - Charme Tan</div>
+                            <span class="product-size">XL</span>
+                        </div>
+                        <div class="product-price">$1,699</div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">image</div>
+                        <div class="product-details">
+                            <div class="product-title">Sven 88" Tufted Leather Sofa - Charme Tan</div>
+                            <span class="product-size">XL</span>
+                        </div>
+                        <div class="product-price">$1,699</div>
+                    </div>
+                </div>
+            </div>
+
+            <!--continue shopping button-->
+            <a href="index.html" class="continue-shopping">CONTINUE SHOPPING</a>
+        </div>
+    </main>
+
+    <!--reusing the existing footer from index.html-->
+    <footer class="footer">
+        <!--copy the entire footer content from index.html-->
+    </footer>
+</body>
+</html>
