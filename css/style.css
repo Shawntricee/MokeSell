@@ -46,6 +46,7 @@ body{
   display: flex;
   flex-direction: column;
   width: 100%;
+  background-color: #F7F5EF;
 }
 .nav-container{
   border-bottom: 2px solid rgba(122, 97, 69, 0.2);
@@ -76,7 +77,7 @@ body{
   position: relative;
   height: 70%;
   width: 100%;
-  padding-right: 20px;
+  padding: 0 20px;
 }
 #search-bar{
   background-color: #F7F5EF;
@@ -91,10 +92,10 @@ body{
 }
 #search-icon{
   position: absolute;
-  left: 15px;
+  left: 34px;
   top: 50%;
   transform: translateY(-50%);
-  height: 50%;
+  height: 40%;
   width: auto;
 }
 .nav-buttons{
@@ -173,10 +174,10 @@ body{
   font-weight: 500;
   gap: 80px;
 }
-.nav-links li{
+.nav-links .link, li{
   position: relative;
 }
-.nav-links li::after {
+.nav-links .link::after {
   content: "";
   position: absolute;
   left: 0;
@@ -188,7 +189,7 @@ body{
   transition: transform 0.3s ease;
 }
 
-.nav-links li:hover::after {
+.nav-links .link:hover::after {
   transform: scaleX(1);
 }
 .nav-links li a{
@@ -233,4 +234,77 @@ body{
 .dropdown:hover .dropdown-menu{
   display: block;
   z-index: 99;
+}
+.footer{
+  border: 2px solid red;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  background-color: #7A6145;
+  color: #F7F5EF;
+  padding: 60px 80px;
+  
+}
+.footer-left{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 40%;
+}
+.footer-logo {
+  max-width: 60%;
+  height: auto;
+  margin-bottom: 20px;
+}
+.footer-logo img{
+  width: 100%;
+  height: auto;
+}
+.footer-left p{
+  font-size: 20px;
+  font-weight: 500;
+  width: 70%;
+}
+.social-icons{
+  display: flex;
+  gap: 30px;
+}
+.social-icons a img{
+  width: 30px;
+  height: auto;
+}
+.copyright p{
+  font-size: 16px;
+  font-weight: 200;
+}
+.footer-right{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 20px;
+  width: 50%;
+}
+.footer-content h4{
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.footer-content ul{
+  list-style: none;
+}
+.footer-content li{
+  margin-bottom: 16px;
+}
+.footer-content li a{
+  display: block;
+  color: #F7F5EF;
+  font-size: 20px;
+  font-weight: 400;
+  text-decoration: none;
+  transition: transform 0.3s ease-in-out;
+}
+.footer-content li a:hover{
+  transform: translateY(-3px) translateX(-5px);
+  text-decoration: underline;
 }
