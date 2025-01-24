@@ -310,6 +310,63 @@ body{
   transform: translateY(-3px) translateX(-5px);
   text-decoration: underline;
 }
+#registrationPopup{
+  display: none;
+  position: fixed;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  padding:  40px;
+  box-shadow: 0px 4px  10px rgba(0, 0, 0, 0,2);
+}
+.popup-content{
+  position: relative;
+}
+.popup-logo img{
+  display: block;
+  height: 100%;
+  max-height: 120px;
+  width: auto;
+}
+.close-button{
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 26px;
+  color: #7A6145;
+  cursor: pointer;
+}
+.form{
+  display: none;
+  padding: 30px 20px 30px 20px;
+}
+.form.active{
+  display: block;
+}
+.popup-header{
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 20px 0 0;
+  border-bottom: 2px solid #00000030;
+  gap: 30px;
+}
+.popup-header button{
+  background: none;
+  border: none;
+  font-size: 24px;
+  font-weight: 600;
+  padding: 10px;
+  cursor: pointer;
+}
+.popup-header .active{
+  font-weight: 600;
+  border-bottom: 3px solid #7A6145;
+}
 
 /*INDEX.HTML STYLES*/
 .main-content{

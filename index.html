@@ -240,6 +240,38 @@
             </div>
         </footer>
     </main>
-    <!--<script src="js/script.js"></script>-->
+    <!--registration popup section-->
+    <div id="registrationPopup" class="popup">
+        <div class="popup-content">
+            <div class="popup-logo">
+                <img src="images/others/mokesell-logo-popup.png">
+            </div>
+            <span class="close-button">X</span>
+            <div class="popup-header">
+                <button id="signupTab" class="active">Sign up</button>
+                <button id="signinTab">Sign in</button>
+            </div>
+            <!--sign up form section-->
+            <div id="signupForm" class="form active">
+                <input type="text" id="signupUsername" placeholder="Username">
+                <input type="email" id="signupEmail" placeholder="Email Address">
+                <input type="password" id="signupPassword" placeholder="Password">
+                <button id="signupButton">SIGN UP</button>
+            </div>
+            <!--sign in form section-->
+            <div id="signinForm" class="form">
+                <input type="text" id="signinUsername" placeholder="Username">
+                <input type="password" id="signinPassword" placeholder="Password">
+                <button id="signinButton">SIGN IN</button>
+            </div>
+            <!--social login section-->
+            <div class="social-login">
+                <p>OR</p>
+                <button>Continue with Google</button>
+                <button>Continue with Facebook</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/registration.js"></script>
 </body>
 </html>
