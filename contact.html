@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmation - MokeSell</title>
-    <!--importing existing styles-->
+    <title>Contact Us - MokeSell</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
-    <!--google font-->
+    <link rel="stylesheet" href="css/contact.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500&display=swap" rel="stylesheet">
-    <!--order confirmation specific styles-->
-    <link rel="stylesheet" href="css/order-confirmation.css">
 </head>
 <body>
     <header class="header">
@@ -120,93 +117,142 @@
     </header>
 
     <main>
-        <div class="confirmation-container">
-            <!--confirmation circle image-->
-            <div class="confirmation-image">image</div>
-
-            <!--thank you message-->
-            <h1 class="thank-you-title">Thank you for your purchase!</h1>
-            <p class="confirmation-message">You will receive an confirmation letter through your email</p>
-
-            <!--order details card-->
-            <div class="order-details-card">
-                <!--order information-->
-                <div class="detail-row">
-                    <div class="detail-label">
-                        <img src="images/icons/calendar-icon.png" alt="Date">
-                        Date
-                    </div>
-                    <div class="detail-value">19/1/2025</div>
+        <!--reach our team section-->
+        <section class="reach-team">
+            <h1>Reach Our Team</h1>
+            <p>We love questions and feedback - and we're always happy to help.<br>Here are some ways to contact us.</p>
+            
+            <div class="contact-cards">
+                <div class="contact-card sales">
+                    <h2>Talk to Sales</h2>
+                    <p>Chat with our sales team to discover how our product can work best for you.</p>
+                    <a href="tel:+6582024995" class="phone-link">65 82024995</a>
                 </div>
-
-                <div class="detail-row">
-                    <div class="detail-label">
-                        <img src="images/icons/user-icon.png" alt="Customer">
-                        Customer
-                    </div>
-                    <div class="detail-value">ShawnBrice Yip</div>
+                
+                <div class="contact-card support">
+                    <h2>Contact Customer Support</h2>
+                    <p>We are waiting to help you and your team — so don't hesitate to reach out!</p>
+                    <button class="live-chat-btn">LIVE CHAT</button>
                 </div>
+            </div>
+        </section>
 
-                <div class="detail-row">
-                    <div class="detail-label">
-                        <img src="images/icons/payment-icon.png" alt="Payment">
-                        Payment Method
-                    </div>
-                    <div class="payment-image">image</div>
+        <!--headquarters section-->
+        <section class="office headquarters">
+            <div class="office-info">
+                <h2>Headquarters</h2>
+                <h3>South Block, Singapore</h3>
+                <p>870 Bukit Timah Ave<br>SG 65</p>
+                <a href="mailto:contact.sg@mokesell.com">contact.sg@mokesell.com</a>
+                <a href="tel:+6582024995">+65 82024995</a>
+                <div class="social-links">
+                    <a href="#" class="social-icon linkedin">LinkedIn</a>
+                    <a href="#" class="social-icon facebook">Facebook</a>
+                    <a href="#" class="social-icon instagram">Instagram</a>
                 </div>
+            </div>
+            <div class="office-map">office</div>
+        </section>
 
-                <div class="detail-row">
-                    <div class="detail-label">
-                        <img src="images/icons/order-icon.png" alt="Order">
-                        Order Number
-                    </div>
-                    <div class="detail-value">202581596</div>
-                </div>
-
-                <div class="detail-row">
-                    <div class="detail-label">
-                        <img src="images/icons/total-icon.png" alt="Total">
-                        Total
-                    </div>
-                    <div class="detail-value">$3,699</div>
-                </div>
-
-                <!--order line items-->
-                <div class="order-line">
-                    <div class="product-card">
-                        <div class="product-image">image</div>
-                        <div class="product-details">
-                            <div class="product-title">Sven 88" Tufted Leather Sofa - Charme Tan</div>
-                            <span class="product-size">XL</span>
-                        </div>
-                        <div class="product-price">$1,699</div>
-                    </div>
-
-                    <div class="product-card">
-                        <div class="product-image">image</div>
-                        <div class="product-details">
-                            <div class="product-title">Sven 88" Tufted Leather Sofa - Charme Tan</div>
-                            <span class="product-size">XL</span>
-                        </div>
-                        <div class="product-price">$1,699</div>
-                    </div>
+        <!--global offices section-->
+        <section class="global-offices">
+            <h2>Global Offices</h2>
+            
+            <div class="office">
+                <div class="office-map">office</div>
+                <div class="office-info">
+                    <h3>Berlin, Germany</h3>
+                    <p>Gormannstraße 89<br>Alt-Mölln 49</p>
+                    <a href="mailto:contact.german@mokesell.com">contact.german@mokesell.com</a>
+                    <a href="tel:+4903427897478">+49 03427 89 74 78</a>
                 </div>
             </div>
 
-            <!--continue shopping button-->
-            <a href="index.html" class="continue-shopping">CONTINUE SHOPPING</a>
-        </div>
+            <div class="office">
+                <div class="office-info">
+                    <h3>Vienna, Austria</h3>
+                    <p>Mariahilferstraße 1, Gräfe-Platz<br>13, Hardsberg</p>
+                    <a href="mailto:contact.austria@mokesell.com">contact.austria@mokesell.com</a>
+                    <a href="tel:+4304242238550">+43 04242 238550</a>
+                </div>
+                <div class="office-map">office</div>
+            </div>
+        </section>
+
+        <!--local sales call section-->
+        <section class="local-sales">
+            <h2>Prefer a Local Sales Call?</h2>
+            <p>Call any of these numbers to reach a member of our global team.<br>We'd love to hear from you.</p>
+            
+            <div class="regions">
+                <div class="region">
+                    <h3>ASIA</h3>
+                    <div class="countries">
+                        <div class="country">
+                            <span>Korea</span>
+                            <a href="tel:+823538864520">+82353886.4520</a>
+                        </div>
+                        <div class="country">
+                            <span>Singapore</span>
+                            <a href="tel:+6582024995">+65 82024995</a>
+                        </div>
+                        <div class="country">
+                            <span>Japan</span>
+                            <a href="tel:+81635253740">+81 635 253 740</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="region">
+                    <h3>EUROPE</h3>
+                    <div class="countries">
+                        <div class="country">
+                            <span>Austria</span>
+                            <a href="tel:+4304242238550">+43 04242 238550</a>
+                        </div>
+                        <div class="country">
+                            <span>Switzerland</span>
+                            <a href="tel:+41338833351">+41 33 883 3351</a>
+                        </div>
+                        <div class="country">
+                            <span>Germany</span>
+                            <a href="tel:+4903427897478">+49 03427 89 74 78</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--contact form section-->
+        <section class="contact-form">
+            <h2>Prefer a Local Sales Call?</h2>
+            <p>Send us a message and we'll respond within 24 hours.</p>
+            
+            <form id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="send-btn">SEND</button>
+            </form>
+        </section>
     </main>
 
-    <!--reusing the existing footer from index.html-->
+    <!--footer from index.html-->
     <footer class="footer">
- 
+
     </footer>
-    <!--external libraries-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.14/lottie.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
-    
-    <!--custom javascript-->
-    <script src="js/order-confirmation.js"></script>
+
+    <script src="js/contact.js"></script>
 </body>
 </html>
