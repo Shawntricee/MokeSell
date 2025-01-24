@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - MokeSell</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/checkout.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <!--top promo bar section-->
+        <div class="promo-bar">
+            10% OFF - On all purchases above $5000.
+        </div>
+        <!--navbar section-->
+        <nav class="navbar">
+            <div class="nav-container">
+                <!--menu button-->
+                <button class="menu-btn" id="openSidebarButton">☰</button>
+                <!--logo-->
+                <div class="logo">
+                    <a href="index.html"><img src="images/others/mokesell-logo.png" alt="mokesell logo"></a>
+                </div>
+                <!--search bar-->
+                <div class="search-container">
+                    <img src="images/icons/search-icon.png" alt="search icon" id="search-icon">
+                    <input type="search" id="search-bar" placeholder="Search for products ...">
+                    <ul id="suggestions-list" class="suggestions-list"></ul>
+                </div>
+                <!--right buttons-->
+                <div class="nav-buttons">
+                    <a href="#">
+                        <button class="sell-button">Sell an item</button>
+                    </a>
+                    <a href="#" class="auth-button">Sign in</a>
+                    <a href="#" class="auth-button">Sign up</a>
+                    <a href="#" class="cart-icon">
+                        <img src="images/icons/cart-icon.png" alt="cart icon">
+                        <span class="cart-badge">0</span>
+                    </a>
+                </div>
+            </div>
+            <!--collapsible menu-->
+            <div class="nav-categories">
+                <ul class="nav-links">
+                    <li><a href="#" class="link">All</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Sofas
+                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Fabric Sofas</a></li>
+                            <li><a href="#">Leather Sofas</a></li>
+                            <li><a href="#">Metal Sofas</a></li>
+                            <li><a href="#">Fabric Sofas</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Tables
+                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Dining Tables</a></li>
+                            <li><a href="#">Side Tables</a></li>
+                            <li><a href="#">Coffee Tables</a></li>
+                            <li><a href="#">Study Tables</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Chairs
+                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Dining Chairs</a></li>
+                            <li><a href="#">Stools</a></li>
+                            <li><a href="#">Benches</a></li>
+                            <li><a href="#">Office Chairs</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Beds
+                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Bed Frames</a></li>
+                            <li><a href="#">Mattresses</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Decors
+                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Lamps</a></li>
+                            <li><a href="#">Mirrors</a></li>
+                            <li><a href="#">Pillow Cushions</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Spaces
+                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Living Room</a></li>
+                            <li><a href="#">Dining Room</a></li>
+                            <li><a href="#">Bed Room</a></li>
+                            <li><a href="#">Study Room</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="checkout-page">
+        <h1>MY SHOPPING BAG (3 ITEMS)</h1>
+
+        <div class="checkout-container">
+            <!--left column-->
+            <div class="checkout-main">
+                <!--order summary section-->
+                <section class="order-summary">
+                    <h2>
+                        <img src="images/icons/cart-icon.png" alt="Cart">
+                        Order summary
+                    </h2>
+                    <div class="order-items">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--item 1-->
+                                <tr>
+                                    <td class="product-info">
+                                        <div class="product-image">image</div>
+                                        <span>Sven 88" Tufted Leather Sofa - Charme Tan</span>
+                                    </td>
+                                    <td>$1,699</td>
+                                    <td>
+                                        <div class="quantity-control">
+                                            <button class="quantity-btn" data-action="decrease">-</button>
+                                            <span>2</span>
+                                            <button class="quantity-btn" data-action="increase">+</button>
+                                        </div>
+                                    </td>
+                                    <td>$1,699</td>
+                                    <td><button class="remove-btn" aria-label="Remove item">×</button></td>
+                                </tr>
+                                <!--item 2-->
+                                <tr>
+                                    <td class="product-info">
+                                        <div class="product-image">image</div>
+                                        <span>Sven 88" Tufted Leather Sofa - Charme Tan</span>
+                                    </td>
+                                    <td>$1,699</td>
+                                    <td>
+                                        <div class="quantity-control">
+                                            <button class="quantity-btn" data-action="decrease">-</button>
+                                            <span>1</span>
+                                            <button class="quantity-btn" data-action="increase">+</button>
+                                        </div>
+                                    </td>
+                                    <td>$1,699</td>
+                                    <td><button class="remove-btn" aria-label="Remove item">×</button></td>
+                                </tr>
+                                <!--item 3-->
+                                <tr>
+                                    <td class="product-info">
+                                        <div class="product-image">image</div>
+                                        <span>Sven 88" Tufted Leather Sofa - Charme Tan</span>
+                                    </td>
+                                    <td>$1,699</td>
+                                    <td>
+                                        <div class="quantity-control">
+                                            <button class="quantity-btn" data-action="decrease">-</button>
+                                            <span>1</span>
+                                            <button class="quantity-btn" data-action="increase">+</button>
+                                        </div>
+                                    </td>
+                                    <td>$1,699</td>
+                                    <td><button class="remove-btn" aria-label="Remove item">×</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!--delivery options-->
+                <section class="delivery-options">
+                    <h2>
+                        <img src="images/icons/delivery-icon.png" alt="Delivery">
+                        Delivery options
+                    </h2>
+                    <div class="operator-selection">
+                        <h3>Operator</h3>
+                        <div class="operators">
+                            <label class="operator">
+                                <input type="radio" name="operator" value="ups" checked>
+                                <span>UPS</span>
+                            </label>
+                            <label class="operator">
+                                <input type="radio" name="operator" value="fedex">
+                                <span>FedEx</span>
+                            </label>
+                            <label class="operator">
+                                <input type="radio" name="operator" value="dhl">
+                                <span>DHL</span>
+                            </label>
+                        </div>
+                        <div class="delivery-times">
+                            <label class="delivery-option">
+                                <input type="radio" name="delivery-time" value="instant" checked>
+                                <div class="option-details">
+                                    <div class="price">$22</div>
+                                    <div class="type">Instant delivery</div>
+                                    <div class="eta">Est. arrival: Today</div>
+                                </div>
+                            </label>
+                            <label class="delivery-option">
+                                <input type="radio" name="delivery-time" value="standard">
+                                <div class="option-details">
+                                    <div class="price">$12</div>
+                                    <div class="type">Standard delivery</div>
+                                    <div class="eta">Est. arrival: DD/MM</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!--customer information-->
+                <section class="customer-information">
+                    <h2>
+                        <img src="images/icons/user-icon.png" alt="User">
+                        Customer information
+                    </h2>
+                    <form class="customer-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullname">Full name</label>
+                                <input type="text" id="fullname" placeholder="ShawnBrice Yip" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone number</label>
+                                <input type="tel" id="phone" placeholder="+65 82024995" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" placeholder="8 Jurong Lake Link, Lake Grande, Singapore 648159" required>
+                        </div>
+                        <label class="save-default">
+                            <input type="checkbox" id="save-default">
+                            <span>Save as default</span>
+                        </label>
+                        <div class="delivery-note">
+                            <img src="images/icons/info-icon.png" alt="Info">
+                            <p>Delivery note<br>The delivery time usually starts when the order confirmation is sent.</p>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+            <!--payment summary-->
+            <div class="checkout-sidebar">
+                <section class="payment-method">
+                    <h2>Payment method</h2>
+                    <div class="payment-selection">
+                        <h3>Change payment methods</h3>
+                        <div class="card-option">
+                            <div class="card-image">image</div>
+                            <div class="card-details">
+                                <span>Mastercard</span>
+                                <span>**** 5987</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="voucher-section">
+                        <h3>Voucher</h3>
+                        <div class="voucher-input">
+                            <input type="text" placeholder="$15 OFF">
+                            <button type="button">Apply</button>
+                        </div>
+                    </div>
+
+                    <div class="order-summary">
+                        <h3>Summary</h3>
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>$180</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Discount</span>
+                            <span>-$15</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Delivery Fee</span>
+                            <span>$22</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span>$187</span>
+                        </div>
+                        <button type="button" class="proceed-btn">Proceed to payment</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!--related products-->
+        <section class="related-products">
+            <h2>RELATED PRODUCTS</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">image</div>
+                    <h3>Sven 88" Tufted Leather Sofa - Charme Tan</h3>
+                    <p class="price">$1,699</p>
+                </div>
+                <!--repeat-->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+    
+    </footer>
+
+    <script src="js/checkout.js"></script>
+</body>
+</html>
