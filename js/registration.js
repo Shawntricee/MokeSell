@@ -16,14 +16,33 @@ class Registration {
                 e.preventDefault();
                 this.loginUser();
             });
+
+             // Event listeners for switching between tabs
+            document.getElementById("signupTab").addEventListener("click", () => {
+                this.switchForm("signup");
+            });
+
+            document.getElementById("signinTab").addEventListener("click", () => {
+                this.switchForm("signin");
+            });
+
+            // Close popup when the close button or overlay is clicked
+            document.querySelector('.close-button').addEventListener('click', () => this.closePopup());
+            document.getElementById('popupOverlay').addEventListener('click', () => this.closePopup());
         });
     }
 
-    showPopupAfterDelay() {
-        setTimeout(() => {
-            document.getElementById("registrationPopup").style.display = "block";
-        }, 5000); // Show popup after 5 seconds
-    }
+        showPopupAfterDelay() {
+            // Check if user is logged in
+            if (localStorage.getItem("userLoggedIn") === "true") {
+                return; // If already logged in, do not show popup
+            }
+
+            setTimeout(() => {
+                document.getElementById("registrationPopup").classList.add("show");
+                document.getElementById("popupOverlay").classList.add("show");
+            }, 4000); // Show after 4 seconds
+        }
 
     registerUser() {
         let username = document.getElementById("signupUsername").value;
@@ -82,34 +101,56 @@ class Registration {
             return;
         }
 
-        let loginData = { username, password };
+        let query = `{"username":"${username}", "password":"${password}"}`;
 
-        let settings = {
-            method: "POST",
+        fetch(`https://mokesell-d5a1.restdb.io/rest/accounts?q=${encodeURIComponent(query)}`, {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "x-apikey": this.apiKey,
                 "Cache-Control": "no-cache"
-            },
-            body: JSON.stringify(loginData)
-        };
-
-        fetch("https://mokesell-d5a1.restdb.io/rest/accounts", settings)
-            .then(response => response.json())
-            .then(() => {
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                // Login successful
                 alert("Login Successful!");
                 this.closePopup();
-            })
-            .catch(error => console.log(error));
+            } else {
+                // If no matching user is found
+                alert("Invalid username or password. Please try again.");
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            alert("An error occurred. Please try again later.");
+        });
     }
 
     switchForm(form) {
-        document.getElementById("signupForm").style.display = form === "signin" ? "none" : "block";
-        document.getElementById("signinForm").style.display = form === "signin" ? "block" : "none";
+        const signupForm = document.getElementById("signupForm");
+        const signinForm = document.getElementById("signinForm");
+        const signupTab = document.getElementById("signupTab");
+        const signinTab = document.getElementById("signinTab");
+    
+        // Toggle form visibility
+        signupForm.classList.toggle("active", form === "signup");
+        signinForm.classList.toggle("active", form === "signin");
+    
+        // Toggle active tab styling
+        signupTab.classList.toggle("active", form === "signup");
+        signinTab.classList.toggle("active", form === "signin");
     }
 
     closePopup() {
-        document.getElementById("registrationPopup").style.display = "none";
+        document.getElementById("registrationPopup").classList.remove("show");
+        document.getElementById("popupOverlay").classList.remove("show");
+    
+        // Delay hiding the overlay to allow the fade-out effect
+        setTimeout(() => {
+            document.getElementById("popupOverlay").style.display = "none";
+        }, 300); // Matches the transition duration in CSS
     }
 }
 
