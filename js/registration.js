@@ -1,60 +1,117 @@
-//method to manage registration popup  
-class RegistrationPopup{
-    constructor() {
-        this.popup = document.getElementById("registrationPopup");
-        this.closeButton= document.querySelector(".close-button");
-
-        //tabs
-        this.signupTab = document.getElementById("signupTab");
-        this.signinTab = document.getElementById("signinTab");
-
-        //forms
-        this.signupForm = document.getElementById("signupForm");
-        this.signinForm = document.getElementById("signinForm");
-
-        //buttons
-        this.signupButton = document.getElementById("signupButton");
-        this.signinButton = document.getElementById("signinButton");
-
-        //initialise event listeners
-        this.initEvents();
-
-        //show popup after 10s
-        this.showPopupAfterDelay(1000);
+class Registration {
+    constructor(apiKey) {
+        this.apiKey = apiKey;
+        this.initEventListeners();
+        this.showPopupAfterDelay();
     }
 
-    initEvents() {
-        this.signupTab.addEventListener("click", () => this.switchForm("signup"));
-        this.signinTab.addEventListener("click", () => this.switchForm("signin"));
-        this.closeButton.addEventListener("click", () => this.closePopup());
-        this.signupButton.addEventListener("click", (event) => this.registerUser(event));
-        this.signinButton.addEventListener("click", (event) => this.loginUser(event));
+    initEventListeners() {
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById("signupButton").addEventListener("click", (e) => {
+                e.preventDefault();
+                this.registerUser();
+            });
+
+            document.getElementById("signinButton").addEventListener("click", (e) => {
+                e.preventDefault();
+                this.loginUser();
+            });
+        });
     }
 
-    switchForm(target) {
-        if (target === "signin") {
-            this.signinForm.classList.add("active");
-            this.signupForm.classList.remove("active");
-            this.signinTab.classList.add("active");
-            this.signupTab.classList.remove("active");
-        } else {
-            this.signupForm.classList.add("active");
-            this.signinForm.classList.remove("active");
-            this.signupTab.classList.add("active");
-            this.signinTab.classList.remove("active");
+    showPopupAfterDelay() {
+        setTimeout(() => {
+            document.getElementById("registrationPopup").style.display = "block";
+        }, 5000); // Show popup after 5 seconds
+    }
+
+    registerUser() {
+        let username = document.getElementById("signupUsername").value;
+        let email = document.getElementById("signupEmail").value;
+        let password = document.getElementById("signupPassword").value;
+
+        if (!username || !email || !password) {
+            alert("Please fill in all fields.");
+            return;
         }
+
+        let userData = { username, email, password };
+
+        // First, check if the email or username already exists
+        fetch(`https://mokesell-d5a1.restdb.io/rest/accounts?q={"$or":[{"username":"${username}"},{"email":"${email}"}]}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": this.apiKey,
+                "Cache-Control": "no-cache"
+            }
+        })
+        .then(response => response.json())
+        .then(existingUsers => {
+            if (existingUsers.length > 0) {
+                alert("Username or Email already exists. Please use a different one.");
+            } else {
+                // If username/email is unique, proceed with registration
+                return fetch("https://mokesell-d5a1.restdb.io/rest/accounts", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-apikey": this.apiKey,
+                        "Cache-Control": "no-cache"
+                    },
+                    body: JSON.stringify(userData)
+                });
+            }
+        })
+        .then(response => response ? response.json() : null)
+        .then(data => {
+            if (data) {
+                alert("Registration Successful!");
+                this.switchForm("signin");
+            }
+        })
+        .catch(error => console.log(error));
+    }
+
+    loginUser() {
+        let username = document.getElementById("signinUsername").value;
+        let password = document.getElementById("signinPassword").value;
+
+        if (!username || !password) {
+            alert("Please enter username and password.");
+            return;
+        }
+
+        let loginData = { username, password };
+
+        let settings = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": this.apiKey,
+                "Cache-Control": "no-cache"
+            },
+            body: JSON.stringify(loginData)
+        };
+
+        fetch("https://mokesell-d5a1.restdb.io/rest/accounts", settings)
+            .then(response => response.json())
+            .then(() => {
+                alert("Login Successful!");
+                this.closePopup();
+            })
+            .catch(error => console.log(error));
+    }
+
+    switchForm(form) {
+        document.getElementById("signupForm").style.display = form === "signin" ? "none" : "block";
+        document.getElementById("signinForm").style.display = form === "signin" ? "block" : "none";
     }
 
     closePopup() {
-        this.popup.style.display = "none";
+        document.getElementById("registrationPopup").style.display = "none";
     }
-
-    showPopupAfterDelay(delay) {
-        setTimeout(() => {
-            this.popup.style.display = "block"; // Show the popup
-        }, delay);
-    }   
 }
 
-// Initialize the popup when the page loads
-document.addEventListener("DOMContentLoaded", () => new RegistrationPopup());
+const APIKEY = "679377f88459083ff6097e55";
+new Registration(APIKEY);
