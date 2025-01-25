@@ -55,7 +55,6 @@ body{
   display: flex;
   align-items: center;
   height: 80px;
-  overflow: hidden;
 }
 .menu-btn{
   display: none;
@@ -66,6 +65,7 @@ body{
   width: auto;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 .nav-container .logo img{
   display: block;
@@ -102,14 +102,61 @@ body{
 }
 .nav-buttons{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   padding: 20px 40px;
   height: 100%;
-  width: 60%;
+  width: 50%;
   color: #7A6145;
   font-size: 18px;
   font-weight: 700;
+}
+#guestNav{
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+}
+#userNav{
+  width: 60%;
+  display: none;
+  justify-content: space-between;
+}
+.profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  width: 100%;
+  cursor: pointer;
+}
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #F7F5EF;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: none;
+  list-style: none;
+  min-width: 150px;
+  z-index: 2;
+}
+.user-dropdown li {
+  padding: 14px;
+  text-align: left;
+}
+.user-dropdown li:hover {
+  background-color: rgba(95, 74, 52, 0.1);
+  cursor: pointer;
+}
+.user-dropdown a {
+  text-decoration: none;
+  color: #000000;
+  font-size:16px;
+  font-weight: 400;
+  display: block;
 }
 .sell-button{
   background-color: #7A6145;
@@ -128,7 +175,7 @@ body{
   text-decoration: none;
   color: inherit;
 }
-.nav-buttons .cart-icon{
+.nav-buttons .nav-icon{
   position: relative;
   display: flex;
   align-items: center;
@@ -138,12 +185,12 @@ body{
   transition: transform 0.2s ease;
   cursor: pointer;
 }
-.nav-buttons .cart-icon img{
+.nav-buttons .nav-icon img, .profile-container img{
   width: 60%;
   height: auto;
   object-fit: contain;
 }
-.nav-buttons .cart-icon:hover{
+.nav-buttons .nav-icon:hover{
   transform: scale(1.1);
 }
 .cart-badge{

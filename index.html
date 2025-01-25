@@ -32,17 +32,37 @@
                     <input type="search" id="search-bar" placeholder="Search for products ...">
                     <ul id="suggestions-list" class="suggestions-list"></ul>
                 </div>
-                <!--right buttons-->
+                <!--right buttons--> 
                 <div class="nav-buttons">
                     <a href="#">
                         <button class="sell-button">Sell an item</button>
                     </a>
-                    <a href="#" class="auth-button">Sign in</a>
-                    <a href="#" class="auth-button">Sign up</a>
-                    <a href="#" class="cart-icon">
-                        <img src="images/icons/cart-icon.png" alt="cart icon">
-                        <span class="cart-badge">0</span>
-                    </a>
+                    <div id="guestNav">
+                        <a href="#" class="auth-button">Sign in</a>
+                        <a href="#" class="auth-button">Sign up</a>
+                        <a href="#" class="nav-icon">
+                            <img src="images/icons/cart-icon.png" alt="cart icon">
+                            <span class="cart-badge">0</span>
+                        </a>
+                    </div>
+                    <div id="userNav">
+                        <div class="profile-container">
+                            <a href="#" class="nav-icon">
+                                <img src="images/icons/favourites-icon.png" id="favouritesIcon" alt="favourites icon">
+                            </a>
+                            <a href="#" class="nav-icon">
+                                <img src="images/icons/cart-icon.png" alt="cart icon">
+                                <span class="cart-badge">0</span>
+                            </a>
+                            <a href="#" class="nav-icon">
+                                <img src="images/icons/profile-icon.png" id="profileIcon" alt="profile icon">
+                            </a>
+                            <ul class="user-dropdown" id="userDropdown">
+                                <li><a href="#">View Profile</a></li>
+                                <li><a href="#" id="logoutButton">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!--collapsible menu-->

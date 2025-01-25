@@ -3,6 +3,7 @@ class Registration {
         this.apiKey = apiKey;
         this.initEventListeners();
         this.showPopupAfterDelay();
+        this.checkLoginStatus();
     }
 
     initEventListeners() {
@@ -21,7 +22,6 @@ class Registration {
             document.getElementById("signupTab").addEventListener("click", () => {
                 this.switchForm("signup");
             });
-
             document.getElementById("signinTab").addEventListener("click", () => {
                 this.switchForm("signin");
             });
@@ -116,6 +116,8 @@ class Registration {
             if (data.length > 0) {
                 // Login successful
                 alert("Login Successful!");
+                localStorage.setItem("userLoggedIn", "true");
+                this.updateNavBar();
                 this.closePopup();
             } else {
                 // If no matching user is found
@@ -126,6 +128,35 @@ class Registration {
             console.log(error);
             alert("An error occurred. Please try again later.");
         });
+    }
+
+    checkLoginStatus() {
+        if (localStorage.getItem("userLoggedIn") === "true") {
+            this.updateNavBar();
+        }
+    }
+
+    updateNavBar() {
+        document.getElementById("userNav").style.display = "flex";
+        document.getElementById("guestNav").style.display = "none";
+        //add event listener to toggle the dropdown on profile click
+        const profileContainer = document.querySelector(".profile-container");
+        const userDropdown = document.getElementById("userDropdown");
+        profileContainer.addEventListener("click", () => {
+            //toggle visibility of the dropdown using style.display
+            if (userDropdown.style.display === "block") {
+                userDropdown.style.display = "none"; // Hide the dropdown
+            } else {
+                userDropdown.style.display = "block"; // Show the dropdown
+            }
+        });
+        //add event listener for logout
+        document.getElementById("logoutButton").addEventListener("click", () => this.logoutUser());
+    }
+
+    logoutUser() {
+        localStorage.removeItem("userLoggedIn");
+        location.reload();
     }
 
     switchForm(form) {
