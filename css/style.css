@@ -518,7 +518,7 @@ body{
   font-size: 24px;
   margin-bottom: 50px;
 }
-.cta-button{
+.hero-button{
   padding: 14px 26px;
   font-size: 14px;
   font-weight: 600;
@@ -529,7 +529,7 @@ body{
   transition: ease-out 0.4s;
   outline: none;
 }
-.cta-button:hover{
+.hero-button:hover{
   box-shadow: inset 250px 0 0 0 #00000012;
   background-color: transparent;
   border: 1px solid #FFFFFF;
@@ -620,7 +620,7 @@ body{
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #7a614591;
+  background: #7a614535;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -670,6 +670,63 @@ body{
   height: 100%;
 }
 .time-box span{
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
+}
+/*list or browse listings section*/
+.list-browse-listings{
+  margin-top: 60px;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  color: #FFFFFF;
+}
+.list-listings{
+  background: url("../images/others/list-listings-bg.png") no-repeat center center;
+}
+.browse-listings{
+  background: url("../images/others/browse-listings-bg.png") no-repeat center center;
+  margin-top: 120px;
+}
+.list-listings, .browse-listings{
+  background-size: cover;
+  width: 45%;
+  height: 560px;
+  color: 20px;
+  text-align: left;
+  box-sizing: border-box;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.list-listings:hover, .browse-listings:hover{
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+.list-listings, .browse-listings{
+  padding: 40px;
+}
+.list-listings h3, .browse-listings h3{
+  font-size: 44px;
+  margin-bottom: 10px;
+}
+.list-listings p, .browse-listings p{
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.list-listings button, .browse-listings button{
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #FFFFFF;
+  color: #000000;
+  border:1px solid rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+.list-listings button:hover, .browse-listings button:hover{
+  background-color: transparent;
+  border: 1px solid #FFFFFF;
+  color:#FFFFFF;
 }
