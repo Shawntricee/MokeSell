@@ -497,7 +497,7 @@ body{
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  background: url('../images/others/hero-image.png') no-repeat center center;
+  background: url('../images/hero/hero-image1.png') no-repeat center center;
   background-size: cover;
   width: 100%;
   height:80vh; /*full viewport height*/
@@ -545,7 +545,8 @@ body{
   font-size: 30px;
   padding: 30px 15px;
   cursor: pointer;
-  transition: 0.3s;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 .prev-button{
   left: 0;
@@ -555,8 +556,9 @@ body{
   right: 0;
   display: none;
 }
-.prev-button:hover, .next-button:hover{
-  background: rgba(0, 0, 0, 0.8);
+.hero:hover .prev-button,
+.hero:hover .next-button {
+    opacity: 1;
 }
 /*top cateogies section styles*/
 .top-categories{
@@ -668,6 +670,10 @@ body{
   padding: 10px 40px;
   border-radius: 5px;
   height: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+.time-box:hover{
+  transform: scale(1.05);
 }
 .time-box span{
   font-size: 40px;
