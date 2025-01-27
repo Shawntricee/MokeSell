@@ -8,6 +8,23 @@ class Registration {
 
     initEventListeners() {
         document.addEventListener('DOMContentLoaded', () => {
+            //nav bar sign in and sign up buttons
+            const navSignUp = document.getElementById("navSignUp");
+            const navSignIn = document.getElementById("navSignIn");
+    
+            if (navSignUp) {
+                navSignUp.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    this.openPopup("signup");
+                });
+            }
+    
+            if (navSignIn) {
+                navSignIn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    this.openPopup("signin");
+                });
+            }
             document.getElementById("signupButton").addEventListener("click", (e) => {
                 e.preventDefault();
                 this.registerUser();
@@ -17,7 +34,6 @@ class Registration {
                 e.preventDefault();
                 this.loginUser();
             });
-
              // Event listeners for switching between tabs
             document.getElementById("signupTab").addEventListener("click", () => {
                 this.switchForm("signup");
@@ -182,6 +198,17 @@ class Registration {
         setTimeout(() => {
             document.getElementById("popupOverlay").style.display = "none";
         }, 300); // Matches the transition duration in CSS
+    }
+
+    openPopup(formType) {
+        const popup = document.getElementById("registrationPopup");
+        const overlay = document.getElementById("popupOverlay");
+
+        popup.classList.add("show");
+        overlay.classList.add("show");
+        overlay.style.display = "block";
+
+    this.switchForm(formType);
     }
 }
 

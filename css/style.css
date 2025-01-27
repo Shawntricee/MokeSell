@@ -172,7 +172,12 @@ body{
 }
 .auth-button{
   text-decoration: none;
-  color: inherit;
+  color: #7A6145;
+  font-weight: 500;
+  background: none;
+  border: none;
+  transition: transform 0.2s ease;
+  cursor: pointer;
 }
 .nav-buttons .nav-icon{
   position: relative;
@@ -189,7 +194,7 @@ body{
   height: auto;
   object-fit: contain;
 }
-.nav-buttons .nav-icon:hover{
+.nav-buttons .nav-icon:hover, .auth-button:hover{
   transform: scale(1.1);
 }
 .cart-badge{
