@@ -70,7 +70,7 @@ class Registration {
             return;
         }
 
-        let userData = { username, email, password };
+        let userData = { username, email, password, date_joined: new Date().toISOString()};
 
         // First, check if the email or username already exists
         fetch(`https://mokesell-d5a1.restdb.io/rest/accounts?q={"$or":[{"username":"${username}"},{"email":"${email}"}]}`, {

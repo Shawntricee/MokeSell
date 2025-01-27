@@ -38,8 +38,8 @@
                         <button class="sell-button">Sell an item</button>
                     </a>
                     <div id="guestNav">
-                        <a href="#" class="auth-button">Sign in</a>
-                        <a href="#" class="auth-button">Sign up</a>
+                        <button class="auth-button" id="navSignIn">Sign in</button>
+                        <button class="auth-button" id="navSignUp">Sign up</button>
                         <a href="#" class="nav-icon">
                             <img src="../images/icons/cart-icon.png" alt="cart icon">
                             <span class="cart-badge">0</span>
@@ -77,7 +77,6 @@
                             <li><a href="#">Fabric Sofas</a></li>
                             <li><a href="#">Leather Sofas</a></li>
                             <li><a href="#">Metal Sofas</a></li>
-                            <li><a href="#">Fabric Sofas</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -150,9 +149,9 @@
                 <!--seller profile-->
                 <div class="seller-profile">
                     <h2>Seller profile</h2>
-                    <p id="seller-username">@Username</p>
-                    <p>Joined <span id="seller-joined">N/A</span></p>
-                    <button id="contact-seller">Chat</button>
+                    <p id="sellerUsername">@Username</p>
+                    <p>Joined <span id="sellerJoined">N/A</span></p>
+                    <button id="contactSeller">Chat</button>
                 </div>
             </div>
             <div class="product-details">
@@ -231,6 +230,53 @@
             </div>
         </footer>
     </main>
+    <!--registration popup section-->
+    <div id="popupOverlay" class="popup-overlay">s</div>
+    <div id="registrationPopup" class="popup">
+        <div class="popup-container">
+            <div class="popup-logo">
+                <img src="../images/others/mokesell-logo-popup.png">
+            </div>
+            <span class="close-button">X</span>
+            <div class="popup-header">
+                <button id="signupTab" class="active">Sign up</button>
+                <button id="signinTab">Sign in</button>
+            </div>
+            <div class="popup-content">
+                <div class="popup-fields">
+                    <!--sign up form-->
+                    <div id="signupForm" class="form active">
+                        <label for="signupUsername">Username</label>
+                        <input type="text" id="signupUsername" placeholder="Username">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" placeholder="Email Address">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" placeholder="Password">
+                        <button id="signupButton">SIGN UP</button>
+                    </div>
+                    <!--sign in form-->
+                    <div id="signinForm" class="form">
+                        <label for="signinUsername">Username</label>
+                        <input type="text" id="signinUsername" placeholder="Username">
+                        <label for="signinPassword">Password</label>
+                        <input type="password" id="signinPassword" placeholder="Password">
+                        <button id="signinButton">SIGN IN</button>
+                    </div>
+                    <!--social login-->
+                    <div class="social-login">
+                        <p>OR</p>
+                        <button>Continue with Google</button>
+                        <button>Continue with Facebook</button>
+                    </div>
+                </div>
+                <!--discount code image-->
+                <div class="discount-code">
+                    <img src="../images/others/popup-discount-code.png" alt="discount code image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/registration.js"></script>
     <script src="../js/product-details.js"></script>
 </body>
 </html>
