@@ -1,0 +1,402 @@
+/*general layout*/
+.showroom-page {
+    background-color: #F7F5EF;
+    padding: 40px 20px;
+}
+
+section {
+    max-width: 1400px;
+    margin: 0 auto 60px;
+}
+
+section h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+/*hero section*/
+.hero-section {
+    text-align: center;
+    position: relative;
+}
+
+.hero-section h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.hero-section p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.hero-image {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*hotspots*/
+.hotspot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.hotspot-dot {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: #7A6145;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    position: relative;
+}
+
+.hotspot-content {
+    position: absolute;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    min-width: 200px;
+    display: none;
+    z-index: 10;
+}
+
+.hotspot:hover .hotspot-content {
+    display: block;
+}
+
+/*featured workspaces*/
+.workspace-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.workspace-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1;
+}
+
+.workspace-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.workspace-card:hover .card-overlay {
+    opacity: 1;
+}
+
+.workspace-card:hover img {
+    transform: scale(1.05);
+}
+
+.shop-button {
+    background: #7A6145;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.shop-button:hover {
+    background: #65503A;
+}
+
+/*get the look*/
+.look-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.look-card {
+    position: relative;
+    aspect-ratio: 1;
+}
+
+.look-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*real homes*/
+.homes-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.home-image {
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+
+.home-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.home-image:hover img {
+    transform: scale(1.05);
+}
+
+/*series section*/
+.series-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.series-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.series-card img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.series-info {
+    padding: 20px;
+}
+
+.series-btn {
+    background: #7A6145;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/*work Lamps*/
+.lamps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.lamp-card {
+    text-align: center;
+}
+
+.lamp-card img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+
+/*workspace guide*/
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.guide-card {
+    text-align: center;
+}
+
+.guide-card img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+/*benefits section*/
+.benefits {
+    background: #7A6145;
+    color: #fff;
+    padding: 60px 0;
+    margin-bottom: 0;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.benefit-item {
+    text-align: center;
+}
+
+.benefit-item img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 15px;
+}
+
+/*gallery modal styles*/
+.gallery-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.modal-products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.modal-product {
+    background: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/*animations*/
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.6s ease forwards;
+}
+
+/*animation delay for grid items*/
+.workspace-card:nth-child(1) { animation-delay: 0.1s; }
+.workspace-card:nth-child(2) { animation-delay: 0.2s; }
+.workspace-card:nth-child(3) { animation-delay: 0.3s; }
+.workspace-card:nth-child(4) { animation-delay: 0.4s; }
+
+/*hotspot pulse animation*/
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(122, 97, 69, 0.7);
+    }
+    70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(122, 97, 69, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(122, 97, 69, 0);
+    }
+}
+
+.hotspot-dot {
+    animation: pulse 2s infinite;
+}
+
+/*responsive design*/
+@media (max-width: 1024px) {
+    .workspace-grid,
+    .homes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .look-grid,
+    .series-grid,
+    .guide-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .lamps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .workspace-grid,
+    .look-grid,
+    .homes-grid,
+    .series-grid,
+    .lamps-grid,
+    .guide-grid {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        margin-bottom: 40px;
+    }
+}

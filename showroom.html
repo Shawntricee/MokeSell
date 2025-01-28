@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Office - MokeSell</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/showroom.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <!--top promo bar section-->
+        <div class="promo-bar">
+            10% OFF - On all purchases above $5000.
+        </div>
+        <!--navbar section-->
+        <nav class="navbar">
+            <div class="nav-container">
+                <!--menu button-->
+                <button class="menu-btn" id="openSidebarButton">☰</button>
+                <!--logo-->
+                <div class="logo">
+                    <a href="index.html"><img src="images/others/mokesell-logo.png" alt="mokesell logo"></a>
+                </div>
+                <!--search bar-->
+                <div class="search-container">
+                    <img src="images/icons/search-icon.png" alt="search icon" id="search-icon">
+                    <input type="search" id="search-bar" placeholder="Search for products ...">
+                    <ul id="suggestions-list" class="suggestions-list"></ul>
+                </div>
+                <!--right buttons-->
+                <div class="nav-buttons">
+                    <a href="#">
+                        <button class="sell-button">Sell an item</button>
+                    </a>
+                    <a href="#" class="auth-button">Sign in</a>
+                    <a href="#" class="auth-button">Sign up</a>
+                    <a href="#" class="cart-icon">
+                        <img src="images/icons/cart-icon.png" alt="cart icon">
+                        <span class="cart-badge">0</span>
+                    </a>
+                </div>
+            </div>
+            <!--collapsible menu-->
+            <div class="nav-categories">
+                <ul class="nav-links">
+                    <li><a href="#" class="link">All</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Sofas
+                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Fabric Sofas</a></li>
+                            <li><a href="#">Leather Sofas</a></li>
+                            <li><a href="#">Metal Sofas</a></li>
+                            <li><a href="#">Fabric Sofas</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Tables
+                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Dining Tables</a></li>
+                            <li><a href="#">Side Tables</a></li>
+                            <li><a href="#">Coffee Tables</a></li>
+                            <li><a href="#">Study Tables</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Chairs
+                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Dining Chairs</a></li>
+                            <li><a href="#">Stools</a></li>
+                            <li><a href="#">Benches</a></li>
+                            <li><a href="#">Office Chairs</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Beds
+                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Bed Frames</a></li>
+                            <li><a href="#">Mattresses</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Decors
+                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Lamps</a></li>
+                            <li><a href="#">Mirrors</a></li>
+                            <li><a href="#">Pillow Cushions</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Spaces
+                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Living Room</a></li>
+                            <li><a href="#">Dining Room</a></li>
+                            <li><a href="#">Bed Room</a></li>
+                            <li><a href="#">Study Room</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="showroom-page">
+        <!--hero section-->
+        <section class="hero-section">
+            <h1>Home office</h1>
+            <p>A place of clarity and encouraging focus.</p>
+            <div class="hero-image">
+                <img src="images/office-main.jpg" alt="Home office setup">
+                <!--interactive hotspots-->
+                <div class="hotspot" style="top: 45%; left: 25%;" data-product="Office Chair">
+                    <span class="hotspot-dot"></span>
+                    <div class="hotspot-content">
+                        <img src="images/products/chair-1.jpg" alt="Office Chair">
+                        <div class="product-info">
+                            <h3>Office Chair</h3>
+                            <p>$299</p>
+                        </div>
+                    </div>
+                </div>
+                <!--more hotspots-->
+            </div>
+        </section>
+
+        <!--featured workspaces section-->
+        <section class="featured-workspaces">
+            <h2>FEATURED WORKSPACES AT HOME</h2>
+            <div class="workspace-grid">
+                <div class="workspace-card">
+                    <img src="images/workspace-1.jpg" alt="Workspace 1">
+                    <div class="card-overlay">
+                        <button class="shop-button">Shop now</button>
+                    </div>
+                </div>
+                <div class="workspace-card">
+                    <img src="images/workspace-2.jpg" alt="Workspace 2">
+                    <div class="card-overlay">
+                        <button class="shop-button">Shop now</button>
+                    </div>
+                </div>
+                <div class="workspace-card">
+                    <img src="images/workspace-3.jpg" alt="Workspace 3">
+                    <div class="card-overlay">
+                        <button class="shop-button">Shop now</button>
+                    </div>
+                </div>
+                <div class="workspace-card">
+                    <img src="images/workspace-4.jpg" alt="Workspace 4">
+                    <div class="card-overlay">
+                        <button class="shop-button">Shop now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--get the look section-->
+        <section class="get-the-look">
+            <h2>GET THE LOOK</h2>
+            <div class="look-grid">
+                <div class="look-card">
+                    <img src="images/look-1.jpg" alt="Office look 1">
+                    <div class="product-tag">
+                        <span class="tag-dot"></span>
+                        <div class="tag-content">
+                            <h4>Product Name</h4>
+                            <p>$XXX</p>
+                        </div>
+                    </div>
+                </div>
+                <!--repeat-->
+            </div>
+        </section>
+
+        <!--real homes section-->
+        <section class="real-homes">
+            <h2>CLICK TO SEE OUR PRODUCTS IN REAL HOMES | @MOKESELL3</h2>
+            <div class="homes-grid">
+                <div class="home-image">
+                    <img src="images/real-home-1.jpg" alt="Real home 1">
+                </div>
+                <!--repeat-->
+            </div>
+        </section>
+
+        <!--series section-->
+        <section class="series-section">
+            <h2>SERIES FOR GAMING, STUDYING AND WORKING</h2>
+            <div class="series-grid">
+                <div class="series-card">
+                    <img src="images/series-1.jpg" alt="Series 1">
+                    <div class="series-info">
+                        <h3>Series Name</h3>
+                        <p>Description text</p>
+                        <button class="series-btn">Shop now</button>
+                    </div>
+                </div>
+                <!--repeat-->
+            </div>
+        </section>
+
+        <!--work lamps section-->
+        <section class="work-lamps">
+            <h2>WORK LAMPS: YOUR PERFECT WORKMATE</h2>
+            <div class="lamps-grid">
+                <div class="lamp-card">
+                    <img src="images/lamp-1.jpg" alt="Work lamp 1">
+                    <div class="lamp-info">
+                        <h3>Lamp Name</h3>
+                        <p>$XX</p>
+                    </div>
+                </div>
+                <!--repeat-->
+            </div>
+        </section>
+
+        <!--better workspace guide-->
+        <section class="workspace-guide">
+            <h2>HOW TO GET A BETTER WORKSPACE AT HOME</h2>
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <img src="images/guide-1.jpg" alt="Guide 1">
+                    <h3>Title</h3>
+                    <p>Description</p>
+                </div>
+                <!--repeat-->
+            </div>
+        </section>
+
+        <!--benefits section-->
+        <section class="benefits">
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <img src="images/icons/benefit-1.svg" alt="Delivery">
+                    <h3>Delivery in 1-3 days</h3>
+                    <p>Express delivery all around the island.</p>
+                </div>
+                <div class="benefit-item">
+                    <img src="images/icons/benefit-2.svg" alt="Installation">
+                    <h3>3-Year Installation Support</h3>
+                    <p>Free installation when you buy above 300$.</p>
+                </div>
+                <div class="benefit-item">
+                    <img src="images/icons/benefit-3.svg" alt="Support">
+                    <h3>3-Year Warranty</h3>
+                    <p>Full warranty with good service support.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--footer from index.html-->
+    <footer class="footer">
+
+    </footer>
+
+    <script src="js/showroom.js"></script>
+</body>
+</html>
