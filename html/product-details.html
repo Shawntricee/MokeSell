@@ -141,6 +141,8 @@
         <!--product container section-->
         <section class="product-container">
             <div class="product-container-left">
+                <!--breadcrumb navigation-->
+                <h3 id="breadcrumbNavigation"></h3>
                 <!--product gallery-->
                 <div class="product-gallery">
                     <img id="mainImage" src="" alt="product image">
@@ -149,26 +151,57 @@
                 <!--seller profile-->
                 <div class="seller-profile">
                     <h2>Seller profile</h2>
-                    <p id="sellerUsername">@Username</p>
-                    <p>Joined <span id="sellerJoined">N/A</span></p>
-                    <button id="contactSeller">Chat</button>
+                    <div class="seller-profile-container">
+                        <div class="seller-profile-details">
+                            <img src="../images/icons/review-profile-icon.png" alt="seller profile icon">
+                            <div class="seller-information">
+                                <p id="sellerUsername">@Username</p>
+                                <p>Joined <span id="sellerJoined">N/A</span></p>
+                            </div>
+                        </div>
+                        <button id="contactSeller">Chat</button>
+                    </div>
                 </div>
             </div>
             <div class="product-details">
                 <h1 id="producTitle">Product Title</h1>
                 <p class="price" id="productPrice">S$0.00</p>
-                <div class="details">
-                    <p><strong>Category:</strong><span id="productCategory">N/A</span></p>
-                    <p><strong>Condition:</strong><span id="productCondition">N/A</span></p>
-                    <p><strong>Listed:</strong><span id="productListed">N/A</span></p>
-                    <p><strong>Dimensions:</strong><span id="productDimensions">N/A</span></p>
-                    <p><strong>Colour:</strong><span id="productColour">N/A</span></p>
-                    <p><strong>Material:</strong><span id="productMaterial">N/A</span></p>
+                <div class="details-container">
+                    <h3>Details</h3>
+                    <div class="details-grid">
+                        <div class="details">
+                            <h4><strong>Category</strong></h4>
+                            <p><span id="productCategory">N/A</span></p>
+                        </div>
+                        <div class="details">
+                            <h4><strong>Condition</strong></h4>
+                            <p><span id="productCondition">N/A</span></p>
+                        </div>
+                        <div class="details">
+                            <h4><strong>Listed</strong></h4>
+                            <p><span id="productListed">N/A</span></p>
+                        </div>
+                        <div class="details">
+                            <h4><strong>Dimensions</strong></h4>
+                            <p><span id="productDimensions">N/A</span></p>
+                        </div>
+                        <div class="details">
+                            <h4><strong>Colour</strong></h4>
+                            <p><span id="productColour">N/A</span></p>
+                        </div>
+                        <div class="details">
+                            <h4><strong>Material</strong></h4>
+                            <p><span id="productMaterial">N/A</span></p>
+                        </div>
+                    </div>
                 </div>
-                <p class="description" id="productDescription">Product description goes here.</p>
+                <div class="description-container">
+                    <h3>Description</h3>
+                    <p class="description" id="productDescription">Product description goes here.</p>
+                </div>
                 <div class="product-points">
                     <img src="../images/icons/points-icon.png" alt="points icon">
-                    <p>Earn<span id="productPoints">0</span> <strong>Moke Points</strong> with this purchase.</p>
+                    <p>Earn <span id="productPoints">0</span><strong> Moke Points</strong> with this purchase.</p>
                 </div>
                 <button id="addToCart">Add to Cart</button>
             </div>
@@ -176,7 +209,7 @@
         <!--seller reviews section-->
         <section class="seller-reviews">
             <h2>Reviews for @<span id="sellerReviewUsername">Username</span></h2>
-            <form class="reviewForm" id="reviewForm">
+            <form class="review-form" id="reviewForm">
                 <textarea id="reviewInput" placeholder="Write your review here..."></textarea>
                 <button type="submit" id="postReviewButton">Post</button>
             </form>

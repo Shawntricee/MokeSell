@@ -1,3 +1,24 @@
+//breadcrumb navigation class
+class BreadcrumbNavigation {
+    constructor(containerSelector) {
+        this.breadcrumbContainer = document.querySelector(containerSelector);
+    }
+
+    generateBreadcrumb(category, subcategory, productTitle) {
+        if (!this.breadcrumbContainer) return;
+        this.breadcrumbContainer.innerHTML = `
+            <a href="/">Home</a> |
+            <a href="/category/${this.formatCategory(category)}">${category || "Category"}</a> |
+            <a href="/category/${this.formatCategory(category)}/${this.formatCategory(subcategory)}">${subcategory || "Subcategory"}</a> |
+            <span>${productTitle || "Product"}</span>
+        `;
+    }
+
+    formatCategory(category) {
+        return category ? category.toLowerCase().replace(/\s+/g, '-') : 'unknown';
+    }
+}
+
 //manage reviews
 class ReviewManager {
     constructor(apiKey, productId, currentUsername) {
@@ -107,6 +128,9 @@ class ReviewManager {
         reviewDiv.setAttribute("data-review-id", review.id); // Add unique ID for checking
         reviewDiv.innerHTML = `
             <div class="review-header">
+                <div class="profile-picture">
+                    <img src="../images/icons/review-profile-icon.png" alt="seller profile icon">
+                </div>
                 <span class="review-username">@${review.username}</span>
                 <span class="review-date">Posted on ${new Date(review.datePosted).toLocaleDateString()}</span>
             </div>
@@ -193,6 +217,9 @@ class Product {
                     console.warn("Warning: No seller data found for this product.");
                 }
                 this.updateProductImages(product.imageFilenames);
+                //generate breadcrumb after updating product details
+                const breadcrumb = new BreadcrumbNavigation("#breadcrumbNavigation");
+                breadcrumb.generateBreadcrumb(product.category, product.subcategory, product.title);
             }
         })
         .catch(error => {
@@ -211,7 +238,7 @@ class Product {
     }
 
     updateProductDetails(product) {
-        document.getElementById("producTitle").textContent = product.description || "No description available";
+        document.getElementById("producTitle").textContent = product.title || "No title available";
         document.getElementById("productPrice").textContent = product.price ? `S$${product.price.toFixed(2)}` : "S$0.00";
         document.getElementById("productCategory").textContent = product.category || "Category not available";
         document.getElementById("productCondition").textContent = product.condition || "Condition not available";
@@ -246,7 +273,7 @@ class Product {
     
             if (secondaryImagesContainer) {
                 secondaryImagesContainer.innerHTML = "";  // Clear existing images
-                images.slice(1).forEach(imgFilename => {  // Skip the first image for secondary images
+                images.slice(0).forEach(imgFilename => {  // Skip the first image for secondary images
                     const imgElement = document.createElement("img");
                     imgElement.src = `${baseImageUrl}${imgFilename}`;
                     imgElement.alt = "product image";
@@ -273,4 +300,12 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(`User not logged in.`);
         product = new Product("679796bbbb50491a00009ee6", APIKEY); // Pass currentUsername to the product class
     }
+    //breadcrumb navigation
+    const breadcrumb = new BreadcrumbNavigation(".product-container-left h3");
+
+    // Extract category and product title from DOM
+    const category = document.getElementById("productCategory")?.textContent.trim() || "Category";
+    const productTitle = document.getElementById("productTitle")?.textContent.trim() || "Product";
+
+    breadcrumb.generateBreadcrumb(category, productTitle);
 });
