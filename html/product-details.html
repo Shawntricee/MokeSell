@@ -166,12 +166,23 @@
                     <p><strong>Material:</strong><span id="productMaterial">N/A</span></p>
                 </div>
                 <p class="description" id="productDescription">Product description goes here.</p>
+                <div class="product-points">
+                    <img src="../images/icons/points-icon.png" alt="points icon">
+                    <p>Earn<span id="productPoints">0</span> <strong>Moke Points</strong> with this purchase.</p>
+                </div>
                 <button id="addToCart">Add to Cart</button>
             </div>
         </section>
         <!--seller reviews section-->
         <section class="seller-reviews">
-
+            <h2>Reviews for @<span id="sellerReviewUsername">Username</span></h2>
+            <form class="reviewForm" id="reviewForm">
+                <textarea id="reviewInput" placeholder="Write your review here..."></textarea>
+                <button type="submit" id="postReviewButton">Post</button>
+            </form>
+            <div id="reviewsList" class="reviews-list">
+                <!--reviews will be dynamically added heres-->
+            </div>
         </section>
         <!--similar listings section-->
         <section class="similar-listings">

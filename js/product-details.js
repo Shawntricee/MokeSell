@@ -1,15 +1,168 @@
+//manage reviews
+class ReviewManager {
+    constructor(apiKey, productId, currentUsername) {
+        this.apiKey = apiKey;
+        this.productId = productId;
+        this.apiUrl = `https://mokesell-d5a1.restdb.io/rest/reviews`; // Replace with the actual reviews API URL
+        this.sellerUsername = ""; // Seller's username
+        this.currentUsername = currentUsername; // Logged-in user's username
+    }
+
+    init() {
+        console.log("reviewmanager initialised");
+        //initialise review form
+        this.setupReviewForm();
+        this.fetchReviews();
+    }
+
+    setupReviewForm() {
+        const reviewForm = document.getElementById("reviewForm");
+        const postReviewButton = document.getElementById("postReviewButton");
+    
+        // Check if form and button exist
+        if (reviewForm && postReviewButton) {
+            console.log("Review form and button found!");
+            
+            reviewForm.addEventListener("submit", (event) => {
+                event.preventDefault();  // Prevent default form submit behavior
+    
+                console.log("Form submitted");  // Log the submit action
+                
+                const reviewInput = document.getElementById("reviewInput");
+                
+                if (reviewInput && reviewInput.value.trim() !== "") {
+                    console.log("Review text:", reviewInput.value.trim());
+                    this.postReview(reviewInput.value.trim());  // Post review if there's valid input
+                } else {
+                    alert("Please enter a review!");
+                }
+            });
+            //mark the form lister as added
+            this.formListenerAdded = true;
+        } else {
+            console.warn("Review form or button not found!");
+        }
+    }
+    
+    postReview(reviewText) {
+        const currentUsername = localStorage.getItem("currentUsername");
+        if (!currentUsername) {
+            alert("You must be logged in to post a review!");
+            return;
+        }
+    
+        // Log current username for debugging
+        console.log("Current Username:", currentUsername);
+    
+        const newReview = {
+            productId: this.productId, // Associate review with product
+            sellerUsername: this.sellerUsername,
+            username: currentUsername,
+            review: reviewText,
+            datePosted: new Date().toISOString(),
+        };
+    
+        console.log("Posting Review:", newReview);  // Log review being posted
+    
+        fetch(this.apiUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": this.apiKey,
+            },
+            body: JSON.stringify(newReview),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    // Log the error status for debugging
+                    console.error("Failed to post review. Status:", response.status);
+                    throw new Error("Failed to post review");
+                }
+                return response.json();
+            })
+            .then((createdReview) => {
+                console.log("Review posted successfully:", createdReview); // Log the created review
+                this.addReviewToUI(createdReview);
+                const reviewInput = document.getElementById("reviewInput");
+                if (reviewInput) {
+                    reviewInput.value = ""; // Clear input field
+                }
+            })
+            .catch((error) => {
+                console.error("Error posting review:", error);
+            });
+    }
+    
+
+    addReviewToUI(review) {
+        const reviewsList = document.getElementById("reviewsList");
+        if (reviewsList) {
+            reviewsList.appendChild(this.renderReview(review));
+        }
+    }
+
+    renderReview(review) {
+        const reviewDiv = document.createElement("div");
+        reviewDiv.classList.add("review-item");
+        reviewDiv.setAttribute("data-review-id", review.id); // Add unique ID for checking
+        reviewDiv.innerHTML = `
+            <div class="review-header">
+                <span class="review-username">@${review.username}</span>
+                <span class="review-date">Posted on ${new Date(review.datePosted).toLocaleDateString()}</span>
+            </div>
+            <p class="review-content">${review.review}</p>
+        `;
+        return reviewDiv;
+    }
+
+    setSellerUsername(sellerUsername) {
+        this.sellerUsername = sellerUsername;
+        this.updateReviewHeader();
+    }
+
+    updateReviewHeader() {
+        const reviewSeller = document.getElementById("sellerUsername");
+        if (reviewSeller) {
+            reviewSeller.textContent = `${this.sellerUsername}`;
+        }
+    }
+
+    fetchReviews() {
+        console.log("fetching reviews...")
+        fetch(this.apiUrl, {
+            headers: {
+                "x-apikey": this.apiKey
+            }
+        })
+        .then(response => response.json())
+        .then(reviews => {
+            console.log("Fetched reviews:", reviews)
+            reviews.forEach(review => {
+                if (!document.querySelector(`.review-item[data-review-id="${review.id}"]`)) {
+                    this.addReviewToUI(review); // Only add if it's not already in the UI
+                }
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching reviews:", error);
+        });
+    }
+}
+
 class Product {
-    constructor(productId, apiKey) {
+    constructor(productId, apiKey, currentUsername = null) {
         this.productId = productId;
         this.apiKey = apiKey;
         this.apiUrl = `https://mokesell-d5a1.restdb.io/rest/products/${productId}`; // Replace with actual API URL
+        this.sellerUsername= "";
+        this.currentUsername = currentUsername;
+        this.reviewManager = new ReviewManager(apiKey, productId, this.currentUsername);
         this.init();
     }
 
     init() {
-        document.addEventListener("DOMContentLoaded", () => {
             this.fetchProductData();
-        });
+            this.reviewManager.init();
     }
 
     fetchProductData() {
@@ -26,9 +179,18 @@ class Product {
         })
         .then(product => {
             if (product) {
+                console.log("Fetched product data:", product)
                 this.updateProductDetails(product);
-                if (product.seller_id && product.seller_id.length > 0) {
-                    this.updateSellerDetails(product.seller_id[0]);
+                // Ensure seller_id exists and is an array with at least one element
+                if (Array.isArray(product.seller_id) && product.seller_id.length > 0) {
+                    const seller = product.seller_id[0]; // Get first seller object
+                    this.updateSellerDetails(seller);
+                    this.sellerUsername = product.seller_id[0].username;
+                    console.log("Extracted Seller Username:", this.sellerUsername);
+                    this.setSellerUsername();
+                    this.reviewManager.setSellerUsername(this.sellerUsername);
+                } else {
+                    console.warn("Warning: No seller data found for this product.");
                 }
                 this.updateProductImages(product.imageFilenames);
             }
@@ -36,6 +198,16 @@ class Product {
         .catch(error => {
             console.error("Error fetching product data:", error);
         });
+    }
+
+    setSellerUsername() {
+        const sellerElement = document.getElementById("sellerReviewUsername");
+        if (sellerElement) {
+            sellerElement.textContent = this.sellerUsername;
+            console.log("Updated sellerReviewUsername:", sellerElement.textContent); // Debugging log
+        } else {
+            console.warn("Warning: Element #sellerReviewUsername not found in the DOM.");
+        }
     }
 
     updateProductDetails(product) {
@@ -52,6 +224,7 @@ class Product {
         document.getElementById("productColour").textContent = product.colour || "Colour not available";
         document.getElementById("productMaterial").textContent = product.material || "Material not available";
         document.getElementById("productDescription").textContent = product.description || "No description available";
+        document.getElementById("productPoints").textContent = product.points || "No points available";
     }
 
     updateSellerDetails(seller) {
@@ -90,9 +263,14 @@ class Product {
         }
     }
 }
-
-// Usage
-const product = new Product("679796bbbb50491a00009ee6", APIKEY); // Replace with dynamic product ID if needed
-
-
-
+// Initialize the product class with the current username
+document.addEventListener("DOMContentLoaded", () => {
+    const currentUsername = localStorage.getItem("currentUsername");
+    if (currentUsername) {
+        console.log(`Logged in as ${currentUsername}`);
+        product = new Product("679796bbbb50491a00009ee6", APIKEY); // Pass currentUsername to the product class
+    } else {
+        console.log(`User not logged in.`);
+        product = new Product("679796bbbb50491a00009ee6", APIKEY); // Pass currentUsername to the product class
+    }
+});

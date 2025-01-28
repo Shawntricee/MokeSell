@@ -111,14 +111,14 @@ class Registration {
     loginUser() {
         let username = document.getElementById("signinUsername").value;
         let password = document.getElementById("signinPassword").value;
-
+    
         if (!username || !password) {
             alert("Please enter username and password.");
             return;
         }
-
+    
         let query = `{"username":"${username}", "password":"${password}"}`;
-
+    
         fetch(`https://mokesell-d5a1.restdb.io/rest/accounts?q=${encodeURIComponent(query)}`, {
             method: "GET",
             headers: {
@@ -132,19 +132,28 @@ class Registration {
             if (data.length > 0) {
                 // Login successful
                 alert("Login Successful!");
+    
+                // Set the login status and current username in localStorage
                 localStorage.setItem("userLoggedIn", "true");
+                localStorage.setItem("currentUsername", username);
+    
+                // Update the navbar and close the login popup
                 this.updateNavBar();
                 this.closePopup();
-            } else {
-                // If no matching user is found
-                alert("Invalid username or password. Please try again.");
-            }
+    
+                // Reinitialize Product and ReviewManager with the currentUsername
+                const currentUsername = localStorage.getItem("currentUsername");
+                product = new Product("679796bbbb50491a00009ee6", APIKEY, currentUsername); // Pass currentUsername to the Product class
+        } else {
+            // If no matching user is found
+            alert("Invalid username or password. Please try again.");
+        }
         })
         .catch(error => {
             console.log(error);
             alert("An error occurred. Please try again later.");
         });
-    }
+    }    
 
     checkLoginStatus() {
         if (localStorage.getItem("userLoggedIn") === "true") {
@@ -172,6 +181,7 @@ class Registration {
 
     logoutUser() {
         localStorage.removeItem("userLoggedIn");
+        localStorage.removeItem("currentUsername");
         location.reload();
     }
 
