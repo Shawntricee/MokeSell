@@ -1,0 +1,26 @@
+[
+    {
+        "_id": "6797923abb50491a00009ed2",
+        "username": "Serene",
+        "email": "Serenekxy@gmail.com",
+        "password": "SEREN4854H",
+        "date_joined": "2025-01-27T14:03:35.109Z",
+        "user_id": 3
+    },
+    {
+        "_id": "679793a1bb50491a00009ed3",
+        "username": "Bobby",
+        "email": "bobby@gmail.com",
+        "password": "bobby1234",
+        "date_joined": "2025-01-27T14:09:33.270Z",
+        "user_id": 4
+    },
+    {
+        "_id": "679793e3bb50491a00009ed4",
+        "username": "shawntrice",
+        "email": "shawntrice@gmail.com",
+        "password": "shawntrice1234",
+        "date_joined": "2025-01-27T14:10:39.579Z",
+        "user_id": 5
+    }
+]

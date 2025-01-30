@@ -21,10 +21,11 @@ class BreadcrumbNavigation {
 
 //manage reviews
 class ReviewManager {
-    constructor(apiKey, productId, currentUsername) {
-        this.apiKey = apiKey;
+    constructor(/*apiKey,*/ productId, currentUsername) {
+        /*this.apiKey = apiKey;*/
         this.productId = productId;
-        this.apiUrl = `https://mokesell-d5a1.restdb.io/rest/reviews`; // Replace with the actual reviews API URL
+        this.reviewsFile = "../json/reviews.json";
+        /*this.apiUrl = `https://mokesell-d5a1.restdb.io/rest/reviews`;*/ // Replace with the actual reviews API URL
         this.sellerUsername = ""; // Seller's username
         this.currentUsername = currentUsername; // Logged-in user's username
     }
@@ -85,14 +86,14 @@ class ReviewManager {
     
         console.log("Posting Review:", newReview);  // Log review being posted
     
-        fetch(this.apiUrl, {
+        fetch(/*this.apiUrl, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "x-apikey": this.apiKey,
             },
             body: JSON.stringify(newReview),
-        })
+        }*/this.reviewsFile)
             .then((response) => {
                 if (!response.ok) {
                     // Log the error status for debugging
@@ -127,14 +128,16 @@ class ReviewManager {
         reviewDiv.classList.add("review-item");
         reviewDiv.setAttribute("data-review-id", review.id); // Add unique ID for checking
         reviewDiv.innerHTML = `
-            <div class="review-header">
+            <div class="review">
                 <div class="profile-picture">
                     <img src="../images/icons/review-profile-icon.png" alt="seller profile icon">
                 </div>
-                <span class="review-username">@${review.username}</span>
-                <span class="review-date">Posted on ${new Date(review.datePosted).toLocaleDateString()}</span>
+                <div class="review-details>
+                    <p><span class="review-username">@${review.username}</span></p>
+                    <p><span class="review-date">Posted on ${new Date(review.datePosted).toLocaleDateString()}</span></p>
+                    <p class="review-content">${review.review}</p>
+                </div>
             </div>
-            <p class="review-content">${review.review}</p>
         `;
         return reviewDiv;
     }
@@ -153,11 +156,11 @@ class ReviewManager {
 
     fetchReviews() {
         console.log("fetching reviews...")
-        fetch(this.apiUrl, {
+        fetch(/*this.apiUrl, {
             headers: {
                 "x-apikey": this.apiKey
             }
-        })
+        }*/this.reviewsFile)
         .then(response => response.json())
         .then(reviews => {
             console.log("Fetched reviews:", reviews)
@@ -174,28 +177,30 @@ class ReviewManager {
 }
 
 class Product {
-    constructor(productId, apiKey, currentUsername = null) {
+    constructor(productId, /*apiKey,*/ currentUsername = null) {
         this.productId = productId;
-        this.apiKey = apiKey;
-        this.apiUrl = `https://mokesell-d5a1.restdb.io/rest/products/${productId}`; // Replace with actual API URL
+        this.productFile = "../json/products.json"
+        /*this.apiKey = apiKey;
+        this.apiUrl = `https://mokesell-d5a1.restdb.io/rest/products/${productId}`; */// Replace with actual API URL
         this.sellerUsername= "";
         this.currentUsername = currentUsername;
-        this.reviewManager = new ReviewManager(apiKey, productId, this.currentUsername);
+        this.reviewManager = new ReviewManager(/*apiKey,*/ productId, this.currentUsername);
         this.init();
     }
 
     init() {
             this.fetchProductData();
             this.reviewManager.init();
+            this.fetchSimilarProducts();
     }
 
     fetchProductData() {
-        fetch(this.apiUrl, {
+        fetch(/*this.apiUrl, {
             headers: {
                 "x-apikey": this.apiKey
             }
-        })
-        .then(response => {
+        }*/this.productFile)
+        /*.then(response => {
             if (!response.ok) {
                 throw new Error("Failed to fetch product data");
             }
@@ -225,7 +230,63 @@ class Product {
         .catch(error => {
             console.error("Error fetching product data:", error);
         });
-    }
+    }*/
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch product data");
+                    }
+                    return response.json(); // This should return an array of products
+                })
+                .then(productsArray => { // Rename it to productsArray to avoid confusion
+                    console.log("Loaded products:", productsArray); // Debugging: Check if array is loaded
+        
+                    // Ensure productsArray is actually an array
+                    if (!Array.isArray(productsArray)) {
+                        throw new Error("Invalid data format: Expected an array of products.");
+                    }
+        
+                    // Find the specific product by ID
+                    const product = productsArray.find(p => p._id === this.productId);
+                    
+                    if (!product) {
+                        console.error(`Product with ID ${this.productId} not found.`);
+                        return;
+                    }
+        
+                    console.log("Fetched product data:", product);
+        
+                    this.updateProductDetails(product);
+        
+                    // Ensure seller_id exists and is an array
+                    if (Array.isArray(product.seller_id) && product.seller_id.length > 0) {
+                        const seller = product.seller_id[0]; // Get first seller object
+                        this.updateSellerDetails(seller);
+                        this.sellerUsername = seller.username;
+                        console.log("Extracted Seller Username:", this.sellerUsername);
+                        this.setSellerUsername();
+                        this.reviewManager.setSellerUsername(this.sellerUsername);
+                    } else {
+                        console.warn("Warning: No seller data found for this product.");
+                    }
+        
+                    // Check if product.imageFilenames exists
+                    if (product.imageFilenames) {
+                        console.log("Product image filenames:", product.imageFilenames);
+                        this.updateProductImages(product.imageFilenames);
+                    } else {
+                        console.warn("Warning: product.imageFilenames is undefined.");
+                        this.updateProductImages(""); // Prevents errors
+                    }
+        
+                    // Generate breadcrumb after updating product details
+                    const breadcrumb = new BreadcrumbNavigation("#breadcrumbNavigation");
+                    breadcrumb.generateBreadcrumb(product.category, product.subcategory, product.title);
+                })
+                .catch(error => {
+                    console.error("Error fetching product data:", error);
+                });
+        }
+        
 
     setSellerUsername() {
         const sellerElement = document.getElementById("sellerReviewUsername");
@@ -256,12 +317,13 @@ class Product {
 
     updateSellerDetails(seller) {
         document.getElementById("sellerUsername").textContent = `@${seller.username || "Unknown"}`;
-        document.getElementById("sellerJoined").textContent = seller.date_joined ? new Date(seller.date_joined).toDateString() : "Joined: N/A";
+        document.getElementById("sellerJoined").textContent = seller.date_joined ? new Date(seller.date_joined).toLocaleDateString() : "Joined: N/A";
     }
 
     updateProductImages(imageFilenames) {
         const mainImageElem = document.getElementById("mainImage");
         const secondaryImagesContainer = document.getElementById("secondaryImages");
+         console.log("Product image filenames:", product.imageFilenames);
         // Split the comma-separated image filenames into an array
         const images = imageFilenames.split(","); // This will create an array like ["fabric-sofa-1-main.jpg", "fabric-sofa-1-secondary-1.jpg", ...]
     
@@ -289,16 +351,63 @@ class Product {
             }
         }
     }
+    fetchSimilarProducts() {
+        /*const apiUrl = "https://mokesell-d5a1.restdb.io/rest/products";*/ // Replace with actual API URL
+    
+        fetch(/*apiUrl, {
+            headers: {
+                "x-apikey": this.apiKey
+            }
+        }*/this.productFile)
+        .then(response => response.json())
+        .then(products => {
+            if (!Array.isArray(products)) throw new Error("Invalid product data");
+            const filteredProducts = products.filter(p => p._id !== this.productId); // Exclude current product
+            const similarListingsContainer = document.getElementById("similarListings");
+    
+            if (filteredProducts.length > 0 && similarListingsContainer) {
+                similarListingsContainer.innerHTML = ""; // Clear existing listings
+                filteredProducts.slice(0, 5).forEach(product => { // Show up to 5 listings
+                    const productCard = document.createElement("div");
+                    productCard.classList.add("listing-card");
+    
+                    // Set product image (default if missing)
+                    const images = product.imageFilenames ? product.imageFilenames.split(",") : [];
+                    const firstImage = images.length > 0 ? `../images/products/${images[0]}` : "../images/default-placeholder.png";
+                    const secondImage = images.length > 1 ? `../images/products/${images[1]}` : firstImage;
+                    productCard.innerHTML = `
+                    <div class="image-wrapper">
+                        <img src="${firstImage}" alt="${product.title}" class="product-image" data-hover="${secondImage}">
+                    </div>
+                    <p class= "title">${product.title}</p>
+                    <p class="price">S$${product.price ? product.price.toFixed(2) : "0.00"}</p>
+                `;
+                    
+                // Hover effect for image swap
+                const imgElement = productCard.querySelector(".product-image");
+                imgElement.addEventListener("mouseover", () => imgElement.src = secondImage);
+                imgElement.addEventListener("mouseout", () => imgElement.src = firstImage);
+
+                productCard.addEventListener("click", () => {
+                    window.location.href = `/product.html?id=${product._id}`;
+                    });
+                    similarListingsContainer.appendChild(productCard);
+                });
+            }
+        })
+        .catch(error => console.error("Error fetching similar products:", error));
+    }
+    
 }
 // Initialize the product class with the current username
 document.addEventListener("DOMContentLoaded", () => {
     const currentUsername = localStorage.getItem("currentUsername");
     if (currentUsername) {
         console.log(`Logged in as ${currentUsername}`);
-        product = new Product("679796bbbb50491a00009ee6", APIKEY); // Pass currentUsername to the product class
+        product = new Product("679796bbbb50491a00009ee6", /*APIKEY*/); // Pass currentUsername to the product class
     } else {
         console.log(`User not logged in.`);
-        product = new Product("679796bbbb50491a00009ee6", APIKEY); // Pass currentUsername to the product class
+        product = new Product("679796bbbb50491a00009ee6", /*APIKEY*/); // Pass currentUsername to the product class
     }
     //breadcrumb navigation
     const breadcrumb = new BreadcrumbNavigation(".product-container-left h3");

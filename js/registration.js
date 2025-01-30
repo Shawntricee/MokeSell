@@ -1,6 +1,7 @@
 class Registration {
-    constructor(apiKey) {
-        this.apiKey = apiKey;
+    constructor(/*apiKey*/) {
+        /*this.apiKey = apiKey;*/
+        this.usersFile = "../json/accounts.json"
         this.initEventListeners();
         this.showPopupAfterDelay();
         this.checkLoginStatus();
@@ -73,21 +74,21 @@ class Registration {
         let userData = { username, email, password, date_joined: new Date().toISOString()};
 
         // First, check if the email or username already exists
-        fetch(`https://mokesell-d5a1.restdb.io/rest/accounts?q={"$or":[{"username":"${username}"},{"email":"${email}"}]}`, {
+        fetch(/*`https://mokesell-d5a1.restdb.io/rest/accounts?q={"$or":[{"username":"${username}"},{"email":"${email}"}]}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "x-apikey": this.apiKey,
                 "Cache-Control": "no-cache"
             }
-        })
+        }*/this.usersFile)
         .then(response => response.json())
         .then(existingUsers => {
             if (existingUsers.length > 0) {
                 alert("Username or Email already exists. Please use a different one.");
             } else {
                 // If username/email is unique, proceed with registration
-                return fetch("https://mokesell-d5a1.restdb.io/rest/accounts", {
+                return fetch(/*"https://mokesell-d5a1.restdb.io/rest/accounts", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -95,7 +96,7 @@ class Registration {
                         "Cache-Control": "no-cache"
                     },
                     body: JSON.stringify(userData)
-                });
+                }*/"../json/accounts.json");
             }
         })
         .then(response => response ? response.json() : null)
@@ -119,14 +120,14 @@ class Registration {
     
         let query = `{"username":"${username}", "password":"${password}"}`;
     
-        fetch(`https://mokesell-d5a1.restdb.io/rest/accounts?q=${encodeURIComponent(query)}`, {
+        fetch(/*`https://mokesell-d5a1.restdb.io/rest/accounts?q=${encodeURIComponent(query)}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "x-apikey": this.apiKey,
                 "Cache-Control": "no-cache"
             }
-        })
+        }*/this.usersFile)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
@@ -143,7 +144,7 @@ class Registration {
     
                 // Reinitialize Product and ReviewManager with the currentUsername
                 const currentUsername = localStorage.getItem("currentUsername");
-                product = new Product("679796bbbb50491a00009ee6", APIKEY, currentUsername); // Pass currentUsername to the Product class
+                product = new Product("679796bbbb50491a00009ee6", /*APIKEY,*/ currentUsername); // Pass currentUsername to the Product class
         } else {
             // If no matching user is found
             alert("Invalid username or password. Please try again.");
@@ -222,5 +223,5 @@ class Registration {
     }
 }
 
-const APIKEY = "679377f88459083ff6097e55";
-new Registration(APIKEY);
+/*const APIKEY = "679377f88459083ff6097e55";*/
+new Registration(/*APIKEY*/);
