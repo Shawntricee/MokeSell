@@ -16,11 +16,10 @@ class Listing {
         this.form = document.getElementById("listingForm");
         this.imageUpload = document.getElementById("imageUpload");
         this.imagePreview = document.getElementById("imagePreview");
-        this.conditionBtns = document.querySelectorAll(".condition-btn");
-        this.conditionInput = document.getElementById("condition");
+        this.conditionSelect = document.getElementById("conditionOptions");
         this.steps = document.querySelectorAll(".step");
         this.categorySelect = document.getElementById("category");
-        this.inputFields = document.querySelectorAll("#height, #width, #depth, #colour, #material, #description");
+        this.inputFields = document.querySelectorAll("#title, #height, #width, #depth, #colour, #material, #description");
         this.priceInput = document.getElementById("price");
         this.currencySelect = document.getElementById("currency");
     }
@@ -28,9 +27,7 @@ class Listing {
     bindEvents() {
         this.imageUpload.addEventListener("change", (event) => this.handleImageUpload(event));
         this.categorySelect.addEventListener("change", () => this.updateStepCompletion(1));
-        this.conditionBtns.forEach(button =>
-            button.addEventListener("click", (event) => this.selectCondition(event))
-        );
+        this.conditionSelect.addEventListener("change", () => this.updateStepCompletion(2));
         this.inputFields.forEach(input =>
             input.addEventListener("input", () => this.updateStepCompletion(3))
         );
@@ -54,38 +51,29 @@ class Listing {
         });
     }    
 
-    addImage(src, file) {
+    addImage(base64, file) {
         const imgBox = document.createElement("div");
         imgBox.classList.add("image-box");
 
         const img = document.createElement("img");
-        img.src = src;
+        img.src = base64;
 
         const deleteBtn = document.createElement("button");
         deleteBtn.innerText = "X";
-        deleteBtn.addEventListener("click", () => this.removeImage(src, file, imgBox));
+        deleteBtn.addEventListener("click", () => this.removeImage(base64, file, imgBox));
 
         imgBox.appendChild(img);
         imgBox.appendChild(deleteBtn);
         this.imagePreview.appendChild(imgBox);
 
-        this.uploadedImages.push(src);
+        this.uploadedImages.push(base64); // Store Base64 string
         this.uploadedFiles.push(file);
-        this.updateStepCompletion(0);
     }
 
-    removeImage(src, file, imgBox) {
-        this.uploadedImages = this.uploadedImages.filter(image => image !== src);
+    removeImage(base64, file, imgBox) {
+        this.uploadedImages = this.uploadedImages.filter(image => image !== base64);
         this.uploadedFiles = this.uploadedFiles.filter(f => f !== file);
         imgBox.remove();
-
-        if (this.uploadedImages.length === 0) {
-            this.resetFileInput();
-            this.updateStepCompletion(0, false); // ✅ Remove progress if no images left
-        } else {
-            this.updateFileInput();
-            this.updateStepCompletion(0);
-        }
     }
 
     resetFileInput() {
@@ -98,38 +86,85 @@ class Listing {
         this.imageUpload.files = dataTransfer.files;
     }
 
-    selectCondition(event) {
-        this.conditionBtns.forEach(btn => btn.classList.remove("selected"));
-        event.target.classList.add("selected");
-        this.conditionInput.value = event.target.dataset.value;
-        this.updateStepCompletion(2);
-    }
-
     handleSubmit(event) {
         event.preventDefault();
-
-        const product = {
-            images: this.uploadedImages,
-            category: this.categorySelect.value,
-            condition: this.conditionInput.value,
-            dimensions: {
-                height: document.getElementById("height").value,
-                width: document.getElementById("width").value,
-                depth: document.getElementById("depth").value
-            },
-            colour: document.getElementById("colour").value,
-            material: document.getElementById("material").value,
-            description: document.getElementById("description").value,
-            price: this.priceInput.value,
-            currency: this.currencySelect.value
-        };
-
-        console.log("Product added:", product);
-        alert("Product listed successfully!");
+        //prevent submission if field is empty
+        if (this.isFormValid()) {
+            const product = this.createProductObject();
+            this.sendProductData(product);
+        } else {
+            alert("Please fill in all required fields.");
+        }
     }
 
-    /**
-     * Updates the progress bar step based on the user's input.*/
+    // check if all required fields are filled
+    isFormValid() {
+        const requiredFields = [
+            this.categorySelect,
+            this.conditionSelect,
+            ...this.inputFields,
+            this.priceInput,
+            this.currencySelect
+        ];
+
+        return requiredFields.every(field => field.value.trim() !== "" || field.files && field.files.length > 0);
+    }
+    
+    //create the product object from form data
+    createProductObject() {
+        // Retrieve user details from localStorage
+        const username = localStorage.getItem("currentUsername");
+        const email = localStorage.getItem("userEmail"); // Retrieve user email if stored
+        const userId = localStorage.getItem("userId"); // Fetch userId from localStorage
+
+        if (!userId || !username || !email) {
+            alert("User details are missing. Please login again.");
+            return;
+        }
+        return {
+            "description": document.getElementById("description").value,
+            "price": this.priceInput.value,
+            "category": this.categorySelect.value,
+            "condition": this.conditionSelect.value,
+            "dimensions": `${document.getElementById("height").value}H x ${document.getElementById("width").value}W x ${document.getElementById("depth").value}D`,
+            "listed": new Date().toISOString(),
+            "colour": document.getElementById("colour").value,
+            "material": document.getElementById("material").value,
+            "seller_id": [{
+                "_id": userId,
+                "username": username,  // replace with actual data
+                "email": email,
+            }],
+            "title": document.getElementById("title").value,
+            "subcategory": this.categorySelect.options[this.categorySelect.selectedIndex].text,
+            "points": parseFloat(this.priceInput.value) * 0.1, // Sample point calculation
+            "id": Math.floor(Math.random() * 10000),
+            "imageFilenames": this.uploadedImages //store base64 images
+        };
+    }
+
+    // Function to send data to your API
+    sendProductData(product) {
+        const apiUrl = "https://mokesell-d5a1.restdb.io/rest/products"; // Replace with actual API URL
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-apikey': '679377f88459083ff6097e55'  // If your API requires authorization
+            },
+            body: JSON.stringify(product)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Product successfully added:', data);
+            alert("Product listed successfully!");
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+     /* Updates the progress bar step based on the user's input.*/
     updateStepCompletion(step) {
         const stepElement = this.steps[step];
     
@@ -143,7 +178,7 @@ class Listing {
                 isStepCompleted = this.categorySelect.value.trim() !== "";
                 break;
             case 2: // Select Condition
-                isStepCompleted = this.conditionInput.value.trim() !== "";
+                isStepCompleted = this.conditionSelect.value.trim() !== "";
                 break;
             case 3: // Item Details (Check all fields)
                 isStepCompleted = [...this.inputFields].every(input => input.value.trim() !== "");

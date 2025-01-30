@@ -133,10 +133,15 @@ class Registration {
             if (data.length > 0) {
                 // Login successful
                 alert("Login Successful!");
-    
+                // Assuming data[0] contains the user data, extract userId and email
+                const userId = data[0].user_id; // Adjust based on API response structure
+                const email = data[0].email; // Adjust based on API response structure
+                console.log(userId, email)
                 // Set the login status and current username in localStorage
                 localStorage.setItem("userLoggedIn", "true");
+                localStorage.setItem("userId", userId)
                 localStorage.setItem("currentUsername", username);
+                localStorage.setItem("userEmail", email)
     
                 // Update the navbar and close the login popup
                 this.updateNavBar();
