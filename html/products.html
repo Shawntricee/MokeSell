@@ -138,92 +138,31 @@
     </header>
     <!-- main content -->
     <main class="main-content">
-        <!--product container section-->
-        <section class="product-container">
-            <div class="product-container-left">
-                <!--breadcrumb navigation-->
-                <h3 id="breadcrumbNavigation"></h3>
-                <!--product gallery-->
-                <div class="product-gallery">
-                    <img id="mainImage" src="" alt="product image">
-                    <div class="secondary-images" id="secondaryImages"></div>
-                </div>
-                <!--seller profile-->
-                <div class="seller-profile">
-                    <h2>Seller profile</h2>
-                    <div class="seller-profile-container">
-                        <div class="seller-profile-details">
-                            <img src="../images/icons/review-profile-icon.png" alt="seller profile icon">
-                            <div class="seller-information">
-                                <p id="sellerUsername">@Username</p>
-                                <p class="seller-joined">Joined <span id="sellerJoined">N/A</span></p>
-                            </div>
-                        </div>
-                        <button id="contactSeller">Chat</button>
-                    </div>
-                </div>
-            </div>
-            <div class="product-details">
-                <h1 id="productTitle">Product Title</h1>
-                <p class="price" id="productPrice">S$0.00</p>
-                <div class="details-container">
-                    <h3>Details</h3>
-                    <div class="details-grid">
-                        <div class="details">
-                            <h4>Category</h4>
-                            <p><span id="productCategory">N/A</span></p>
-                        </div>
-                        <div class="details">
-                            <h4>Condition</h4>
-                            <p><span id="productCondition">N/A</span></p>
-                        </div>
-                        <div class="details">
-                            <h4>Listed</h4>
-                            <p><span id="productListed">N/A</span></p>
-                        </div>
-                        <div class="details">
-                            <h4>Dimensions</h4>
-                            <p><span id="productDimensions">N/A</span></p>
-                        </div>
-                        <div class="details">
-                            <h4>Colour</h4>
-                            <p><span id="productColour">N/A</span></p>
-                        </div>
-                        <div class="details">
-                            <h4>Material</h4>
-                            <p><span id="productMaterial">N/A</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="description-container">
-                    <h3>Description</h3>
-                    <p class="description" id="productDescription">Product description goes here.</p>
-                </div>
-                <div class="product-points">
-                    <img src="../images/icons/points-icon.png" alt="points icon">
-                    <p>Earn <span id="productPoints">0</span><strong> Moke Points</strong> with this purchase.</p>
-                </div>
-                <button id="addToCart">Add to Cart</button>
-            </div>
+        <h1 id="pageTitle">All Products</h1>
+        <!--filter section-->
+        <section class="filters">
+            <!--filter by price-->
+            <label for="filterPrice">Sort by Price:</label>
+            <select id="filterPrice">
+                <option value="default">Default</option>
+                <option value="low-to-high">Lowest to Highest</option>
+                <option value="high-to-low">Highest to Lowest</option>
+            </select>
+            <!--filter by condition-->
+            <label for="filterCondition">Condition:</label>
+            <select id="filterCondition">
+                <option value="all">All</option>
+                <option value="Brand New">Brand New</option>
+                <option value="Like New">Like New</option>
+                <option value="Lightly Used">Lightly Used</option>
+                <option value="Well Used">Well Used</option>
+                <option value="Heavily Used">Heavily Used</option>
+            </select>
         </section>
-        <!--seller reviews section-->
-        <section class="seller-reviews">
-            <h2>Reviews for @<span id="sellerReviewUsername">Username</span></h2>
-            <form class="review-form" id="reviewForm">
-                <textarea id="reviewInput" placeholder="Write your review here..."></textarea>
-                <button type="submit" id="postReviewButton">Post</button>
-            </form>
-            <div id="reviewsList" class="reviews-list">
-                <!--reviews will be dynamically added heres-->
-            </div>
-        </section>
-        <!--similar listings section-->
-        <section class="similar-listings">
-            <h2>SIMILAR LISTINGS</h2>
-            <div class="listings-container" id="similarListings">
-                <!--products will be inserted here dynamically-->
-            </div>
-        </section>
+        <!--products section-->
+        <section class="product-grid" id="productGrid"></section>
+        <!--load more button-->
+        <button id="loadMoreBtn">Load More</button>
         <!--footer section-->
         <footer class="footer">
             <!--footer left section-->
@@ -324,7 +263,6 @@
         </div>
     </div>
     <script src="../js/registration.js"></script>
-    <script src="../js/product-details.js"></script>
-    <script src="../js/script.js"></script>
+    <script src="../js/products.js"></script>
 </body>
 </html>
