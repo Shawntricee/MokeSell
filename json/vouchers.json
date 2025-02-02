@@ -1,0 +1,44 @@
+[
+    {
+        "_id": "679f0342bb50491a0000cb84",
+        "name": "Get 10% off your first purchase over $100",
+        "discount": 0.1,
+        "points": 200,
+        "expiry": "2026-02-02T00:00:00.000Z"
+    },
+    {
+        "_id": "679f03a3bb50491a0000cb88",
+        "name": "Get 20% on all items",
+        "discount": 0.2,
+        "points": 500,
+        "expiry": "2026-02-02T00:00:00.000Z"
+    },
+    {
+        "_id": "679f03dfbb50491a0000cb8b",
+        "name": "Buy 2 items for 10% off",
+        "discount": 0.1,
+        "points": 400,
+        "expiry": "2026-02-02T00:00:00.000Z"
+    },
+    {
+        "_id": "679f040ebb50491a0000cb8d",
+        "name": "Buy 3 items for 15% off",
+        "discount": 0.15,
+        "points": 300,
+        "expiry": "2026-02-02T00:00:00.000Z"
+    },
+    {
+        "_id": "679f0441bb50491a0000cb91",
+        "name": "Buy 4 items for 20% off",
+        "discount": 0.2,
+        "points": 200,
+        "expiry": "2026-02-02T00:00:00.000Z"
+    },
+    {
+        "_id": "679f0477bb50491a0000cb94",
+        "name": "Get 10% off with minimum spend of $1000",
+        "discount": 0.1,
+        "points": 120,
+        "expiry": "2026-02-02T00:00:00.000Z"
+    }
+]
