@@ -1,0 +1,146 @@
+[
+    {
+        "cart_id": "c001",
+        "user_id": 3,
+        "items": [
+            {
+                "product_id": "679796bbbb50491a00009ee6",
+                "title": "Timber 90\" Sofa - Olio Green",
+                "price": 1299,
+                "quantity": 1,
+                "image_url": "fabric-sofa-1-main.jpg",
+                "points": 129.9
+            }
+        ],
+        "subtotal": 1299,
+        "shipping": 35,
+        "discount": 0,
+        "total": 1334
+    },
+    {
+        "cart_id": "c002",
+        "user_id": 5,
+        "items": [
+            {
+                "product_id": "679796bbbb50491a00009ee8",
+                "title": "Timber 100\" Sofa - Blue",
+                "price": 1599,
+                "quantity": 1,
+                "image_url": "fabric-sofa-2-main.jpg",
+                "points": 159.9
+            }
+        ],
+        "subtotal": 1599,
+        "shipping": 35,
+        "discount": 0,
+        "total": 1634
+    },
+    {
+        "cart_id": "c003",
+        "user_id": 7,
+        "items": [
+            {
+                "product_id": "679796bbbb50491a00009ee9",
+                "title": "Timber 120\" Sofa - White",
+                "price": 1899,
+                "quantity": 1,
+                "image_url": "fabric-sofa-3-main.jpg",
+                "points": 189.9
+            }
+        ],
+        "subtotal": 1899,
+        "shipping": 35,
+        "discount": 0,
+        "total": 1934
+    },
+    {
+        "cart_id": "c004",
+        "user_id": 9,
+        "items": [
+            {
+                "product_id": "679796bbbb50491a00009eea",
+                "title": "Timber 140\" Sofa - Black",
+                "price": 2199,
+                "quantity": 1,
+                "image_url": "fabric-sofa-4-main.jpg",
+                "points": 219.9
+            }
+        ],
+        "subtotal": 2199,
+        "shipping": 35,
+        "discount": 0,
+        "total": 2234
+    },
+    {
+        "cart_id": "c005",
+        "user_id": 11,
+        "items": [
+            {
+                "product_id": "679796bbbb50491a00009eeb",
+                "title": "Timber 160\" Sofa - Red",
+                "price": 2499,
+                "quantity": 1,
+                "image_url": "fabric-sofa-5-main.jpg",
+                "points": 249.9
+            }
+        ],
+        "subtotal": 2499,
+        "shipping": 35,
+        "discount": 0,
+        "total": 2534
+    },
+    {
+        "cart_id": "c006",
+        "user_id": 13,
+        "items": [
+            {
+                "product_id": "679796bbbb50491a00009eec",
+                "title": "Timber 180\" Sofa - Yellow",
+                "price": 2799,
+                "quantity": 1,
+                "image_url": "fabric-sofa-6-main.jpg",
+                "points": 279.9
+            }
+        ],
+        "subtotal": 2799,
+        "shipping": 35,
+        "discount": 0,
+        "total": 2834
+    },
+    {
+        "cart_id": "c007",
+        "user_id": 15,
+        "items": [
+            {
+                "product_id": "679796bbbb50491a00009eed",
+                "title": "Timber 200\" Sofa - Green",
+                "price": 3099,
+                "quantity": 1,
+                "image_url": "fabric-sofa-7-main.jpg",
+                "points": 309.9
+            }
+        ],
+        "subtotal": 3099,
+        "shipping": 35,
+        "discount": 0,
+        "total": 3134
+    },
+    {
+        "cart_id": "c008",
+        "user_id": 17,
+        "items": [
+            {
+                "product_id": "679796bbbb50491a00009eee",
+                "title": "Timber 220\" Sofa - Blue",
+                "price": 3399,
+                "quantity": 1,
+                "image_url": "fabric-sofa-8-main.jpg",
+                "points": 339.9
+            }
+        ],
+        "subtotal": 3399,
+        "shipping": 35,
+        "discount": 0,
+        "total": 3434
+    }
+]

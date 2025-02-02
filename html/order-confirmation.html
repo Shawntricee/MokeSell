@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Confirmation - MokeSell</title>
     <!--importing existing styles-->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!--google font-->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500&display=swap" rel="stylesheet">
-    <!--order confirmation specific styles-->
-    <link rel="stylesheet" href="css/order-confirmation.css">
 </head>
 <body>
     <header class="header">
@@ -25,25 +23,45 @@
                 <button class="menu-btn" id="openSidebarButton">☰</button>
                 <!--logo-->
                 <div class="logo">
-                    <a href="index.html"><img src="images/others/mokesell-logo.png" alt="mokesell logo"></a>
+                    <a href="index.html"><img src="../images/others/mokesell-logo.png" alt="mokesell logo"></a>
                 </div>
                 <!--search bar-->
                 <div class="search-container">
-                    <img src="images/icons/search-icon.png" alt="search icon" id="search-icon">
+                    <img src="../images/icons/search-icon.png" alt="search icon" id="search-icon">
                     <input type="search" id="search-bar" placeholder="Search for products ...">
                     <ul id="suggestions-list" class="suggestions-list"></ul>
                 </div>
-                <!--right buttons-->
+                <!--right buttons--> 
                 <div class="nav-buttons">
                     <a href="#">
                         <button class="sell-button">Sell an item</button>
                     </a>
-                    <a href="#" class="auth-button">Sign in</a>
-                    <a href="#" class="auth-button">Sign up</a>
-                    <a href="#" class="cart-icon">
-                        <img src="images/icons/cart-icon.png" alt="cart icon">
-                        <span class="cart-badge">0</span>
-                    </a>
+                    <div id="guestNav">
+                        <button class="auth-button" id="navSignIn">Sign in</button>
+                        <button class="auth-button" id="navSignUp">Sign up</button>
+                        <a href="#" class="nav-icon">
+                            <img src="../images/icons/cart-icon.png" alt="cart icon">
+                            <span class="cart-badge">0</span>
+                        </a>
+                    </div>
+                    <div id="userNav">
+                        <div class="profile-container">
+                            <a href="#" class="nav-icon">
+                                <img src="../images/icons/favourites-icon.png" id="favouritesIcon" alt="favourites icon">
+                            </a>
+                            <a href="#" class="nav-icon">
+                                <img src="../images/icons/cart-icon.png" alt="cart icon">
+                                <span class="cart-badge">0</span>
+                            </a>
+                            <a href="#" class="nav-icon">
+                                <img src="../images/icons/profile-icon.png" id="profileIcon" alt="profile icon">
+                            </a>
+                            <ul class="user-dropdown" id="userDropdown">
+                                <li><a href="#">View Profile</a></li>
+                                <li><a href="#" id="logoutButton">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!--collapsible menu-->
@@ -52,18 +70,17 @@
                     <li><a href="#" class="link">All</a></li>
                     <li class="dropdown">
                         <a href="#" class="link">Sofas
-                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Fabric Sofas</a></li>
                             <li><a href="#">Leather Sofas</a></li>
                             <li><a href="#">Metal Sofas</a></li>
-                            <li><a href="#">Fabric Sofas</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="link">Tables
-                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Dining Tables</a></li>
@@ -74,7 +91,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="link">Chairs
-                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Dining Chairs</a></li>
@@ -85,7 +102,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="link">Beds
-                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Bed Frames</a></li>
@@ -94,7 +111,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="link">Decors
-                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Accessories</a></li>
@@ -105,7 +122,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="link">Spaces
-                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Living Room</a></li>
@@ -118,11 +135,10 @@
             </div>
         </nav>
     </header>
-
     <main>
         <div class="confirmation-container">
-            <!--confirmation circle image-->
-            <div class="confirmation-image">image</div>
+            <!--lottie animation container-->
+            <div class="confirmation-image" id="successAnimation">image</div>
 
             <!--thank you message-->
             <h1 class="thank-you-title">Thank you for your purchase!</h1>
@@ -133,23 +149,23 @@
                 <!--order information-->
                 <div class="detail-row">
                     <div class="detail-label">
-                        <img src="images/icons/calendar-icon.png" alt="Date">
+                        <img src="../images/icons/calendar-icon.png" alt="Date">
                         Date
                     </div>
-                    <div class="detail-value">19/1/2025</div>
+                    <div class="detail-value" data-field="date">2/2/2025</div>
                 </div>
 
                 <div class="detail-row">
                     <div class="detail-label">
-                        <img src="images/icons/user-icon.png" alt="Customer">
+                        <img src="../images/icons/user-icon.png" alt="Customer">
                         Customer
                     </div>
-                    <div class="detail-value">ShawnBrice Yip</div>
+                    <div class="detail-value" data-field="customer">Shawntrice Yip</div>
                 </div>
 
                 <div class="detail-row">
                     <div class="detail-label">
-                        <img src="images/icons/payment-icon.png" alt="Payment">
+                        <img src="../images/icons/payment-icon.png" alt="Payment">
                         Payment Method
                     </div>
                     <div class="payment-image">image</div>
@@ -157,18 +173,18 @@
 
                 <div class="detail-row">
                     <div class="detail-label">
-                        <img src="images/icons/order-icon.png" alt="Order">
+                        <img src="../images/icons/order-icon.png" alt="Order">
                         Order Number
                     </div>
-                    <div class="detail-value">202581596</div>
+                    <div class="detail-value" data-field="orderNumber">202581596</div>
                 </div>
 
                 <div class="detail-row">
                     <div class="detail-label">
-                        <img src="images/icons/total-icon.png" alt="Total">
+                        <img src="../images/icons/total-icon.png" alt="Total">
                         Total
                     </div>
-                    <div class="detail-value">$3,699</div>
+                    <div class="detail-value" data-field="total">$3,699</div>
                 </div>
 
                 <!--order line items-->
@@ -194,22 +210,22 @@
             </div>
 
             <!--continue shopping button-->
-            <a href="index.html" class="continue-shopping">CONTINUE SHOPPING</a>
+            <a href="../index.html" class="continue-shopping">CONTINUE SHOPPING</a>
         </div>
-        
-        <!--footer section-->
+    </main>
+    <!--footer section-->
         <footer class="footer">
             <!--footer left section-->
             <div class="footer-left">
                 <div class="footer-logo">
-                    <img src="images/others/mokesell-logo-footer.png" alt="mokesell logo">
+                    <img src="../images/others/mokesell-logo-footer.png" alt="mokesell logo">
                 </div>
                 <p>Where Style Meets Comfort - Redefining Your Furniture Journey.</p>
                 <!--social links-->
                 <div class="social-icons">
-                    <a href="#" target="_blank" class="icon"><img src="images/icons/instagram-icon.png" alt="Instagram"></a>
-                    <a href="#" target="_blank" class="icon"><img src="images/icons/twitter-icon.png" alt="Twitter"></a>
-                    <a href="#" target="_blank" class="icon"><img src="images/icons/facebook-icon.png" alt="Facebook"></a>
+                    <a href="#" target="_blank" class="icon"><img src="../images/icons/instagram-icon.png" alt="Instagram"></a>
+                    <a href="#" target="_blank" class="icon"><img src="../images/icons/twitter-icon.png" alt="Twitter"></a>
+                    <a href="#" target="_blank" class="icon"><img src="../images/icons/facebook-icon.png" alt="Facebook"></a>
                 </div>
                 <!--copyright-->
                 <div class="copyright">
@@ -250,13 +266,59 @@
             </div>
         </footer>
     </main>
-
-    </footer>
+    <!--registration popup section-->
+    <div id="popupOverlay" class="popup-overlay">s</div>
+    <div id="registrationPopup" class="popup">
+        <div class="popup-container">
+            <div class="popup-logo">
+                <img src="../images/others/mokesell-logo-popup.png">
+            </div>
+            <span class="close-button">X</span>
+            <div class="popup-header">
+                <button id="signupTab" class="active">Sign up</button>
+                <button id="signinTab">Sign in</button>
+            </div>
+            <div class="popup-content">
+                <div class="popup-fields">
+                    <!--sign up form-->
+                    <div id="signupForm" class="form active">
+                        <label for="signupUsername">Username</label>
+                        <input type="text" id="signupUsername" placeholder="Username">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" placeholder="Email Address">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" placeholder="Password">
+                        <button id="signupButton">SIGN UP</button>
+                    </div>
+                    <!--sign in form-->
+                    <div id="signinForm" class="form">
+                        <label for="signinUsername">Username</label>
+                        <input type="text" id="signinUsername" placeholder="Username">
+                        <label for="signinPassword">Password</label>
+                        <input type="password" id="signinPassword" placeholder="Password">
+                        <button id="signinButton">SIGN IN</button>
+                    </div>
+                    <!--social login-->
+                    <div class="social-login">
+                        <p>OR</p>
+                        <button>Continue with Google</button>
+                        <button>Continue with Facebook</button>
+                    </div>
+                </div>
+                <!--discount code image-->
+                <div class="discount-code">
+                    <img src="../images/others/popup-discount-code.png" alt="discount code image">
+                </div>
+            </div>
+        </div>
+    </div>
     <!--external libraries-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.14/lottie.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     
     <!--custom javascript-->
-    <script src="js/order-confirmation.js"></script>
+    <script src="../js/registration.js"></script>
+    <script src="../js/order-confirmation.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,170 @@
+[
+    {
+        "order_id": "202581596",
+        "user_id": 3,
+        "date": "2025-01-19",
+        "customer": "Shawntrice Yip",
+        "payment_method": "Mastercard",
+        "payment_last4": "5987",
+        "items": [
+            {
+                "product_id": "679ee900bb50491a0000cb5d",
+                "title": "Leather black dining chair",
+                "price": 1699,
+                "quantity": 2,
+                "size": "XL",
+                "image_url": "dining-chair-1-main.jpg"
+            }
+        ],
+        "shipping_address": "870 Bukit Timah Ave, SG 654198",
+        "total": 3699,
+        "status": "confirmed"
+    },
+    {
+        "order_id": "202581597",
+        "user_id": 4,
+        "date": "2025-01-20",
+        "customer": "Serene",
+        "payment_method": "Visa",
+        "payment_last4": "4567",
+        "items": [
+            {
+                "product_id": "679ee900bb50491a0000cb5e",
+                "title": "Sede Leather Dining Chair - Black",
+                "price": 100,
+                "quantity": 1,
+                "size": "M",
+                "image_url": "dining-chair-1-main.jpg"
+            }
+        ],
+        "shipping_address": "123 Bukit Timah Ave, SG 654198",
+        "total": 100,
+        "status": "pending"
+    },
+    {
+        "order_id": "202581598",
+        "user_id": 5,
+        "date": "2025-01-21",
+        "customer": "Lily",
+        "payment_method": "American Express",
+        "payment_last4": "3210",
+        "items": [
+            {
+                "product_id": "679ee900bb50491a0000cb5f",
+                "title": "Plumas Extendable Dining Table for 6 - Walnut",
+                "price": 1200,
+                "quantity": 1,
+                "size": "L",
+                "image_url": "dining-chair-1-main.jpg"
+            }
+        ],
+        "shipping_address": "870 Bukit Timah Ave, SG 654198",
+        "total": 1200,
+        "status": "cancelled"
+    },
+    {
+        "order_id": "202581599",
+        "user_id": 6,
+        "date": "2025-01-22",
+        "customer": "Rachel",
+        "payment_method": "Discover",
+        "payment_last4": "2345",
+        "items": [
+            {
+                "product_id": "679ee900bb50491a0000cb60",
+                "title": "Leather black dining chair",
+                "price": 1699,
+                "quantity": 1,
+                "size": "XL",
+                "image_url": "dining-chair-1-main.jpg"
+            }
+        ],
+        "shipping_address": "870 Bukit Timah Ave, SG 654198",
+        "total": 1699,
+        "status": "shipped"
+    },
+    {
+        "order_id": "202581600",
+        "user_id": 7,
+        "date": "2025-01-23",
+        "customer": "Dawn",
+        "payment_method": "Visa",
+        "payment_last4": "6789",
+        "items": [
+            {
+                "product_id": "679ee900bb50491a0000cb61",
+                "title": "Leather black dining chair",
+                "price": 1699,
+                "quantity": 1,
+                "size": "M",
+                "image_url": "dining-chair-1-main.jpg"
+            }
+        ],
+        "shipping_address": "870 Bukit Timah Ave, SG 654198",
+        "total": 1699,
+        "status": "returned"
+    },
+    {
+        "order_id": "202581601",
+        "user_id": 8,
+        "date": "2025-01-24",
+        "customer": "Elizabeth",
+        "payment_method": "Mastercard",
+        "payment_last4": "1234",
+        "items": [
+            {
+                "product_id": "679ee900bb50491a0000cb62",
+                "title": "Leather black dining chair",
+                "price": 1699,
+                "quantity": 1,
+                "size": "L",
+                "image_url": "dining-chair-1-main.jpg"
+            }
+        ],
+        "shipping_address": "870 Bukit Timah Ave, SG 654198",
+        "total": 1699,
+        "status": "pending"
+    },
+    {
+        "order_id": "202581602",
+        "user_id": 9,
+        "date": "2025-01-25",
+        "customer": "Frank",
+        "payment_method": "Discover",
+        "payment_last4": "5678",
+        "items": [
+            {
+                "product_id": "679ee900bb50491a0000cb63",
+                "title": "Leather black dining chair",
+                "price": 1699,
+                "quantity": 1,
+                "size": "XL",
+                "image_url": "dining-chair-1-main.jpg"
+            }
+        ],
+        "shipping_address": "870 Bukit Timah Ave, SG 654198",
+        "total": 1699,
+        "status": "shipped"
+    },
+    {
+        "order_id": "202581603",
+        "user_id": 10,
+        "date": "2025-01-26",
+        "customer": "Grace",
+        "payment_method": "Visa",
+        "payment_last4": "9876",
+        "items": [
+            {
+                "product_id": "679ee900bb50491a0000cb64",
+                "title": "Madera Dining Table for 6 - Oak",
+                "price": 99,
+                "quantity": 1,
+                "size": "M",
+                "image_url": "dining-table-2-main.jpg"
+            }
+        ],
+        "shipping_address": "678 Bukit Timah Ave, SG 654198",
+        "total": 99,
+        "status": "returned"
+    }
+]
