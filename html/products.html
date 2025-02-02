@@ -138,31 +138,36 @@
     </header>
     <!-- main content -->
     <main class="main-content">
+        <!--page title-->
         <h1 id="pageTitle">All Products</h1>
         <!--filter section-->
-        <section class="filters">
-            <!--filter by price-->
-            <label for="filterPrice">Sort by Price:</label>
-            <select id="filterPrice">
-                <option value="default">Default</option>
-                <option value="low-to-high">Lowest to Highest</option>
-                <option value="high-to-low">Highest to Lowest</option>
-            </select>
-            <!--filter by condition-->
-            <label for="filterCondition">Condition:</label>
-            <select id="filterCondition">
-                <option value="all">All</option>
-                <option value="Brand New">Brand New</option>
-                <option value="Like New">Like New</option>
-                <option value="Lightly Used">Lightly Used</option>
-                <option value="Well Used">Well Used</option>
-                <option value="Heavily Used">Heavily Used</option>
-            </select>
+        <section class="filter-container">
+            <div class="filter">
+                <!--filter by price-->
+                <label for="filterPrice">Sort by Price:</label>
+                <select id="filterPrice">
+                    <option value="default">Default</option>
+                    <option value="low-to-high">Lowest to Highest</option>
+                    <option value="high-to-low">Highest to Lowest</option>
+                </select>
+            </div>
+            <div class="filter">
+                <!--filter by condition-->
+                <label for="filterCondition">Condition:</label>
+                <select id="filterCondition">
+                    <option value="all">All</option>
+                    <option value="Brand New">Brand New</option>
+                    <option value="Like New">Like New</option>
+                    <option value="Lightly Used">Lightly Used</option>
+                    <option value="Well Used">Well Used</option>
+                    <option value="Heavily Used">Heavily Used</option>
+                </select>
+            </div>
         </section>
         <!--products section-->
         <section class="product-grid" id="productGrid"></section>
         <!--load more button-->
-        <button id="loadMoreBtn">Load More</button>
+        <button id="loadMoreBtn" class="load-more">Load More</button>
         <!--footer section-->
         <footer class="footer">
             <!--footer left section-->

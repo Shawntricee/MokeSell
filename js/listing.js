@@ -44,34 +44,37 @@ class Listing {
             if (!this.uploadedFiles.includes(file)) {
                 let reader = new FileReader();
                 reader.onload = (e) => {
-                    this.addImage(e.target.result, file);
+                    this.addImage(file);
                 };
                 reader.readAsDataURL(file);
+                console.log(file);
             }
         });
     }    
 
-    addImage(base64, file) {
+    addImage(file) {
         const imgBox = document.createElement("div");
         imgBox.classList.add("image-box");
 
         const img = document.createElement("img");
-        img.src = base64;
+        img.src = URL.createObjectURL(file);
 
         const deleteBtn = document.createElement("button");
         deleteBtn.innerText = "X";
-        deleteBtn.addEventListener("click", () => this.removeImage(base64, file, imgBox));
+        deleteBtn.addEventListener("click", () => this.removeImage(file, imgBox));
 
         imgBox.appendChild(img);
         imgBox.appendChild(deleteBtn);
         this.imagePreview.appendChild(imgBox);
 
-        this.uploadedImages.push(base64); // Store Base64 string
+        const fileName = file.name;
+        this.uploadedImages.push(fileName);
         this.uploadedFiles.push(file);
+        console.log(this.uploadedImages);
     }
 
-    removeImage(base64, file, imgBox) {
-        this.uploadedImages = this.uploadedImages.filter(image => image !== base64);
+    removeImage(file, imgBox) {
+        this.uploadedImages = this.uploadedImages.filter(image => image !== file.name);
         this.uploadedFiles = this.uploadedFiles.filter(f => f !== file);
         imgBox.remove();
     }
@@ -116,6 +119,8 @@ class Listing {
         const username = localStorage.getItem("currentUsername");
         const email = localStorage.getItem("userEmail"); // Retrieve user email if stored
         const userId = localStorage.getItem("userId"); // Fetch userId from localStorage
+        // Retrieve the value from the input field and parse it as a float
+        const price = parseFloat(document.getElementById("price").value);
 
         if (!userId || !username || !email) {
             alert("User details are missing. Please login again.");
@@ -123,7 +128,7 @@ class Listing {
         }
         return {
             "description": document.getElementById("description").value,
-            "price": this.priceInput.value,
+            "price": price,
             "category": this.categorySelect.value,
             "condition": this.conditionSelect.value,
             "dimensions": `${document.getElementById("height").value}H x ${document.getElementById("width").value}W x ${document.getElementById("depth").value}D`,

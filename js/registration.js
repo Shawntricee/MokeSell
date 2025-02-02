@@ -72,6 +72,7 @@ class Registration {
                     localStorage.setItem("userLoggedIn", "true");
                     localStorage.setItem("currentUsername", username);
                     localStorage.setItem("userEmail", user.email);
+                    localStorage.setItem("userId", user._id);
                     this.updateNavBar();
                     this.closePopup();
                 } else {

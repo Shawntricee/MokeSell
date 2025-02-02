@@ -135,7 +135,7 @@ class Product {
 
                 console.log("Fetched product data:", product);
                 this.updateProductDetails(product);
-                this.updateProductImages(product.imageFilenames);
+                this.updateProductImages(product.image_url);
                 const breadcrumb = new BreadcrumbNavigation("#breadcrumbNavigation");
                 breadcrumb.generateBreadcrumb(product.category, product.subcategory, product.title);
 
@@ -167,11 +167,11 @@ class Product {
         document.getElementById("sellerJoined").textContent = seller.date_joined ? new Date(seller.date_joined).toLocaleDateString() : "Joined: N/A";
     }
 
-    updateProductImages(imageFilenames) {
+    updateProductImages(image_url) {
         const mainImageElem = document.getElementById("mainImage");
         const secondaryImagesContainer = document.getElementById("secondaryImages");
 
-        const images = imageFilenames.split(",");
+        const images = image_url;
         const baseImageUrl = "../images/products/";
 
         if (mainImageElem && images.length > 0) {
@@ -179,9 +179,9 @@ class Product {
 
             if (secondaryImagesContainer) {
                 secondaryImagesContainer.innerHTML = "";
-                images.slice(0).forEach(imgFilename => {
+                images.slice(0).forEach(image_url => {
                     const imgElement = document.createElement("img");
-                    imgElement.src = `${baseImageUrl}${imgFilename}`;
+                    imgElement.src = `${baseImageUrl}${image_url}`;
                     imgElement.alt = "product image";
                     imgElement.classList.add("secondary-image");
 
@@ -208,7 +208,7 @@ class Product {
                         const productCard = document.createElement("div");
                         productCard.classList.add("listing-card");
 
-                        const images = product.imageFilenames ? product.imageFilenames.split(",") : [];
+                        const images = product.image_url ? product.image_url : [];
                         const firstImage = images[0] ? `../images/products/${images[0]}` : "../images/default-placeholder.png";
                         const secondImage = images[1] ? `../images/products/${images[1]}` : firstImage;
 
