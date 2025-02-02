@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <title>Product - MokeSell</title>
+    <!--normalize.css-->
+    <link rel="stylesheet" href="../css/normalize.css">
+    <!--custom styles-->
+    <link rel="stylesheet" href="../css/style.css">
+    <!--google font-->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <!--top promo bar section-->
+        <div class="promo-bar">
+            10% OFF - On all purchases above $5000.
+        </div>
+        <!--navbar section-->
+        <nav class="navbar">
+            <div class="nav-container">
+                <!--menu button-->
+                <button class="menu-btn" id="openSidebarButton">☰</button>
+                <!--logo-->
+                <div class="logo">
+                    <a href="index.html"><img src="../images/others/mokesell-logo.png" alt="mokesell logo"></a>
+                </div>
+                <!--search bar-->
+                <div class="search-container">
+                    <img src="../images/icons/search-icon.png" alt="search icon" id="search-icon">
+                    <input type="search" id="search-bar" placeholder="Search for products ...">
+                    <ul id="suggestions-list" class="suggestions-list"></ul>
+                </div>
+                <!--right buttons--> 
+                <div class="nav-buttons">
+                    <a href="#">
+                        <button class="sell-button">Sell an item</button>
+                    </a>
+                    <div id="guestNav">
+                        <button class="auth-button" id="navSignIn">Sign in</button>
+                        <button class="auth-button" id="navSignUp">Sign up</button>
+                        <a href="#" class="nav-icon">
+                            <img src="../images/icons/cart-icon.png" alt="cart icon">
+                            <span class="cart-badge">0</span>
+                        </a>
+                    </div>
+                    <div id="userNav">
+                        <div class="profile-container">
+                            <a href="#" class="nav-icon">
+                                <img src="../images/icons/favourites-icon.png" id="favouritesIcon" alt="favourites icon">
+                            </a>
+                            <a href="#" class="nav-icon">
+                                <img src="../images/icons/cart-icon.png" alt="cart icon">
+                                <span class="cart-badge">0</span>
+                            </a>
+                            <a href="#" class="nav-icon">
+                                <img src="../images/icons/profile-icon.png" id="profileIcon" alt="profile icon">
+                            </a>
+                            <ul class="user-dropdown" id="userDropdown">
+                                <li><a href="#">View Profile</a></li>
+                                <li><a href="#" id="logoutButton">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--collapsible menu-->
+            <div class="nav-categories">
+                <ul class="nav-links">
+                    <li><a href="#" class="link">All</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Sofas
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Fabric Sofas</a></li>
+                            <li><a href="#">Leather Sofas</a></li>
+                            <li><a href="#">Metal Sofas</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Tables
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Dining Tables</a></li>
+                            <li><a href="#">Side Tables</a></li>
+                            <li><a href="#">Coffee Tables</a></li>
+                            <li><a href="#">Study Tables</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Chairs
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Dining Chairs</a></li>
+                            <li><a href="#">Stools</a></li>
+                            <li><a href="#">Benches</a></li>
+                            <li><a href="#">Office Chairs</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Beds
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Bed Frames</a></li>
+                            <li><a href="#">Mattresses</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Decors
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Lamps</a></li>
+                            <li><a href="#">Mirrors</a></li>
+                            <li><a href="#">Pillow Cushions</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="link">Spaces
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Living Room</a></li>
+                            <li><a href="#">Dining Room</a></li>
+                            <li><a href="#">Bed Room</a></li>
+                            <li><a href="#">Study Room</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- main content -->
+    <main class="main-content">
+        <div class="video-background">
+            <video autoplay loop muted>
+                <!--<source src="background.mp4" type="video/mp4">-->
+            </video>
+        </div>
+        
+        <div class="content">
+            <h1>PLAY, COMPETE, REDEEM:<br> THE FUN STARTS HERE!</h1>
+            <p id="step-text">STEP 1: EARN POINTS</p>
+            <button id="next-step">Next</button>
+            <button id="start-playing">Start Playing</button>
+        </div>
+        
+        <div id="game-section">
+            <h2>Vouchers</h2>
+            <div id="vouchers"></div>
+            
+            <h2>Leaderboard</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Place</th>
+                        <th>User</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard"></tbody>
+            </table>
+        </div>
+        <!--dino game section-->
+        <button id="startGameBtn">Start Game</button>
+        <button id="restartGameBtn" style="display:none;">Restart Game</button>
+        <canvas id="board"></canvas>
+
+        <!--footer section-->
+        <footer class="footer">
+            <!--footer left section-->
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <img src="../images/others/mokesell-logo-footer.png" alt="mokesell logo">
+                </div>
+                <p>Where Style Meets Comfort - Redefining Your Furniture Journey.</p>
+                <!--social links-->
+                <div class="social-icons">
+                    <a href="#" target="_blank" class="icon"><img src="../images/icons/instagram-icon.png" alt="Instagram"></a>
+                    <a href="#" target="_blank" class="icon"><img src="../images/icons/twitter-icon.png" alt="Twitter"></a>
+                    <a href="#" target="_blank" class="icon"><img src="../images/icons/facebook-icon.png" alt="Facebook"></a>
+                </div>
+                <!--copyright-->
+                <div class="copyright">
+                    <p>© 2025 MokeSell. All Rights Reserved.</p>
+                </div>
+            </div> 
+            <!--footer right section-->
+            <div class="footer-right">
+                <!--shop section-->
+                <div class="footer-content">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html">Shop All</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Second-Hand Furniture</a></li>
+                    </ul>
+                </div>
+                <!--discover section-->
+                <div class="footer-content">
+                    <h4>Discover</h4>
+                    <ul>
+                        <li><a href="#">Games and Rewards</a></li>
+                        <li><a href="#">How it Works</a></li>
+                        <li><a href="#">Showrooms</a></li>
+                    </ul>
+                </div>
+                <!--support section-->
+                <div class="footer-content">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms and Conditions</a></li>
+                        <li><a href="#">Return and Exchange</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <!--registration popup section-->
+    <div id="popupOverlay" class="popup-overlay">s</div>
+    <div id="registrationPopup" class="popup">
+        <div class="popup-container">
+            <div class="popup-logo">
+                <img src="../images/others/mokesell-logo-popup.png">
+            </div>
+            <span class="close-button">X</span>
+            <div class="popup-header">
+                <button id="signupTab" class="active">Sign up</button>
+                <button id="signinTab">Sign in</button>
+            </div>
+            <div class="popup-content">
+                <div class="popup-fields">
+                    <!--sign up form-->
+                    <div id="signupForm" class="form active">
+                        <label for="signupUsername">Username</label>
+                        <input type="text" id="signupUsername" placeholder="Username">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" placeholder="Email Address">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" placeholder="Password">
+                        <button id="signupButton">SIGN UP</button>
+                    </div>
+                    <!--sign in form-->
+                    <div id="signinForm" class="form">
+                        <label for="signinUsername">Username</label>
+                        <input type="text" id="signinUsername" placeholder="Username">
+                        <label for="signinPassword">Password</label>
+                        <input type="password" id="signinPassword" placeholder="Password">
+                        <button id="signinButton">SIGN IN</button>
+                    </div>
+                    <!--social login-->
+                    <div class="social-login">
+                        <p>OR</p>
+                        <button>Continue with Google</button>
+                        <button>Continue with Facebook</button>
+                    </div>
+                </div>
+                <!--discount code image-->
+                <div class="discount-code">
+                    <img src="../images/others/popup-discount-code.png" alt="discount code image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/registration.js"></script>
+    <script src="../js/game.js"></script>
+</body>
+</html>

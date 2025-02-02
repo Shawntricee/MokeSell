@@ -150,7 +150,7 @@ class Listing {
 
     // Function to send data to your API
     sendProductData(product) {
-        const apiUrl = "https://mokesell-d5a1.restdb.io/rest/products"; // Replace with actual API URL
+        const apiUrl = /*"https://mokesell-d5a1.restdb.io/rest/products";*/ // Replace with actual API URL
         fetch(apiUrl, {
             method: 'POST',
             headers: {
