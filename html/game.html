@@ -138,39 +138,56 @@
     </header>
     <!-- main content -->
     <main class="main-content">
-        <div class="video-background">
-            <video autoplay loop muted>
-                <!--<source src="background.mp4" type="video/mp4">-->
+        <!--video section-->
+        <section class="video-container">
+            <video autoplay loop muted playsinline>
+                <source src="../images/game/dino-game-bg.mp4" type="video/mp4">
             </video>
-        </div>
-        
-        <div class="content">
-            <h1>PLAY, COMPETE, REDEEM:<br> THE FUN STARTS HERE!</h1>
-            <p id="step-text">STEP 1: EARN POINTS</p>
-            <button id="next-step">Next</button>
-            <button id="start-playing">Start Playing</button>
-        </div>
-        
-        <div id="game-section">
-            <h2>Vouchers</h2>
-            <div id="vouchers"></div>
-            
-            <h2>Leaderboard</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Place</th>
-                        <th>User</th>
-                        <th>Points</th>
-                    </tr>
-                </thead>
-                <tbody id="leaderboard"></tbody>
-            </table>
-        </div>
+            <div class="content">
+                <h1>PLAY, COMPETE, REDEEM:<br> THE FUN STARTS HERE!</h1>
+                <div class="step-container">
+                    <div class="game-step">
+                        <p id="step-text">STEP 1: EARN POINTS</p>
+                        <div id="step-description-container">
+                            <p id="step-description">Play the Game: Earn points by playing our game!</p>
+                            <p id="step-description">Shop More: Earn additional points with each purchase.</p>
+                        </div>
+                    </div>
+                    <button id="next-step"><img src="../images/icons/next-icon.png" alt="next step button"></button>
+                </div>
+                <button id="start-playing">START PLAYING</button>
+            </div>
+        </section>
+        <!--vouchers and leaderboard section-->
+        <section class="game-section">
+            <div class="vouchers-container">
+                <h2>VOUCHERS</h2>
+                <div id="vouchers"></div>
+            </div>
+            <div class="leaderboard-container">
+                <h2>LEADERBOARD</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Place</th>
+                            <th>User</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard"></tbody>
+                </table>
+            </div>
+        </section>
         <!--dino game section-->
-        <button id="startGameBtn">Start Game</button>
-        <button id="restartGameBtn" style="display:none;">Restart Game</button>
-        <canvas id="board"></canvas>
+        <section class="dino-game-container">
+            <h2>PLAY THE GAME</h2>
+            <p>Help the dino jump over the furniture and earn points!</p>
+            <div id="dino-game">
+                <button id="startGameBtn">START GAME</button>
+                <button id="restartGameBtn">RESTART GAME</button>
+                <canvas id="board"></canvas>
+            </div>
+        </section>
 
         <!--footer section-->
         <footer class="footer">
