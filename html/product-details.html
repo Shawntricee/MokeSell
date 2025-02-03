@@ -203,7 +203,7 @@
                     <img src="../images/icons/points-icon.png" alt="points icon">
                     <p>Earn <span id="productPoints">0</span><strong> Moke Points</strong> with this purchase.</p>
                 </div>
-                <button id="addToCart">Add to Cart</button>
+                <button id="addToCart" data-add-to-cart data-product-id="">ADD TO CART</button>
             </div>
         </section>
         <!--seller reviews section-->
@@ -277,6 +277,85 @@
             </div>
         </footer>
     </main>
+
+    <!--cart overlay and sidebar-->
+    <div id="cartOverlay" class="cart-overlay"></div>
+    <div id="cartSidebar" class="cart-sidebar">
+        <!--cart header-->
+        <div class="cart-header">
+            <h2>Your cart</h2>
+            <button class="close-cart">×</button>
+        </div>
+
+        <!--cart items container-->
+        <div id="cartItems" class="cart-items">
+            <!--cart items-->
+        </div>
+
+        <!--empty cart state-->
+        <div id="emptyCart" class="empty-cart">
+            <div id="emptyCartLottie"></div>
+            <h3>Your cart is empty</h3>
+            <p>Looks like you haven't added any items yet</p>
+            <button class="continue-shopping">Continue Shopping</button>
+        </div>
+
+        <!--cart summary-->
+        <div class="cart-summary">
+            <!--voucher input-->
+            <div class="voucher-input">
+                <input type="text" id="voucherCode" placeholder="Enter voucher code">
+                <button id="applyVoucher">Apply</button>
+            </div>
+
+            <!--summary details-->
+            <div class="summary-details">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span id="shippingCost">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Discount</span>
+                    <span id="discountAmount">$0.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="cartTotal">$0.00</span>
+                </div>
+            </div>
+
+            <!--checkout button-->
+            <button id="checkoutButton" class="checkout-button">
+                Continue to check out
+            </button>
+        </div>
+    </div>
+
+    <!--cart item template-->
+    <template id="cartItemTemplate">
+        <div class="cart-item">
+            <div class="item-image">
+                <img src="image" alt="Product">
+            </div>
+            <div class="item-details">
+                <h3 class="item-title"></h3>
+                <div class="item-controls">
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity">1</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <span class="item-price"></span>
+                </div>
+            </div>
+            <button class="remove-item" aria-label="Remove item">×</button>
+        </div>
+    </template>
+
     <!--registration popup section-->
     <div id="popupOverlay" class="popup-overlay">s</div>
     <div id="registrationPopup" class="popup">
@@ -323,8 +402,14 @@
             </div>
         </div>
     </div>
+
+    <!--external libraries-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.14/lottie.min.js"></script>
+    
+    <!--custom javascript-->
     <script src="../js/registration.js"></script>
     <script src="../js/product-details.js"></script>
     <script src="../js/script.js"></script>
+    <script src="../js/cart-manager.js"></script>
 </body>
 </html>
