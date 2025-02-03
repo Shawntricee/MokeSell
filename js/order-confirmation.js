@@ -72,7 +72,7 @@ class OrderManager {
 
     createOrderItemElement(item) {
         const itemDiv = document.createElement('div');
-        itemDiv.className = 'product-card';
+        itemDiv.className = 'checkout-product-card';
         itemDiv.innerHTML = `
             <div class="product-image">image</div>
             <div class="product-details">
