@@ -37,27 +37,52 @@ class Listing {
         this.form.addEventListener("submit", (event) => this.handleSubmit(event));
     }
 
+    // Function to handle image upload
     handleImageUpload(event) {
         const files = Array.from(event.target.files);
-    
+
         files.forEach((file) => {
             if (!this.uploadedFiles.includes(file)) {
                 let reader = new FileReader();
                 reader.onload = (e) => {
-                    this.addImage(file);
+                    this.uploadImageToCloudinary(file);
                 };
-                reader.readAsDataURL(file);
-                console.log(file);
+                reader.readAsDataURL(file);  // Still needed for preview, no base64 saving anymore
             }
         });
-    }    
+    }
 
-    addImage(file) {
+    // Function to upload an image to Cloudinary
+    async uploadImageToCloudinary(file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "listing");  // Replace with your actual upload preset
+
+        const response = await fetch(`https://api.cloudinary.com/v1_1/dygllvmdk/image/upload`, {
+            method: "POST",
+            body: formData
+        });
+
+        if (!response.ok) {
+            const errorResponse = await response.json();
+            console.error("Cloudinary upload failed with error:", errorResponse.error.message);
+            return;  // Stop further execution in case of error
+        }
+
+        const data = await response.json();
+        const imageUrl = data.secure_url;
+        console.log("Image uploaded successfully:", imageUrl);
+
+        this.addImage(file, imageUrl);
+    }
+
+    // Function to add image to the preview and store the URL
+    addImage(file, imageUrl) {
         const imgBox = document.createElement("div");
         imgBox.classList.add("image-box");
 
         const img = document.createElement("img");
-        img.src = URL.createObjectURL(file);
+        img.src = imageUrl;  // Display the Cloudinary URL
 
         const deleteBtn = document.createElement("button");
         deleteBtn.innerText = "X";
@@ -67,8 +92,8 @@ class Listing {
         imgBox.appendChild(deleteBtn);
         this.imagePreview.appendChild(imgBox);
 
-        const fileName = file.name;
-        this.uploadedImages.push(fileName);
+        // Store Cloudinary URL instead of file name
+        this.uploadedImages.push(imageUrl);
         this.uploadedFiles.push(file);
         console.log(this.uploadedImages);
     }
@@ -144,12 +169,12 @@ class Listing {
             "subcategory": this.categorySelect.options[this.categorySelect.selectedIndex].text,
             "points": parseFloat(this.priceInput.value) * 0.1, // Sample point calculation
             "id": Math.floor(Math.random() * 10000),
-            "imageFilenames": this.uploadedImages //store base64 images
+            "image_url": this.uploadedImages
         };
     }
 
     // Function to send data to your API
-    sendProductData(product) {
+    async sendProductData(product) {
         const apiUrl = /*"https://mokesell-d5a1.restdb.io/rest/products";*/ // Replace with actual API URL
         fetch(apiUrl, {
             method: 'POST',

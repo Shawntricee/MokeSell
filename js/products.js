@@ -75,8 +75,8 @@ class ProductPage {
         const images = product.image_url;
         productCard.innerHTML = `
             <div class="product-image">
-                <img src="../images/products/${images[0]}" class="main-image" alt="${product.title}">
-                <img src="../images/products/${images[1]}" class="secondary-image" alt="${product.title}">
+                <img src="${images[0]}" class="main-image" alt="${product.title}">
+                <img src="${images[1]}" class="secondary-image" alt="${product.title}">
             </div>
             <div class="product-card-details">
                 <h3>${product.title}</h3>

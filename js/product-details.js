@@ -172,16 +172,15 @@ class Product {
         const secondaryImagesContainer = document.getElementById("secondaryImages");
 
         const images = image_url;
-        const baseImageUrl = "../images/products/";
 
         if (mainImageElem && images.length > 0) {
-            mainImageElem.src = `${baseImageUrl}${images[0]}`;
+            mainImageElem.src = `${images[0]}`;
 
             if (secondaryImagesContainer) {
                 secondaryImagesContainer.innerHTML = "";
                 images.slice(0).forEach(image_url => {
                     const imgElement = document.createElement("img");
-                    imgElement.src = `${baseImageUrl}${image_url}`;
+                    imgElement.src = `${image_url}`;
                     imgElement.alt = "product image";
                     imgElement.classList.add("secondary-image");
 
@@ -209,8 +208,8 @@ class Product {
                         productCard.classList.add("listing-card");
 
                         const images = product.image_url ? product.image_url : [];
-                        const firstImage = images[0] ? `../images/products/${images[0]}` : "../images/default-placeholder.png";
-                        const secondImage = images[1] ? `../images/products/${images[1]}` : firstImage;
+                        const firstImage = images[0] ? `${images[0]}` : "../images/default-placeholder.png";
+                        const secondImage = images[1] ? `${images[1]}` : firstImage;
 
                         productCard.innerHTML = `
                             <div class="image-wrapper">

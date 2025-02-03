@@ -1,37 +1,5 @@
 [
-    {
-        "_id": "679ee900bb50491a0000cb5d",
-        "description": "Leather black dining chair",
-        "price": 220,
-        "condition": "Brand new",
-        "category": "Chairs",
-        "listed": "2025-02-02T03:39:40.548Z",
-        "dimensions": "122H x 22W x 133D",
-        "colour": "Black",
-        "material": "Leather",
-        "title": "Dining Chair - Black",
-        "seller_id": [
-            {
-                "_id": "6797923abb50491a00009ed2",
-                "username": "Serene",
-                "email": "Serenekxy@gmail.com",
-                "password": "SEREN4854H",
-                "date_joined": "2025-01-27T14:03:35.109Z",
-                "user_id": 3,
-                "_created": "2025-01-27T14:03:38.883Z",
-                "_changed": "2025-01-27T14:03:38.883Z"
-            }
-        ],
-        "subcategory": "Chairs",
-        "points": 22,
-        "id": 38,
-        "image_url": [
-            "dining-chair-1-main.jpg",
-            "dining-chair-1-secondary-1.jpg",
-            "dining-chair-1-secondary-2.jpg",
-            "dining-chair-1-secondary-3.jpg"
-        ]
-    },
+    
     {
         "_id": "6797978abb50491a00009ef2",
         "description": "Featuring a dreamy memory foam mattress, this sleeper sofa bed is upholstered in durable fabric with loose, easy-flip seat and back cushions. Entertaining and your guests had one too many? Sofa bed. In-laws unexpectedly show up? Sofa bed. Like to fall asleep in front of the TV? Sofa bed.",
@@ -59,10 +27,10 @@
         "id": 1,
         "points": 169.9,
         "image_url": [
-            "fabric-sofa-2-main.jpg",
-            "fabric-sofa-2-secondary-1.jpg",
-            "fabric-sofa-2-secondary-2.jpg",
-            "fabric-sofa-2-secondary-3.jpg"
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592529/fabric-sofa-2-main_mfuokc.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592529/fabric-sofa-2-secondary-1_fnfpo5.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592529/fabric-sofa-2-secondary-2_mjhygj.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592529/fabric-sofa-2-secondary-3_fex7pk.jpg"
         ]
     },
     {
@@ -92,10 +60,10 @@
         "points": 29.9,
         "id": 11,
         "image_url": [
-            "dining-chair-1-main.jpg",
-            "dining-chair-1-secondary-1.jpg",
-            "dining-chair-1-secondary-2.jpg",
-            "dining-chair-1-secondary-3.jpg"
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593089/dining-chair-1-main_vvlmku.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593090/dining-chair-1-secondary-1_qscggz.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593090/dining-chair-1-secondary-2_g88bsl.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593093/dining-chair-1-secondary-3_oj2ocu.jpg"
         ]
     },
     {
@@ -125,10 +93,10 @@
         "points": 99.9,
         "id": 6,
         "image_url": [
-            "dining-table-1-main.jpg",
-            "dining-table-1-secondary-1.jpg",
-            "dining-table-1-secondary-2.jpg",
-            "dining-table-1-secondary-3.jpg"
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592985/dining-table-1-main_g7vq6f.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592985/dining-table-1-secondary-1_fnvxq7.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592986/dining-table-1-secondary-2_n4j6ea.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592988/dining-table-1-secondary-3_sohdmu.jpg"
         ]
     },
     {
@@ -158,10 +126,10 @@
         "points": 19.9,
         "id": 10,
         "image_url": [
-            "dining-chair-2-main.jpg",
-            "dining-chair-2-secondary-1.jpg",
-            "dining-chair-2-secondary-2.jpg",
-            "dining-chair-2-secondary-3.jpg"
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593094/dining-chair-2-main_ljlfjs.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593095/dining-chair-2-secondary-1_g1xczi.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593095/dining-chair-2-secondary-2_dkubh1.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593097/dining-chair-2-secondary-3_pqfbbv.jpg"
         ]
     },
     {
@@ -191,10 +159,10 @@
         "points": 99.9,
         "id": 5,
         "image_url": [
-            "metal-sofa-2-main.jpg",
-            "metal-sofa-2-secondary-1.jpg",
-            "metal-sofa-2-secondary-2.jpg",
-            "metal-sofa-2-secondary-3.jpg"
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592754/metal-sofa-2-main_a6jg9x.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592754/metal-sofa-2-secondary-1_zxq41x.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592755/metal-sofa-2-secondary-2_sxhqmy.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592755/metal-sofa-2-secondary-3_bfqrma.jpg"
         ]
     },
     {
@@ -224,10 +192,10 @@
         "points": 99.9,
         "id": 7,
         "image_url": [
-            "dining-table-2-main.jpg",
-            "dining-table-2-secondary-1.jpg",
-            "dining-table-2-secondary-2.jpg",
-            "dining-table-2-secondary-3.jpg"
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592989/dining-table-2-main_xoenpn.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592989/dining-table-2-secondary-1_tqtf4x.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592992/dining-table-2-secondary-2_kdtopg.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592993/dining-table-2-secondary-3_uk4gvm.jpg"
         ]
     },
     {
@@ -257,10 +225,10 @@
         "points": 14.9,
         "id": 8,
         "image_url": [
-            "side-table-2-main.jpg",
-            "side-table-2-secondary-1.jpg",
-            "side-table-2-secondary-2.jpg",
-            "side-table-2-secondary-3.jpg"
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593366/side-table-2-main_bp9zu1.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593366/side-table-2-secondary-1_uaz3sm.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593369/side-table-2-secondary-2_x6hlkz.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593370/side-table-2-secondary-3_rinwtz.jpg"
         ]
     },
     {
@@ -290,10 +258,10 @@
         "points": 19.9,
         "id": 9,
         "image_url": [
-            "side-table-1-main.jpg",
-            "side-table-1-secondary-1.jpg",
-            "side-table-1-secondary-2.jpg",
-            "side-table-1-secondary-3.jpg"
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593361/side-table-1-main_l7ljot.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593362/side-table-1-secondary-1_gms5vh.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593362/side-table-1-secondary-2_viqfgu.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593363/side-table-1-secondary-3_gpnxk8.jpg"
         ]
     },
     {
@@ -323,10 +291,10 @@
         "points": 42.9,
         "id": 12,
         "image_url": [
-            "stools-1-main.jpg",
-            "stools-1-secondary-1.jpg",
-            "stools-1-secondary-2.jpg",
-            "stools-1-secondary-3.jpg"
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592870/stools-1-main_bod70e.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592871/stools-1-secondary-1_a6xqmt.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592871/stools-1-secondary-2_iju5ta.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592872/stools-1-secondary-3_cg4tk7.jpg"
         ]
     },
     {
@@ -356,10 +324,10 @@
         "points": 159.9,
         "id": 4,
         "image_url": [
-            "metal-sofa-1-main.jpg",
-            "metal-sofa-1-secondary-1.jpg",
-            "metal-sofa-1-secondary-2.jpg",
-            "metal-sofa-1-secondary-3.jpg"
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592819/metal-sofa-1-main_iyjmio.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592819/metal-sofa-1-secondary-1_hiivok.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592820/metal-sofa-1-secondary-2_jn5c9j.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592820/metal-sofa-1-secondary-3_fjuptl.jpg"
         ]
     },
     {
@@ -389,10 +357,10 @@
         "points": 24.9,
         "id": 13,
         "image_url": [
-            "stools-2-main.jpg",
-            "stools-2-secondary-1.jpg",
-            "stools-2-secondary-2.jpg",
-            "stools-2-secondary-3.jpg"
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592917/stools-2-main_gmmrav.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592917/stools-2-secondary-1_i6odcj.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592918/stools-2-secondary-2_zaevdi.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592918/stools-2-secondary-3_gxhf58.jpg"
         ]
     },
     {
@@ -422,10 +390,10 @@
         "id": 3,
         "points": 369.9,
         "image_url": [
-            "leather-sofa-2-main.jpg",
-            "leather-sofa-2-secondary-1.jpg",
-            "leather-sofa-2-secondary-2.jpg",
-            "leather-sofa-2-secondary-3.jpg"
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592692/leather-sofa-2-main_leemp1.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592692/leather-sofa-2-secondary-1_hujanj.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592692/leather-sofa-2-secondary-2_gcrudj.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592693/leather-sofa-2-secondary-3_x1vp2q.jpg"
         ]
     },
     {
@@ -455,10 +423,10 @@
         "id": 0,
         "points": 129.9,
         "image_url": [
-            "fabric-sofa-1-main.jpg",
-            "fabric-sofa-1-secondary-1.jpg",
-            "fabric-sofa-1-secondary-2.jpg",
-            "fabric-sofa-1-secondary-3.jpg"
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592060/fabric-sofa-1-main_efmw7m.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592060/fabric-sofa-1-secondary-1_kcuyub.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592061/fabric-sofa-1-secondary-2_tjrpw8.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592061/fabric-sofa-1-secondary-3_xa9hif.jpg"
         ]
     },
     {
@@ -488,10 +456,10 @@
         "id": 2,
         "points": 169.9,
         "image_url": [
-            "leather-sofa-1-main.jpg",
-            "leather-sofa-1-secondary-1.jpg",
-            "leather-sofa-1-secondary-2.jpg",
-            "leather-sofa-1-secondary-3.jpg"
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592633/leather-sofa-1-main_c6pe9h.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592633/leather-sofa-1-secondary-1_einmaw.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592633/leather-sofa-1-secondary-2_y7wf9w.jpg",
+            "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592633/leather-sofa-1-secondary-3_kdonch.jpg"
         ]
     }
 ]
