@@ -1,7 +1,7 @@
 //constants and configurations
-const API_ENDPOINT = ''; //API endpoint
+const RESTDB_API_KEY = 'my_api_key';
+const RESTDB_API_URL = 'https://mokesell-d5a1.restdb.io/rest';
 
-//order data management
 class OrderManager {
     constructor() {
         this.orderData = null;
@@ -10,7 +10,13 @@ class OrderManager {
 
     async init() {
         try {
-            //get order ID from URL parameters
+            //initialize lottie animation
+            this.initLottieAnimation();
+            
+            //launch confetti effect
+            this.launchConfetti();
+            
+            //get order id from url parameters
             const urlParams = new URLSearchParams(window.location.search);
             const orderId = urlParams.get('orderId');
             
@@ -25,7 +31,12 @@ class OrderManager {
 
     async fetchOrderDetails(orderId) {
         try {
-            const response = await fetch(`${API_ENDPOINT}/orders/${orderId}`);
+            const response = await fetch(`${RESTDB_API_URL}/orders/${orderId}`, {
+                headers: {
+                    'x-apikey': RESTDB_API_KEY
+                }
+            });
+            
             if (!response.ok) throw new Error('Order fetch failed');
             
             this.orderData = await response.json();
@@ -39,11 +50,11 @@ class OrderManager {
     populateOrderDetails() {
         if (!this.orderData) return;
 
-        //populate order information
-        document.querySelector('.detail-value:nth-child(1)').textContent = this.formatDate(this.orderData.date);
-        document.querySelector('.detail-value:nth-child(2)').textContent = this.orderData.customerName;
-        document.querySelector('.detail-value:nth-child(4)').textContent = this.orderData.orderNumber;
-        document.querySelector('.detail-value:nth-child(5)').textContent = this.formatPrice(this.orderData.total);
+        //update order information using data attributes
+        document.querySelector('[data-field="date"]').textContent = this.formatDate(this.orderData.date);
+        document.querySelector('[data-field="customer"]').textContent = this.orderData.customerName;
+        document.querySelector('[data-field="orderNumber"]').textContent = this.orderData.orderNumber;
+        document.querySelector('[data-field="total"]').textContent = this.formatPrice(this.orderData.total);
 
         //populate order items
         this.populateOrderItems();
@@ -73,8 +84,35 @@ class OrderManager {
         return itemDiv;
     }
 
+    initLottieAnimation() {
+        //initialize success checkmark animation
+        const animation = lottie.loadAnimation({
+            container: document.getElementById('successAnimation'),
+            renderer: 'svg',
+            loop: false,
+            autoplay: true,
+            path: 'animations/success-checkmark.json' //animation file
+        });
+
+        //animation complete callback
+        animation.addEventListener('complete', () => {
+            console.log('Animation completed');
+        });
+    }
+
+    launchConfetti() {
+        //launch celebration confetti effect
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#7A6145', '#F7F5EF', '#65503A'] //match colour scheme
+        });
+    }
+
     formatDate(dateString) {
-        return new Date(dateString).toLocaleDateString('en-GB');
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-GB'); //format: DD/MM/YYYY
     }
 
     formatPrice(price) {
@@ -85,43 +123,12 @@ class OrderManager {
     }
 
     handleError(error) {
-        //add error handling UI logic here
         console.error('Error:', error);
+        //add error handling UI logic here if needed
     }
 }
 
-//lottie animation setup
-class ConfirmationAnimation {
-    constructor() {
-        this.init();
-    }
-
-    init() {
-        //initialize lottie animation
-        const animationContainer = document.querySelector('.confirmation-image');
-        lottie.loadAnimation({
-            container: animationContainer,
-            renderer: 'svg',
-            loop: false,
-            autoplay: true,
-            path: '' //lottie animation path
-        });
-    }
-}
-
-//initialize when DOM is ready
+//initialize when dom is ready
 document.addEventListener('DOMContentLoaded', () => {
     const orderManager = new OrderManager();
-    const animation = new ConfirmationAnimation();
 });
-
-//add confetti effect on load
-const launchConfetti = () => {
-    confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
-    });
-};
-
-window.onload = launchConfetti;

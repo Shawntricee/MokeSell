@@ -1,15 +1,55 @@
-//constants
-const API_ENDPOINT = ''; //API endpoint here
+//constants and configurations
+const RESTDB_API_KEY = 'my-restdb-api-key';
+const RESTDB_API_URL = 'https://mokesell-d5a1.restdb.io/rest';
+const LOTTIE_LOADING_PATH = '../animations/loading.json';
 
+/*checkoutmanager class handles all checkout page functionality*/
 class CheckoutManager {
     constructor() {
-        this.initializeEventListeners();
+        //initialize state
         this.cartItems = [];
-        this.loadCartItems();
-        this.updateSummary();
+        this.loadingAnimation = null;
+        this.voucherApplied = false;
+        
+        //initialize the page
+        this.init();
     }
 
-    initializeEventListeners() {
+    async init() {
+        try {
+            //initialize loading animation
+            this.initializeLoadingAnimation();
+            
+            //setup event listeners
+            this.setupEventListeners();
+            
+            //load cart items from RestDB
+            await this.loadCartItems();
+            
+            //initialize the summary
+            this.updateSummary();
+            
+            //load saved customer info if available
+            this.loadSavedCustomerInfo();
+        } catch (error) {
+            console.error('Initialization error:', error);
+            this.showMessage('Failed to initialize checkout', 'error');
+        }
+    }
+
+    /*initialize Lottie loading animation*/
+    initializeLoadingAnimation() {
+        this.loadingAnimation = lottie.loadAnimation({
+            container: document.getElementById('loadingAnimation'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: false,
+            path: LOTTIE_LOADING_PATH
+        });
+    }
+
+    /*setup all event listeners for the page*/
+    setupEventListeners() {
         //quantity controls
         document.querySelectorAll('.quantity-btn').forEach(btn => {
             btn.addEventListener('click', (e) => this.handleQuantityChange(e));
@@ -25,64 +65,25 @@ class CheckoutManager {
             radio.addEventListener('change', () => this.updateSummary());
         });
 
-        //voucher application
-        const voucherButton = document.querySelector('.voucher-input button');
+        //apply voucher button
+        const voucherButton = document.getElementById('applyVoucher');
         if (voucherButton) {
             voucherButton.addEventListener('click', () => this.applyVoucher());
         }
 
-        //proceed to payment
-        const proceedButton = document.querySelector('.proceed-btn');
+        //proceed to payment button
+        const proceedButton = document.getElementById('proceedToPayment');
         if (proceedButton) {
-            proceedButton.addEventListener('click', () => this.proceedToPayment());
-        }
-
-        //form validation
-        const customerForm = document.querySelector('.customer-form');
-        if (customerForm) {
-            customerForm.addEventListener('submit', (e) => this.validateForm(e));
+            proceedButton.addEventListener('click', () => this.handleProceedToPayment());
         }
     }
 
-    async loadCartItems() {
-        try {
-            const response = await fetch(`${API_ENDPOINT}/cart`);
-            if (!response.ok) throw new Error('Failed to load cart items');
-            this.cartItems = await response.json();
-            this.renderCartItems();
-        } catch (error) {
-            console.error('Error loading cart:', error);
-        }
-    }
-
-    renderCartItems() {
-        const tbody = document.querySelector('.order-items tbody');
-        if (!tbody) return;
-
-        tbody.innerHTML = this.cartItems.map(item => `
-            <tr data-id="${item.id}">
-                <td class="product-info">
-                    <div class="product-image">image</div>
-                    <span>${item.name}</span>
-                </td>
-                <td>$${item.price.toFixed(2)}</td>
-                <td>
-                    <div class="quantity-control">
-                        <button class="quantity-btn" data-action="decrease">-</button>
-                        <span>${item.quantity}</span>
-                        <button class="quantity-btn" data-action="increase">+</button>
-                    </div>
-                </td>
-                <td>$${(item.price * item.quantity).toFixed(2)}</td>
-                <td><button class="remove-btn" aria-label="Remove item">×</button></td>
-            </tr>
-        `).join('');
-    }
-
-    handleQuantityChange(event) {
+    /*handle quantity change for cart items*/
+    async handleQuantityChange(event) {
         const button = event.target;
         const action = button.dataset.action;
         const row = button.closest('tr');
+        const itemId = row.dataset.itemId;
         const quantitySpan = row.querySelector('.quantity-control span');
         let quantity = parseInt(quantitySpan.textContent);
 
@@ -92,138 +93,210 @@ class CheckoutManager {
             quantity--;
         }
 
-        quantitySpan.textContent = quantity;
-        this.updateSummary();
+        try {
+            //update quantity in restdb
+            await this.updateCartItemQuantity(itemId, quantity);
+            
+            //update ui
+            quantitySpan.textContent = quantity;
+            this.updateSummary();
+        } catch (error) {
+            console.error('Failed to update quantity:', error);
+            this.showMessage('Failed to update quantity', 'error');
+        }
     }
 
-    handleRemoveItem(event) {
+    /*handle removing items from cart*/
+    async handleRemoveItem(event) {
         const row = event.target.closest('tr');
-        row.remove();
-        this.updateSummary();
-    }
-
-    getSubtotal() {
-        let subtotal = 0;
-        document.querySelectorAll('.order-items tbody tr').forEach(row => {
-            const price = parseFloat(row.querySelector('td:nth-child(2)').textContent.replace('$', ''));
-            const quantity = parseInt(row.querySelector('.quantity-control span').textContent);
-            subtotal += price * quantity;
-        });
-        return subtotal;
-    }
-
-    getDeliveryFee() {
-        const selectedDelivery = document.querySelector('input[name="delivery-time"]:checked');
-        const priceElement = selectedDelivery.closest('.delivery-option').querySelector('.price');
-        return parseFloat(priceElement.textContent.replace('$', ''));
-    }
-
-    updateSummary() {
-        const subtotal = this.getSubtotal();
-        const deliveryFee = this.getDeliveryFee();
-        const discount = 15; //hardcoded for demo
-        const total = subtotal - discount + deliveryFee;
-
-        document.querySelector('.summary-row:nth-child(1) span:last-child').textContent = `$${subtotal.toFixed(2)}`;
-        document.querySelector('.summary-row:nth-child(2) span:last-child').textContent = `-$${discount.toFixed(2)}`;
-        document.querySelector('.summary-row:nth-child(3) span:last-child').textContent = `$${deliveryFee.toFixed(2)}`;
-        document.querySelector('.summary-row.total span:last-child').textContent = `$${total.toFixed(2)}`;
-    }
-
-    async applyVoucher() {
-        const voucherInput = document.querySelector('.voucher-input input');
-        const voucherCode = voucherInput.value.trim();
+        const itemId = row.dataset.itemId;
 
         try {
-            const response = await fetch(`${API_ENDPOINT}/voucher/validate`, {
-                method: 'POST',
+            //remove from restdb
+            await this.removeCartItem(itemId);
+            
+            //remove from ui with animation
+            row.style.opacity = '0';
+            setTimeout(() => {
+                row.remove();
+                this.updateSummary();
+                this.updateItemCount();
+            }, 300);
+        } catch (error) {
+            console.error('Failed to remove item:', error);
+            this.showMessage('Failed to remove item', 'error');
+        }
+    }
+
+    /*load cart items from restdb*/
+    async loadCartItems() {
+        try {
+            this.showLoading(true);
+            const response = await fetch(`${RESTDB_API_URL}/cart`, {
                 headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ code: voucherCode })
+                    'x-apikey': RESTDB_API_KEY
+                }
             });
 
-            const data = await response.json();
-            if (data.valid) {
+            if (!response.ok) throw new Error('Failed to load cart items');
+
+            this.cartItems = await response.json();
+            this.renderCartItems();
+        } catch (error) {
+            console.error('Error loading cart:', error);
+            this.showMessage('Failed to load cart items', 'error');
+        } finally {
+            this.showLoading(false);
+        }
+    }
+
+    /*apply voucher to the order*/
+    async applyVoucher() {
+        const voucherInput = document.getElementById('voucherCode');
+        const voucherCode = voucherInput.value.trim();
+
+        if (!voucherCode) {
+            this.showMessage('Please enter a voucher code', 'error');
+            return;
+        }
+
+        try {
+            this.showLoading(true);
+            const response = await fetch(`${RESTDB_API_URL}/vouchers?code=${voucherCode}`, {
+                headers: {
+                    'x-apikey': RESTDB_API_KEY
+                }
+            });
+
+            if (!response.ok) throw new Error('Invalid voucher');
+
+            const voucher = await response.json();
+            if (voucher && voucher.valid) {
+                this.voucherApplied = true;
                 this.updateSummary();
                 this.showMessage('Voucher applied successfully!', 'success');
+                voucherInput.disabled = true;
             } else {
-                this.showMessage('Invalid voucher code', 'error');
+                this.showMessage('Invalid or expired voucher', 'error');
             }
         } catch (error) {
             console.error('Error applying voucher:', error);
             this.showMessage('Failed to apply voucher', 'error');
+        } finally {
+            this.showLoading(false);
         }
     }
 
-    validateForm(event) {
-        event.preventDefault();
-        const form = event.target;
-        const isValid = form.checkValidity();
-
-        if (isValid) {
-            this.proceedToPayment();
-        } else {
-            form.reportValidity();
-        }
-    }
-
-    async proceedToPayment() {
-        const customerForm = document.querySelector('.customer-form');
-        if (!customerForm.checkValidity()) {
-            customerForm.reportValidity();
+    /*handle proceed to payment*/
+    async handleProceedToPayment() {
+        if (!this.validateForm()) {
+            this.showMessage('Please fill in all required fields', 'error');
             return;
         }
 
-        const formData = new FormData(customerForm);
-        const customerData = Object.fromEntries(formData);
-
         try {
-            const response = await fetch(`${API_ENDPOINT}/checkout`, {
+            this.showLoading(true);
+
+            //get form data
+            const formData = new FormData(document.getElementById('customerForm'));
+            const customerData = Object.fromEntries(formData);
+
+            //create order in restdb
+            const orderData = {
+                items: this.cartItems,
+                customer: customerData,
+                delivery: {
+                    operator: document.querySelector('input[name="operator"]:checked').value,
+                    type: document.querySelector('input[name="delivery-time"]:checked').value
+                },
+                voucher: this.voucherApplied ? document.getElementById('voucherCode').value : null,
+                total: this.calculateTotal()
+            };
+
+            const response = await fetch(`${RESTDB_API_URL}/orders`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'x-apikey': RESTDB_API_KEY,
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    items: this.cartItems,
-                    customer: customerData,
-                    delivery: {
-                        operator: document.querySelector('input[name="operator"]:checked').value,
-                        type: document.querySelector('input[name="delivery-time"]:checked').value
-                    },
-                    payment: {
-                        method: 'mastercard',
-                        last4: '5987'
-                    }
-                })
+                body: JSON.stringify(orderData)
             });
 
-            if (response.ok) {
-                const orderData = await response.json();
-                window.location.href = `/order-confirmation.html?orderId=${orderData.orderId}`;
-            } else {
-                this.showMessage('Failed to process payment. Please try again.', 'error');
-            }
+            if (!response.ok) throw new Error('Failed to create order');
+
+            const order = await response.json();
+            
+            //redirect to order confirmation page
+            window.location.href = `/html/order-confirmation.html?orderId=${order._id}`;
         } catch (error) {
-            console.error('Checkout error:', error);
-            this.showMessage('An error occurred during checkout', 'error');
+            console.error('Error processing payment:', error);
+            this.showMessage('Failed to process payment', 'error');
+        } finally {
+            this.showLoading(false);
         }
     }
 
+    /*show loading animation*/
+    showLoading(show) {
+        const loadingContainer = document.getElementById('loadingAnimation');
+        if (show) {
+            loadingContainer.style.display = 'flex';
+            this.loadingAnimation.play();
+        } else {
+            loadingContainer.style.display = 'none';
+            this.loadingAnimation.stop();
+        }
+    }
+
+    /*show message to user*/
     showMessage(message, type) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${type}`;
         messageDiv.textContent = message;
         
-        document.querySelector('.checkout-container').prepend(messageDiv);
+        document.body.appendChild(messageDiv);
         
         setTimeout(() => {
-            messageDiv.remove();
-        }, 5000);
+            messageDiv.style.opacity = '0';
+            setTimeout(() => messageDiv.remove(), 300);
+        }, 3000);
+    }
+
+    /*update the order summary*/
+    updateSummary() {
+        const subtotal = this.calculateSubtotal();
+        const deliveryFee = this.getDeliveryFee();
+        const discount = this.voucherApplied ? 15 : 0;
+        const total = subtotal + deliveryFee - discount;
+
+        document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('discount').textContent = `-$${discount.toFixed(2)}`;
+        document.getElementById('deliveryFee').textContent = `$${deliveryFee.toFixed(2)}`;
+        document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+    }
+
+    /*helper functions for calculations*/
+    calculateSubtotal() {
+        return this.cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    }
+
+    getDeliveryFee() {
+        const selectedDelivery = document.querySelector('input[name="delivery-time"]:checked');
+        return selectedDelivery.closest('.delivery-option').querySelector('.price').textContent.replace('$', '');
+    }
+
+    calculateTotal() {
+        return this.calculateSubtotal() + this.getDeliveryFee() - (this.voucherApplied ? 15 : 0);
+    }
+
+    /*form validation*/
+    validateForm() {
+        const form = document.getElementById('customerForm');
+        return form.checkValidity();
     }
 }
 
-//initialize checkout manager when DOM is loaded
+//initialize checkout manager when dom is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new CheckoutManager();
 });

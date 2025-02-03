@@ -236,15 +236,25 @@ class Product {
     }
 }
 
-// Initialize the product page with the product ID from the URL
-document.addEventListener("DOMContentLoaded", () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get("id");
-    const currentUsername = localStorage.getItem("currentUsername");
-
-    if (productId) {
-        const product = new Product(productId, currentUsername);
-    } else {
-        console.error("Product ID not found in URL.");
+//initialize the product page with the product ID from the URL
+document.addEventListener('DOMContentLoaded', function() {
+    const addToCartBtn = document.getElementById('addToCart');
+    if (addToCartBtn) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        
+        //set the product ID to the button
+        addToCartBtn.setAttribute('data-product-id', productId);
+        
+        //add click event listener
+        addToCartBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Add to cart clicked');
+            if (window.cartManager) {
+                window.cartManager.addToCart(productId);
+            } else {
+                console.error('Cart manager not initialized');
+            }
+        });
     }
 });

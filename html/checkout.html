@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - MokeSell</title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/checkout.css">
+    <!--importing existing styles-->
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!--google font-->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <!--external libraries-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.14/lottie.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -22,25 +25,45 @@
                 <button class="menu-btn" id="openSidebarButton">☰</button>
                 <!--logo-->
                 <div class="logo">
-                    <a href="index.html"><img src="images/others/mokesell-logo.png" alt="mokesell logo"></a>
+                    <a href="index.html"><img src="../images/others/mokesell-logo.png" alt="mokesell logo"></a>
                 </div>
                 <!--search bar-->
                 <div class="search-container">
-                    <img src="images/icons/search-icon.png" alt="search icon" id="search-icon">
+                    <img src="../images/icons/search-icon.png" alt="search icon" id="search-icon">
                     <input type="search" id="search-bar" placeholder="Search for products ...">
                     <ul id="suggestions-list" class="suggestions-list"></ul>
                 </div>
-                <!--right buttons-->
+                <!--right buttons--> 
                 <div class="nav-buttons">
                     <a href="#">
                         <button class="sell-button">Sell an item</button>
                     </a>
-                    <a href="#" class="auth-button">Sign in</a>
-                    <a href="#" class="auth-button">Sign up</a>
-                    <a href="#" class="cart-icon">
-                        <img src="images/icons/cart-icon.png" alt="cart icon">
-                        <span class="cart-badge">0</span>
-                    </a>
+                    <div id="guestNav">
+                        <button class="auth-button" id="navSignIn">Sign in</button>
+                        <button class="auth-button" id="navSignUp">Sign up</button>
+                        <a href="#" class="nav-icon">
+                            <img src="../images/icons/cart-icon.png" alt="cart icon">
+                            <span class="cart-badge">0</span>
+                        </a>
+                    </div>
+                    <div id="userNav">
+                        <div class="profile-container">
+                            <a href="#" class="nav-icon">
+                                <img src="../images/icons/favourites-icon.png" id="favouritesIcon" alt="favourites icon">
+                            </a>
+                            <a href="#" class="nav-icon">
+                                <img src="../images/icons/cart-icon.png" alt="cart icon">
+                                <span class="cart-badge">0</span>
+                            </a>
+                            <a href="#" class="nav-icon">
+                                <img src="../images/icons/profile-icon.png" id="profileIcon" alt="profile icon">
+                            </a>
+                            <ul class="user-dropdown" id="userDropdown">
+                                <li><a href="#">View Profile</a></li>
+                                <li><a href="#" id="logoutButton">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!--collapsible menu-->
@@ -49,18 +72,17 @@
                     <li><a href="#" class="link">All</a></li>
                     <li class="dropdown">
                         <a href="#" class="link">Sofas
-                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Fabric Sofas</a></li>
                             <li><a href="#">Leather Sofas</a></li>
                             <li><a href="#">Metal Sofas</a></li>
-                            <li><a href="#">Fabric Sofas</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="link">Tables
-                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Dining Tables</a></li>
@@ -71,7 +93,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="link">Chairs
-                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Dining Chairs</a></li>
@@ -82,7 +104,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="link">Beds
-                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Bed Frames</a></li>
@@ -91,7 +113,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="link">Decors
-                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Accessories</a></li>
@@ -102,7 +124,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="link">Spaces
-                            <img src="images/icons/dropdown-icon.png" alt="dropdown button">
+                            <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Living Room</a></li>
@@ -115,9 +137,10 @@
             </div>
         </nav>
     </header>
-
+    <!--main content -->
     <main class="checkout-page">
-        <h1>MY SHOPPING BAG (3 ITEMS)</h1>
+        <!--page title-->
+        <h1>MY SHOPPING BAG (<span id="itemCount">3</span> ITEMS)</h1>
 
         <div class="checkout-container">
             <!--left column-->
@@ -125,7 +148,7 @@
                 <!--order summary section-->
                 <section class="order-summary">
                     <h2>
-                        <img src="images/icons/cart-icon.png" alt="Cart">
+                        <img src="../images/icons/cart-icon.png" alt="Cart">
                         Order summary
                     </h2>
                     <div class="order-items">
@@ -139,8 +162,8 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <!--item 1-->
+                            <tbody id="orderItemsBody">
+                                <!--sample item row - will be populated by javascript-->
                                 <tr>
                                     <td class="product-info">
                                         <div class="product-image">image</div>
@@ -154,41 +177,7 @@
                                             <button class="quantity-btn" data-action="increase">+</button>
                                         </div>
                                     </td>
-                                    <td>$1,699</td>
-                                    <td><button class="remove-btn" aria-label="Remove item">×</button></td>
-                                </tr>
-                                <!--item 2-->
-                                <tr>
-                                    <td class="product-info">
-                                        <div class="product-image">image</div>
-                                        <span>Sven 88" Tufted Leather Sofa - Charme Tan</span>
-                                    </td>
-                                    <td>$1,699</td>
-                                    <td>
-                                        <div class="quantity-control">
-                                            <button class="quantity-btn" data-action="decrease">-</button>
-                                            <span>1</span>
-                                            <button class="quantity-btn" data-action="increase">+</button>
-                                        </div>
-                                    </td>
-                                    <td>$1,699</td>
-                                    <td><button class="remove-btn" aria-label="Remove item">×</button></td>
-                                </tr>
-                                <!--item 3-->
-                                <tr>
-                                    <td class="product-info">
-                                        <div class="product-image">image</div>
-                                        <span>Sven 88" Tufted Leather Sofa - Charme Tan</span>
-                                    </td>
-                                    <td>$1,699</td>
-                                    <td>
-                                        <div class="quantity-control">
-                                            <button class="quantity-btn" data-action="decrease">-</button>
-                                            <span>1</span>
-                                            <button class="quantity-btn" data-action="increase">+</button>
-                                        </div>
-                                    </td>
-                                    <td>$1,699</td>
+                                    <td>$3,398</td>
                                     <td><button class="remove-btn" aria-label="Remove item">×</button></td>
                                 </tr>
                             </tbody>
@@ -196,10 +185,10 @@
                     </div>
                 </section>
 
-                <!--delivery options-->
+                <!--delivery options section-->
                 <section class="delivery-options">
                     <h2>
-                        <img src="images/icons/delivery-icon.png" alt="Delivery">
+                        <img src="../images/icons/delivery-icon.png" alt="Delivery">
                         Delivery options
                     </h2>
                     <div class="operator-selection">
@@ -207,15 +196,21 @@
                         <div class="operators">
                             <label class="operator">
                                 <input type="radio" name="operator" value="ups" checked>
-                                <span>UPS</span>
+                                <div class="operator-logo">
+                                    <img src="../images/others/ups-logo.png" alt="UPS">
+                                </div>
                             </label>
                             <label class="operator">
                                 <input type="radio" name="operator" value="fedex">
-                                <span>FedEx</span>
+                                <div class="operator-logo">
+                                    <img src="../images/others/fedex-logo.png" alt="FedEx">
+                                </div>
                             </label>
                             <label class="operator">
                                 <input type="radio" name="operator" value="dhl">
-                                <span>DHL</span>
+                                <div class="operator-logo">
+                                    <img src="../images/others/dhl-logo.png" alt="DHL">
+                                </div>
                             </label>
                         </div>
                         <div class="delivery-times">
@@ -232,52 +227,53 @@
                                 <div class="option-details">
                                     <div class="price">$12</div>
                                     <div class="type">Standard delivery</div>
-                                    <div class="eta">Est. arrival: DD/MM</div>
+                                    <div class="eta">Est. arrival: Tomorrow</div>
                                 </div>
                             </label>
                         </div>
                     </div>
                 </section>
 
-                <!--customer information-->
+                <!--customer information section-->
                 <section class="customer-information">
                     <h2>
-                        <img src="images/icons/user-icon.png" alt="User">
+                        <img src="../images/icons/user-icon.png" alt="User">
                         Customer information
                     </h2>
-                    <form class="customer-form">
+                    <form class="customer-form" id="customerForm">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="fullname">Full name</label>
-                                <input type="text" id="fullname" placeholder="ShawnBrice Yip" required>
+                                <input type="text" id="fullname" name="fullname" placeholder="ShawnBrice Yip" required>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone number</label>
-                                <input type="tel" id="phone" placeholder="+65 82024995" required>
+                                <input type="tel" id="phone" name="phone" placeholder="+65 82024995" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <input type="text" id="address" placeholder="8 Jurong Lake Link, Lake Grande, Singapore 648159" required>
+                            <input type="text" id="address" name="address" 
+                                   placeholder="8 Jurong Lake Link, Lake Grande, Singapore 648159" required>
                         </div>
                         <label class="save-default">
-                            <input type="checkbox" id="save-default">
+                            <input type="checkbox" id="save-default" name="saveDefault">
                             <span>Save as default</span>
                         </label>
                         <div class="delivery-note">
-                            <img src="images/icons/info-icon.png" alt="Info">
+                            <img src="../images/icons/info-icon.png" alt="Info">
                             <p>Delivery note<br>The delivery time usually starts when the order confirmation is sent.</p>
                         </div>
                     </form>
                 </section>
             </div>
 
-            <!--payment summary-->
+            <!--right column - payment summary-->
             <div class="checkout-sidebar">
                 <section class="payment-method">
                     <h2>Payment method</h2>
                     <div class="payment-selection">
-                        <h3>Change payment methods</h3>
+                        <h3>Payment card</h3>
                         <div class="card-option">
                             <div class="card-image">image</div>
                             <div class="card-details">
@@ -290,8 +286,8 @@
                     <div class="voucher-section">
                         <h3>Voucher</h3>
                         <div class="voucher-input">
-                            <input type="text" placeholder="$15 OFF">
-                            <button type="button">Apply</button>
+                            <input type="text" id="voucherCode" placeholder="Enter voucher code">
+                            <button type="button" id="applyVoucher">Apply</button>
                         </div>
                     </div>
 
@@ -299,52 +295,44 @@
                         <h3>Summary</h3>
                         <div class="summary-row">
                             <span>Subtotal</span>
-                            <span>$180</span>
+                            <span id="subtotal">$3,398</span>
                         </div>
                         <div class="summary-row">
                             <span>Discount</span>
-                            <span>-$15</span>
+                            <span id="discount">-$15</span>
                         </div>
                         <div class="summary-row">
                             <span>Delivery Fee</span>
-                            <span>$22</span>
+                            <span id="deliveryFee">$22</span>
                         </div>
                         <div class="summary-row total">
                             <span>Total</span>
-                            <span>$187</span>
+                            <span id="total">$3,405</span>
                         </div>
-                        <button type="button" class="proceed-btn">Proceed to payment</button>
+                        <button type="button" class="proceed-btn" id="proceedToPayment">
+                            Proceed to payment
+                        </button>
                     </div>
                 </section>
             </div>
         </div>
 
-        <!--related products-->
-        <section class="related-products">
-            <h2>RELATED PRODUCTS</h2>
-            <div class="products-grid">
-                <div class="product-card">
-                    <div class="product-image">image</div>
-                    <h3>Sven 88" Tufted Leather Sofa - Charme Tan</h3>
-                    <p class="price">$1,699</p>
-                </div>
-                <!--repeat-->
-            </div>
-        </section>
-        
-        <!--footer section-->
+        <!--loading animation container-->
+        <div id="loadingAnimation" class="loading-container" style="display: none;"></div>
+    </main>
+    <!--footer section-->
         <footer class="footer">
             <!--footer left section-->
             <div class="footer-left">
                 <div class="footer-logo">
-                    <img src="images/others/mokesell-logo-footer.png" alt="mokesell logo">
+                    <img src="../images/others/mokesell-logo-footer.png" alt="mokesell logo">
                 </div>
                 <p>Where Style Meets Comfort - Redefining Your Furniture Journey.</p>
                 <!--social links-->
                 <div class="social-icons">
-                    <a href="#" target="_blank" class="icon"><img src="images/icons/instagram-icon.png" alt="Instagram"></a>
-                    <a href="#" target="_blank" class="icon"><img src="images/icons/twitter-icon.png" alt="Twitter"></a>
-                    <a href="#" target="_blank" class="icon"><img src="images/icons/facebook-icon.png" alt="Facebook"></a>
+                    <a href="#" target="_blank" class="icon"><img src="../images/icons/instagram-icon.png" alt="Instagram"></a>
+                    <a href="#" target="_blank" class="icon"><img src="../images/icons/twitter-icon.png" alt="Twitter"></a>
+                    <a href="#" target="_blank" class="icon"><img src="../images/icons/facebook-icon.png" alt="Facebook"></a>
                 </div>
                 <!--copyright-->
                 <div class="copyright">
@@ -385,7 +373,58 @@
             </div>
         </footer>
     </main>
-
-    <script src="js/checkout.js"></script>
+    <!--registration popup section-->
+    <div id="popupOverlay" class="popup-overlay">s</div>
+    <div id="registrationPopup" class="popup">
+        <div class="popup-container">
+            <div class="popup-logo">
+                <img src="../images/others/mokesell-logo-popup.png">
+            </div>
+            <span class="close-button">X</span>
+            <div class="popup-header">
+                <button id="signupTab" class="active">Sign up</button>
+                <button id="signinTab">Sign in</button>
+            </div>
+            <div class="popup-content">
+                <div class="popup-fields">
+                    <!--sign up form-->
+                    <div id="signupForm" class="form active">
+                        <label for="signupUsername">Username</label>
+                        <input type="text" id="signupUsername" placeholder="Username">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" placeholder="Email Address">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" placeholder="Password">
+                        <button id="signupButton">SIGN UP</button>
+                    </div>
+                    <!--sign in form-->
+                    <div id="signinForm" class="form">
+                        <label for="signinUsername">Username</label>
+                        <input type="text" id="signinUsername" placeholder="Username">
+                        <label for="signinPassword">Password</label>
+                        <input type="password" id="signinPassword" placeholder="Password">
+                        <button id="signinButton">SIGN IN</button>
+                    </div>
+                    <!--social login-->
+                    <div class="social-login">
+                        <p>OR</p>
+                        <button>Continue with Google</button>
+                        <button>Continue with Facebook</button>
+                    </div>
+                </div>
+                <!--discount code image-->
+                <div class="discount-code">
+                    <img src="../images/others/popup-discount-code.png" alt="discount code image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--external libraries-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.14/lottie.min.js"></script>
+    
+    <!--custom javascript-->
+    <script src="../js/registration.js"></script>
+    <script src="../js/checkout.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>

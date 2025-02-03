@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <title>Product - MokeSell</title>
-    <!--normalize.css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - MokeSell</title>
+    <!--base styles-->
     <link rel="stylesheet" href="../css/normalize.css">
-    <!--custom styles-->
     <link rel="stylesheet" href="../css/style.css">
     <!--google font-->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <!--external libraries-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.14/lottie.min.js"></script>
+    <!--google maps api-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
 </head>
 <body>
     <header class="header">
@@ -136,95 +139,205 @@
             </div>
         </nav>
     </header>
-    <!-- main content -->
-    <main class="main-content">
-        <!--product container section-->
-        <section class="product-container">
-            <div class="product-container-left">
-                <!--breadcrumb navigation-->
-                <h3 id="breadcrumbNavigation"></h3>
-                <!--product gallery-->
-                <div class="product-gallery">
-                    <img id="mainImage" src="" alt="product image">
-                    <div class="secondary-images" id="secondaryImages"></div>
+    <main>
+        <!--reach our team section-->
+        <section class="reach-team">
+            <div class="section-content">
+                <h1>Reach Our Team</h1>
+                <p>We love questions and feedback - and we're always happy to help.<br>Here are some ways to contact us.</p>
+                
+                <!--contact cards container-->
+                <div class="contact-cards">
+                    <!--sales card-->
+                    <div class="contact-card sales" id="salesCard">
+                        <div id="phoneAnimation" class="card-icon"></div>
+                        <h2>Talk to Sales</h2>
+                        <p>Chat with our sales team to discover how our product can work best for you.</p>
+                        <a href="tel:+6582024995" class="phone-link">
+                            <img src="../images/icons/phone-icon.png" alt="Phone">
+                            65 82024995
+                        </a>
+                    </div>
+                    
+                    <!--support card-->
+                    <div class="contact-card support" id="supportCard">
+                        <div id="chatAnimation" class="card-icon"></div>
+                        <h2>Contact Customer Support</h2>
+                        <p>We are waiting to help you and your team — so don't hesitate to reach out!</p>
+                        <button class="live-chat-btn">
+                            <img src="../images/icons/chat-icon.png" alt="Chat">
+                            LIVE CHAT
+                        </button>
+                    </div>
                 </div>
-                <!--seller profile-->
-                <div class="seller-profile">
-                    <h2>Seller profile</h2>
-                    <div class="seller-profile-container">
-                        <div class="seller-profile-details">
-                            <img src="../images/icons/review-profile-icon.png" alt="seller profile icon">
-                            <div class="seller-information">
-                                <p id="sellerUsername">@Username</p>
-                                <p class="seller-joined">Joined <span id="sellerJoined">N/A</span></p>
+            </div>
+        </section>
+
+        <!--headquarters section-->
+        <section class="office headquarters">
+            <div class="office-info">
+                <h2>Headquarters</h2>
+                <h3>South Block, Singapore</h3>
+                <address>
+                    <p>870 Bukit Timah Ave<br>SG 65</p>
+                    <a href="mailto:contact.sg@mokesell.com" class="contact-link">
+                        <img src="../images/icons/mail-icon.png" alt="Email">
+                        contact.sg@mokesell.com
+                    </a>
+                    <a href="tel:+6582024995" class="contact-link">
+                        <img src="../images/icons/phone-icon.png" alt="Phone">
+                        +65 82024995
+                    </a>
+                </address>
+                <div class="social-links">
+                    <a href="#" class="social-icon linkedin">
+                        <img src="../images/icons/linkedin-icon.png" alt="LinkedIn">
+                    </a>
+                    <a href="#" class="social-icon facebook">
+                        <img src="../images/icons/facebook-icon.png" alt="Facebook">
+                    </a>
+                    <a href="#" class="social-icon instagram">
+                        <img src="../images/icons/instagram-icon.png" alt="Instagram">
+                    </a>
+                </div>
+            </div>
+            <div id="headquartersMap" class="office-map"></div>
+        </section>
+
+        <!--global offices section-->
+        <section class="global-offices">
+            <h2>Global Offices</h2>
+            
+            <!--berlin office-->
+            <div class="office">
+                <div id="berlinMap" class="office-map"></div>
+                <div class="office-info">
+                    <h3>Berlin, Germany</h3>
+                    <address>
+                        <p>Gormannstraße 89<br>Alt-Mölln 49</p>
+                        <a href="mailto:contact.german@mokesell.com" class="contact-link">
+                            <img src="../images/icons/mail-icon.png" alt="Email">
+                            contact.german@mokesell.com
+                        </a>
+                        <a href="tel:+4903427897478" class="contact-link">
+                            <img src="../images/icons/phone-icon.png" alt="Phone">
+                            +49 03427 89 74 78
+                        </a>
+                    </address>
+                </div>
+            </div>
+
+            <!--vienna office-->
+            <div class="office">
+                <div class="office-info">
+                    <h3>Vienna, Austria</h3>
+                    <address>
+                        <p>Mariahilferstraße 1, Gräfe-Platz<br>13, Hardsberg</p>
+                        <a href="mailto:contact.austria@mokesell.com" class="contact-link">
+                            <img src="../images/icons/mail-icon.png" alt="Email">
+                            contact.austria@mokesell.com
+                        </a>
+                        <a href="tel:+4304242238550" class="contact-link">
+                            <img src="../images/icons/phone-icon.png" alt="Phone">
+                            +43 04242 238550
+                        </a>
+                    </address>
+                </div>
+                <div id="viennaMap" class="office-map"></div>
+            </div>
+        </section>
+
+        <!--local sales call section-->
+        <section class="local-sales">
+            <div class="section-content">
+                <h2>Prefer a Local Sales Call?</h2>
+                <p>Call any of these numbers to reach a member of our global team.<br>We'd love to hear from you.</p>
+                
+                <div class="regions">
+                    <!--asia region-->
+                    <div class="region">
+                        <h3>ASIA</h3>
+                        <div class="countries">
+                            <div class="country">
+                                <span>Korea</span>
+                                <a href="tel:+823538864520">+82353886.4520</a>
+                            </div>
+                            <div class="country">
+                                <span>Singapore</span>
+                                <a href="tel:+6582024995">+65 82024995</a>
+                            </div>
+                            <div class="country">
+                                <span>Japan</span>
+                                <a href="tel:+81635253740">+81 635 253 740</a>
                             </div>
                         </div>
-                        <button id="contactSeller">Chat</button>
+                    </div>
+
+                    <!--europe region-->
+                    <div class="region">
+                        <h3>EUROPE</h3>
+                        <div class="countries">
+                            <div class="country">
+                                <span>Austria</span>
+                                <a href="tel:+4304242238550">+43 04242 238550</a>
+                            </div>
+                            <div class="country">
+                                <span>Switzerland</span>
+                                <a href="tel:+41338833351">+41 33 883 3351</a>
+                            </div>
+                            <div class="country">
+                                <span>Germany</span>
+                                <a href="tel:+4903427897478">+49 03427 89 74 78</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="product-details">
-                <h1 id="productTitle">Product Title</h1>
-                <p class="price" id="productPrice">S$0.00</p>
-                <div class="details-container">
-                    <h3>Details</h3>
-                    <div class="details-grid">
-                        <div class="details">
-                            <h4>Category</h4>
-                            <p><span id="productCategory">N/A</span></p>
+        </section>
+
+        <!--contact form section-->
+        <section class="contact-form">
+            <div class="section-content">
+                <h2>Send Us a Message</h2>
+                <p>Send us a message and we'll respond within 24 hours.</p>
+                
+                <!--loading animation container-->
+                <div id="loadingAnimation" class="loading-container" style="display: none;"></div>
+                
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
                         </div>
-                        <div class="details">
-                            <h4>Condition</h4>
-                            <p><span id="productCondition">N/A</span></p>
-                        </div>
-                        <div class="details">
-                            <h4>Listed</h4>
-                            <p><span id="productListed">N/A</span></p>
-                        </div>
-                        <div class="details">
-                            <h4>Dimensions</h4>
-                            <p><span id="productDimensions">N/A</span></p>
-                        </div>
-                        <div class="details">
-                            <h4>Colour</h4>
-                            <p><span id="productColour">N/A</span></p>
-                        </div>
-                        <div class="details">
-                            <h4>Material</h4>
-                            <p><span id="productMaterial">N/A</span></p>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
                         </div>
                     </div>
-                </div>
-                <div class="description-container">
-                    <h3>Description</h3>
-                    <p class="description" id="productDescription">Product description goes here.</p>
-                </div>
-                <div class="product-points">
-                    <img src="../images/icons/points-icon.png" alt="points icon">
-                    <p>Earn <span id="productPoints">0</span><strong> Moke Points</strong> with this purchase.</p>
-                </div>
-                <button id="addToCart" data-add-to-cart data-product-id="">ADD TO CART</button>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="send-btn">SEND</button>
+                </form>
             </div>
         </section>
-        <!--seller reviews section-->
-        <section class="seller-reviews">
-            <h2>Reviews for @<span id="sellerReviewUsername">Username</span></h2>
-            <form class="review-form" id="reviewForm">
-                <textarea id="reviewInput" placeholder="Write your review here..."></textarea>
-                <button type="submit" id="postReviewButton">Post</button>
-            </form>
-            <div id="reviewsList" class="reviews-list">
-                <!--reviews will be dynamically added heres-->
-            </div>
-        </section>
-        <!--similar listings section-->
-        <section class="similar-listings">
-            <h2>SIMILAR LISTINGS</h2>
-            <div class="listings-container" id="similarListings">
-                <!--products will be inserted here dynamically-->
-            </div>
-        </section>
-        <!--footer section-->
+    </main>
+
+    <!--live chat window container-->
+    <div id="chatWindow" class="chat-window" style="display: none;">
+        <div class="chat-header">
+            <h3>Live Chat Support</h3>
+            <button class="close-chat">×</button>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input">
+            <textarea placeholder="Type your message..." id="chatInput"></textarea>
+            <button class="send-message">Send</button>
+        </div>
+    </div>
+    <!--footer section-->
         <footer class="footer">
             <!--footer left section-->
             <div class="footer-left">
@@ -277,85 +390,6 @@
             </div>
         </footer>
     </main>
-
-    <!--cart overlay and sidebar-->
-    <div id="cartOverlay" class="cart-overlay"></div>
-    <div id="cartSidebar" class="cart-sidebar">
-        <!--cart header-->
-        <div class="cart-header">
-            <h2>Your cart</h2>
-            <button class="close-cart">×</button>
-        </div>
-
-        <!--cart items container-->
-        <div id="cartItems" class="cart-items">
-            <!--cart items-->
-        </div>
-
-        <!--empty cart state-->
-        <div id="emptyCart" class="empty-cart">
-            <div id="emptyCartLottie"></div>
-            <h3>Your cart is empty</h3>
-            <p>Looks like you haven't added any items yet</p>
-            <button class="continue-shopping">Continue Shopping</button>
-        </div>
-
-        <!--cart summary-->
-        <div class="cart-summary">
-            <!--voucher input-->
-            <div class="voucher-input">
-                <input type="text" id="voucherCode" placeholder="Enter voucher code">
-                <button id="applyVoucher">Apply</button>
-            </div>
-
-            <!--summary details-->
-            <div class="summary-details">
-                <div class="summary-row">
-                    <span>Subtotal</span>
-                    <span id="cartSubtotal">$0.00</span>
-                </div>
-                <div class="summary-row">
-                    <span>Shipping</span>
-                    <span id="shippingCost">$0.00</span>
-                </div>
-                <div class="summary-row">
-                    <span>Discount</span>
-                    <span id="discountAmount">$0.00</span>
-                </div>
-                <div class="summary-row total">
-                    <span>Total</span>
-                    <span id="cartTotal">$0.00</span>
-                </div>
-            </div>
-
-            <!--checkout button-->
-            <button id="checkoutButton" class="checkout-button">
-                Continue to check out
-            </button>
-        </div>
-    </div>
-
-    <!--cart item template-->
-    <template id="cartItemTemplate">
-        <div class="cart-item">
-            <div class="item-image">
-                <img src="image" alt="Product">
-            </div>
-            <div class="item-details">
-                <h3 class="item-title"></h3>
-                <div class="item-controls">
-                    <div class="quantity-controls">
-                        <button class="quantity-btn minus">-</button>
-                        <span class="quantity">1</span>
-                        <button class="quantity-btn plus">+</button>
-                    </div>
-                    <span class="item-price"></span>
-                </div>
-            </div>
-            <button class="remove-item" aria-label="Remove item">×</button>
-        </div>
-    </template>
-
     <!--registration popup section-->
     <div id="popupOverlay" class="popup-overlay">s</div>
     <div id="registrationPopup" class="popup">
@@ -403,13 +437,9 @@
         </div>
     </div>
 
-    <!--external libraries-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.14/lottie.min.js"></script>
-    
     <!--custom javascript-->
     <script src="../js/registration.js"></script>
-    <script src="../js/product-details.js"></script>
+    <script src="../js/contact.js"></script>
     <script src="../js/script.js"></script>
-    <script src="../js/cart-manager.js"></script>
 </body>
 </html>
