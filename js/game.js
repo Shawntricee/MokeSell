@@ -4,8 +4,7 @@ class GameRewards {
             {
                 title: "STEP 1: EARN POINTS",
                 descriptions: [
-                    "Play the Game: Have fun and earn points by playing our game!",
-                    "Shop More: Earn additional points with each purchase."
+                    "Play the Game: Have fun and earn points by playing our game!"
                 ]
             },
             {
@@ -56,7 +55,7 @@ class GameRewards {
 
     // Fetch vouchers available for the user
     fetchVouchers() {
-        let userId = localStorage.getItem("userId");
+        let userId = sessionStorage.getItem("userId");
         fetch(/*`/api/vouchers?user=${userId}`*/ '../json/vouchers.json')
             .then(response => response.json())
             .then(vouchers => {
@@ -74,7 +73,7 @@ class GameRewards {
                         <button onclick="gameRewards.claimVoucher('${voucher.id}')">Claim</button>
                     `;
                     // Only show vouchers the user can afford
-                    let userPoints = localStorage.getItem("userPoints") || 0;
+                    let userPoints = sessionStorage.getItem("userPoints") || 0;
                     if (voucher.points <= userPoints) {
                         vouchersDiv.appendChild(voucherElem);
                     }
@@ -88,9 +87,9 @@ class GameRewards {
 
     // Claim the voucher and update the user points
     claimVoucher(voucherId) {
-        // Get user ID and points from localStorage
-        let userId = localStorage.getItem("userId");
-        let userPoints = parseInt(localStorage.getItem("userPoints")) || 0;
+        // Get user ID and points from sessionStorage
+        let userId = sessionStorage.getItem("userId");
+        let userPoints = parseInt(sessionStorage.getItem("userPoints")) || 0;
         console.log(userPoints);
 
         // Temporarily fetch the vouchers from the local JSON file (simulating a fetch)
@@ -103,7 +102,7 @@ class GameRewards {
                 if (voucher && voucher.points <= userPoints) {
                     // Update the user's points
                     let updatedPoints = userPoints - voucher.points;
-                    localStorage.setItem("userPoints", updatedPoints);
+                    sessionStorage.setItem("userPoints", updatedPoints);
 
                     // Simulate voucher claim (optional - update local list of vouchers)
                     const index = vouchers.indexOf(voucher);
@@ -112,7 +111,7 @@ class GameRewards {
                     }
 
                     // Store the updated vouchers list (for temporary use, you would update this server-side in a real app)
-                    // localStorage.setItem('vouchers', JSON.stringify(vouchers)); // If needed
+                    // sessionStorage.setItem('vouchers', JSON.stringify(vouchers)); // If needed
 
                     // After claiming, fetch updated vouchers (display the remaining ones)
                     this.fetchVouchers();
@@ -149,7 +148,7 @@ class GameRewards {
 
     // Update user's points after game over
     updateUserPoints(score) {
-        let userId = localStorage.getItem("userId");
+        let userId = sessionStorage.getItem("userId");
         let pointsEarned = Math.floor(score / 800);  // Convert game score to points (1 point per 800 game points)
 
         // Update points in the user's account in the API
@@ -160,8 +159,8 @@ class GameRewards {
         }*/"../json/accounts.json")
         .then(response => response.json())
         .then(user => {
-            // After updating, store the updated points in localStorage
-            localStorage.setItem("userPoints", user.points);
+            // After updating, store the updated points in sessionStorage
+            sessionStorage.setItem("userPoints", user.points);
 
             // Update available vouchers based on new points
             this.fetchVouchers();  // Refetch vouchers to reflect the updated points

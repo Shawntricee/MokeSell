@@ -106,7 +106,7 @@ body{
 }
 .nav-buttons{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
   padding: 20px 40px;
   height: 100%;
@@ -118,15 +118,16 @@ body{
   text-decoration: none;
 }
 #guestNav{
-width: 60%;
+  width: 60%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 20px;
   padding-left: 20px;
 }
 #userNav{
   width: 60%;
   display: none;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .profile-container{
   position: relative;
@@ -165,6 +166,7 @@ width: 60%;
   display: block;
 }
 .sell-button{
+  display: inline-block;
   background-color: #684F36;
   color: #EDE6D9;
   font-weight: 500;
@@ -173,9 +175,9 @@ width: 60%;
   transition: all 0.3s ease-in-out;
 }
 .sell-button:hover{
-  background-color: #EDE6D9; /* Swap background */
-  color: #684F36; /* Swap text color */
-  border: 2px solid #684F36; /* Add subtle border */
+  background-color: #EDE6D9;
+  color: #684F36;
+  border: 2px solid #684F36;
 }
 .auth-button{
   text-decoration: none;
@@ -1493,6 +1495,7 @@ to { opacity: 0; transform: translateX(30px); }
   margin-bottom: 60px;
   font-size: 16px;
   font-weight: 500;
+  padding: 10px 0;
 }
 .progress-bar .step{
   flex: 1;
@@ -1510,24 +1513,24 @@ to { opacity: 0; transform: translateX(30px); }
   flex-direction: row;
   align-items: flex-start;
   gap: 40px;
+  width:100%;
 }
 .listing-left{
   display: flex;
   flex: 1;
+  width: 50%;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  width: 100%;
 }
 .upload-images{
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
   margin-top: 10px;
   padding: 20px;
   border-radius: 10px;
   width: 600px;
-  height: 100%;
+  height: auto;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Added proper box-shadow */
 }
 .upload-images input[type="file"] {
@@ -2791,6 +2794,7 @@ to {
   height: 44vw;
   margin-top: 5px;
   overflow: hidden;
+  position: relative;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 12px;
 }
 .video-background video{
@@ -2804,7 +2808,7 @@ to {
 }
 .video-container .content{
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -3350,7 +3354,7 @@ thead th{
     }
 }
 
-/*RESPONSIVE DESIGN*/ /*NOTE: can u consolidate all ur responsive media query here THANKS*/
+/*RESPONSIVE DESIGN*/ /*NOTE: can u consolidate all ur responsive media query here THANKS (one spacing between each html page, no spacing between each style target)*/
 /*responsive design*/
 @media (max-width: 1024px) {
   /*navbar section styles*/
@@ -3359,7 +3363,7 @@ thead th{
     background-color: #684F36;
     color: #FFFFFF;
     border: none;
-    padding-left: 40px;
+    padding: 0 20px 0 40px;
     font-size: 20px;
     cursor: pointer;
   }
@@ -3379,9 +3383,16 @@ thead th{
   .sell-button{
     display: none;
   }
+  #search-container{
+    padding: 30px 0;
+  }
+  #search-bar{
+   padding: 5px 15px 5px 45px;
+  }
   #guestNav{
     width: 100%;
     font-size: 16px;
+    gap: 14px;
   }
   #userNav{
     width: 40%;
@@ -3478,7 +3489,6 @@ thead th{
   .time-box{
     font-size: 18px;
   }
-  
 
   /*PRODUCTS.HTML STYLES*/
   #pageTitle{
@@ -3488,7 +3498,6 @@ thead th{
   .filter{
     width: 100%;
   }
-
 
   /*PRODUCT-DETAILS.HTML STYLES*/
   .product-container-left{
@@ -3504,23 +3513,479 @@ thead th{
   .details p{
     font-size: 14px;
   }
+  #productTitle{
+    font-size: 24px;
+    text-align: left;
+  }
+  #productPrice{
+    font-size: 20px;
+    text-align: left;
+  }
+  
+  #productDescription{
+    font-size: 14px;
+    text-align: left;
+  }
 
-  
   /*LISTING.HTML STYLES*/
-  
+  .listing-form{
+    gap: 10px;
+  }
+  .upload-images{
+    max-width: 400px;
+  }
+
+  /*GAME.HTML STYLES*/
+  .video-container .content h1{
+    font-size: 36px;
+  }
+  .step-container{
+    padding: 20px 20px 20px 60px;
+    height: 120px;
+  }
+  #step-text{
+    font-size: 18px;
+  }
+  #step-description-container{
+    margin-top: 10px;
+    gap: 5px;
+  }
+  #step-description-container p{
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 768px) {
+  /*navbar section styles*/
+  .menu-btn{
+    padding-left: 20px;
+    font-size: 16px;
+  }
+  .navbar{
+    height: 60px;
+  }
+  .nav-container{
+    height: 60px;
+  }
+  .nav-container .logo img{
+    height: 58px;
+  }
+  .search-container{
+    width: 50%;
+    padding: 0;
+  }
+  #search-bar{
+    font-size: 16px;
+  }
+  #search-icon{
+    left: 10px;
+  }
+  .nav-buttons{
+    padding-right: 20px;
+    width: 30%;
+  }
+  #guestNav{
+    gap: 20px;
+  }
+  #userNav{
+    width: 30%;
+  }
+  .nav-categories{
+    top: 238px;
+  }
+  .nav-links li a{
+    font-size: 16px;
+  }
+  /*dropdown styles*/
+  .dropdown-menu{
+    left: 250px;
+  }
+  /*registration popup styles section*/
+  #registrationPopup{
+    padding: 20px;
+  }
+  .popup-header button{
+    font-size: 16px;
+  }
+  .popup-content{
+    flex-direction: column;
+  }
+  .discount-code img{
+    display: none;
+  }
+  /*footer section styles*/
+  .footer{
+    padding: 40px;
+  }
+  .footer-left p{
+    font-size: 16px;
+  }
+  .footer-right h4, .footer-right li{
+    font-size: 18px;
+  }
+  .footer-right li a{
+    font-size: 16px;
+  }
+  .footer-right li a img{
+    width: 14px;
+  }
+  .footer .social-icons img{
+    width: 20px;
+  }
 
+  /*INDEX.HTML STYLES*/
+  .main-content{
+    padding-top: 98px;
+  }
+  /*hero section styles*/
+  .hero-text h1{
+    font-size: 40px;
+  }
+  .hero-text p{
+    font-size: 18px;
+  }
+  .hero-button{
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  .prev-button, .next-button{
+    font-size: 16px;
+    padding:  16px 8px;
+  }
+  /*top categories section styles*/
+  .top-categories{
+    padding: 40px 20px;
+  }
+  .top-categories h2{
+    font-size: 32px;
+  }
+  .limited-offers-header{
+    padding-left: 10px;
+  }
+  .limited-offers-header h2{
+    font-size: 40px;
+  }
+  .limited-offers-header p{
+    font-size: 18px;
+  }
+  .countdown{
+    width: 100%;
+  }
+  .time-box{
+    padding:8px 14px;
+    font-size: 16px;
+  }
+  .list-browse-listings{
+    padding: 20px 10px;
+  }
+  .list-browse-listings h3{
+    font-size: 36px;
+  }
+  .list-browse-listings p{
+    font-size: 18px;
+  }
+  .list-browse-listings button{
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  .how-it-works{
+    padding: 40px 20px;
+  }
+  .how-it-works h2{
+    font-size: 32px;
+  }
+  .how-it-works p{
+    font-size: 18px;
+  }
+  .how-it-works .step img{
+    width: 60px;
+  }
+  .how-it-works .step h4{
+    font-size: 20px;
+  }
+  .how-it-works .step p{
+    font-size: 16px;
+  }
+  
+  /*PRODUCT-DETAILS.HTML STYLES*/
+  #breadcrumbNavigation, #breadcrumbNavigation a{
+    font-size: 12px;
+  }
+  .details-container{
+    align-items: flex-start;
+  }
+  .details h4{
+    font-size: 14px;
+  }
+  .details p{
+    font-size: 12px;
+  }
+  .product-points{
+    font-size: 14px;
+  }
+  .seller-profile h2{
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  #sellerUsername{
+    font-size: 16px;
+  }
+  #contactSeller{
+    padding: 10px 40px;
+  }
+  .review-form{
+    width: 100%;
+  }
+  .similar-listings{
+    padding: 40px 20px;
+  }
+  .similar-listings h2{
+    font-size: 36px;
+  }
+  
+  /*LISTING.HTML STYLES*/
+  .progress-bar{
+    font-size: 14px;
+  }
+  .listing-form{
+    flex-direction: column;
+  }
+  .upload-images{
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  /*GAME.HTML STYLES*/
+  .video-container .content h1{
+    font-size: 28px;
+  }
+  .step-container{
+    padding: 20px 20px 20px 40px;
+    height: 110px;
+  }
+  #step-text{
+    font-size: 16px;
+  }
+  #step-description-container{
+    margin-top: 5px;
+    gap: 5px;
+  }
+  #step-description-container p{
+    font-size: 14px;
+  }
+  #start-playing{
+    font-size: 16px;
+  }
+  .game-section{
+    flex-direction: column;
+    gap: 40px;
+  }
+  .vouchers-container, .leaderboard-container{
+    width: 100%;
+  }
+  .vouchers-container{
+    gap: 20px;
+  }
+  .dino-game-container h2{
+    font-size: 36px;
+  }
+  .dino-game-container p{
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
 }
 
 @media (max-width: 480px) {
+  /*navbar section styles*/
+  .promo-bar{
+    font-size: 12px;
+  }
+  .menu-btn{
+    padding-left: 10px;
+    font-size: 14px;
+  }
+  .navbar{
+    height: 50px;
+  }
+  .nav-container{
+    height: 48px;
+  }
+  .nav-container .logo img{
+    height: 46px;
+  }
+  .search-container{
+    display: none;
+  }
+  .nav-buttons{
+    width: 80%;
+  }
+  .auth-button{
+    font-size: 14px;
+  }
+  .proflie-container{
+    gap: 5px;
+  }
+  #guestNav{
+    gap: 10px;
+  }
+  #userNav{
+    width: 60%;
+  }
+  .nav-categories{
+    top: 216px;
+  }
+  .nav-links li a{
+    font-size: 12px;
+  }
+  /*dropdown styles*/
+  .dropdown-menu{
+    left: 184px;
+  }
+  /*registration popup styles section*/
+  #registrationPopup{
+    padding: 10px;
+    top: 30%;
+  }
+  .popup-header button{
+    font-size: 14px;
+  }
+  .popup-fields{
+    gap: 10px;
+    font-size: 14px;
+  }
+  .poup-fields button{
+    font-size: 14px;
+  }
+  /*footer section styles*/
+  .footer{
+    padding: 40px;
+    flex-direction: column-reverse;
+    gap: 0;
+  }
+  .footer-left{
+    width: 100%;
+    gap: 10px;
+  }
+  .footer-logo{
+    margin: 0;
+  }
+  .footer-logo img{
+    width: 140px;
+  }
+  .footer-left p{
+    font-size: 14px;
+    margin-top: 0;
+  }
+  .footer-right{
+    width: 100%;
+  }
+  .footer-right h4, .footer-right li{
+    font-size: 14px;
+  }
+  .footer-right li a{
+    font-size: 14px;
+  }
+  
+  /*INDEX.HTML STYLES*/
+  .main-content{
+    padding-top: 78px;
+  }
+  /*hero section styles*/
+  .hero{
+    height: 20vh;
+  }
+  .hero-text h1{
+    font-size: 32px;
+  }
+  .hero-text p{
+    font-size: 16px;
+  }
+  .hero-button{
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+  .prev-button, .next-button{
+    font-size: 14px;
+    padding:  14px 6px;
+  }
+  /*top categories section styles*/
+  .top-categories{
+    max-width: 480px;
+  }
+  .category-grid{
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+  }
+  .category{
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+  .category-name{
+    font-size: 16px;
+  }
+  .limited-offers{
+    height: 160px;
+  }
+  .limited-offers-header h2{
+    font-size: 26px;
+    width: 50%;
+  }
+  .limited-offers-header p{
+    font-size: 12px;
+  }
+  .countdown span{
+    font-size: 16px;
+  }
+  .countdown{
+    height: 30%;
+    width: 100%;
+  }
+  .time-box{
+    padding: 6px 10px;
+    font-size: 8px;
+  }
+  .list-browse-listings{
+    flex-direction: column;
+    width: 100%;
+  }
+  .list-listings, .browse-listings{
+    margin: 20px;
+    width: 80%;
+  }
+  .list-browse-listings h3{
+    font-size: 28px;
+  }
+  .list-browse-listings p{
+    font-size: 16px;
+  }
+  .list-browse-listings button{
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  .how-it-works{
+    padding: 20px;
+  }
+  .how-it-works h2{
+    font-size: 26px;
+  }
+  .how-it-works p{
+    font-size: 12px;
+  }
+  .how-it-works .steps{
+    flex-direction: column;
+  }
+  .how-it-works .step h4{
+    font-size: 16px;
+  }
   /*cart sidebar styles*/
   .cart-sidebar {
     width: 100%;
     right: -100%;
   }
-
   .item-image {
       width: 80px;
       height: 80px;
