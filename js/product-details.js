@@ -13,14 +13,15 @@ class ReviewManager {
     }
 
     setSellerUsername(sellerUsername) {
-        this.sellerUsername = sellerUsername;
+        this.sellerUsername = sellerUsername || "Unknown";
+        console.log("Setting seller username:", this.sellerUsername);  // Debug log
         this.updateReviewHeader();
     }
 
     updateReviewHeader() {
-        const reviewSeller = document.getElementById("sellerUsername");
+        const reviewSeller = document.getElementById("sellerReviewUsername");
         if (reviewSeller) {
-            reviewSeller.textContent =`${this.sellerUsername}`;
+            reviewSeller.textContent = this.sellerUsername;
         }
     }
 
@@ -45,37 +46,51 @@ class ReviewManager {
     }
 
     postReview(reviewText) {
-        const currentUsername = localStorage.getItem("currentUsername");
+        const currentUsername = sessionStorage.getItem("currentUsername");
         if (!currentUsername) {
             alert("You must be logged in to post a review!");
             return;
         }
-
+    
         const newReview = {
             productId: this.productId,
             username: currentUsername,
             review: reviewText,
             datePosted: new Date().toISOString(),
         };
-
+    
         console.log("Posting Review:", newReview);
-
-        fetch(this.reviewsFile)
-            .then(response => response.json())
-            .then((createdReview) => {
-                console.log("Review posted successfully:", createdReview);
-                this.addReviewToUI(createdReview);
-                document.getElementById("reviewInput").value = "";
-            })
-            .catch((error) => console.error("Error posting review:", error));
+    
+        fetch(this.reviewsFile, { 
+            method: "POST", 
+            headers: { "Content-Type": "application/json" }, 
+            body: JSON.stringify(newReview) 
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to post review. Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(createdReview => {
+            console.log("Review posted successfully:", createdReview);
+            // Now `addReviewToUI` will work because `this` context is preserved
+            this.addReviewToUI(createdReview);
+            document.getElementById("reviewInput").value = "";
+        })
+        .catch(error => {
+            console.error("Error posting review:", error);
+            alert("Failed to post review. Please try again.");
+        });
     }
-
+    
     addReviewToUI(review) {
         const reviewsList = document.getElementById("reviewsList");
         if (reviewsList) {
             reviewsList.appendChild(this.renderReview(review));
         }
     }
+    
 
     renderReview(review) {
         const reviewDiv = document.createElement("div");
@@ -240,10 +255,11 @@ class Product {
 document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get("id");
-    const currentUsername = localStorage.getItem("currentUsername");
+    const currentUsername = sessionStorage.getItem("currentUsername");
 
     if (productId) {
         const product = new Product(productId, currentUsername);
+        product.init();
 
         // Handle "Add to Cart" button
         const addToCartBtn = document.getElementById("addToCart");

@@ -29,7 +29,7 @@ class Registration {
     }
 
     showPopupAfterDelay() {
-        if (localStorage.getItem("userLoggedIn") !== "true") {
+        if (sessionStorage.getItem("userLoggedIn") !== "true") {
             setTimeout(() => {
                 document.getElementById("registrationPopup").classList.add("show");
                 document.getElementById("popupOverlay").classList.add("show");
@@ -69,11 +69,12 @@ class Registration {
                 const user = users.find(u => u.username === username && u.password === password);
                 if (user) {
                     alert("Login Successful!");
-                    localStorage.setItem("userLoggedIn", "true");
-                    localStorage.setItem("currentUsername", username);
-                    localStorage.setItem("userEmail", user.email);
-                    localStorage.setItem("userId", user._id);
-                    localStorage.setItem("userPoints", user.points);
+                    sessionStorage.setItem("userLoggedIn", "true");
+                    sessionStorage.setItem("currentUsername", username);
+                    sessionStorage.setItem("userEmail", user.email);
+                    sessionStorage.setItem("userId", user._id);
+                    sessionStorage.setItem("userPoints", user.points);
+                    
                     this.updateNavBar();
                     this.closePopup();
                 } else {
@@ -84,7 +85,7 @@ class Registration {
     }
 
     checkLoginStatus() {
-        if (localStorage.getItem("userLoggedIn") === "true") {
+        if (sessionStorage.getItem("userLoggedIn") === "true") {
             this.updateNavBar();
         }
     }
@@ -105,7 +106,7 @@ class Registration {
     }
 
     logoutUser() {
-        localStorage.clear();
+        sessionStorage.clear();
         location.reload();
     }
 

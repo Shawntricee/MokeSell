@@ -140,10 +140,10 @@ class Listing {
     
     //create the product object from form data
     createProductObject() {
-        // Retrieve user details from localStorage
-        const username = localStorage.getItem("currentUsername");
-        const email = localStorage.getItem("userEmail"); // Retrieve user email if stored
-        const userId = localStorage.getItem("userId"); // Fetch userId from localStorage
+        // Retrieve user details from sessionStorage
+        const username = sessionStorage.getItem("currentUsername");
+        const email = sessionStorage.getItem("userEmail"); // Retrieve user email if stored
+        const userId = sessionStorage.getItem("userId"); // Fetch userId from sessionStorage
         // Retrieve the value from the input field and parse it as a float
         const price = parseFloat(document.getElementById("price").value);
 
