@@ -7,6 +7,11 @@ class ReviewManager {
     }
 
     init() {
+        if (this.reviewsFetched) {
+            console.log("Reviews already fetched");
+            return; // Prevent fetching if reviews are already fetched
+        }
+
         console.log("ReviewManager initialized");
         this.setupReviewForm();
         this.fetchReviews();
@@ -111,6 +116,10 @@ class ReviewManager {
     }
 
     fetchReviews() {
+        if (this.reviewsFetched) {
+            console.log("Reviews already fetched.");
+            return;
+        }
         console.log("Fetching reviews...");
         fetch(this.reviewsFile)
             .then(response => response.json())
@@ -118,6 +127,7 @@ class ReviewManager {
                 reviews.forEach(review => {
                     this.addReviewToUI(review);
                 });
+                this.reviewsFetched = true;
             })
             .catch((error) => console.error("Error fetching reviews:", error));
     }
@@ -259,7 +269,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (productId) {
         const product = new Product(productId, currentUsername);
-        product.init();
 
         // Handle "Add to Cart" button
         const addToCartBtn = document.getElementById("addToCart");
