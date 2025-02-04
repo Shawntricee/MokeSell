@@ -143,6 +143,36 @@ class BreadcrumbNavigation {
 // Initialize Breadcrumb
 new BreadcrumbNavigation("breadcrumbNavigation");
 
+document.addEventListener("DOMContentLoaded", function () {
+    // Menu button toggle for nav-categories
+    const menuBtn = document.querySelector(".menu-btn");
+    const navCategories = document.querySelector(".nav-categories");
+
+    if (menuBtn && navCategories) {
+        menuBtn.addEventListener("click", function () {
+            navCategories.classList.toggle("show");
+        });
+    }
+
+    // Dropdown toggle for mobile (click to show)
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('click', function () {
+            
+            // Toggle the "show" class on the clicked dropdown
+            this.classList.toggle('show');
+        });
+    });
+
+    // Close all dropdowns if clicked outside
+    document.addEventListener('click', function () {
+        dropdowns.forEach(dropdown => {
+            dropdown.classList.remove('show');
+        });
+    });
+});
+
 
 
 // List of background images
