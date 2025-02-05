@@ -1,10 +1,10 @@
 
 class ProductPage {
     constructor() {
-        this.productGrid = document.getElementById("productGrid");
-        this.loadMoreBtn = document.getElementById("loadMoreBtn");
-        this.filters = document.querySelectorAll(".filter-input");
-        this.pageTitle = document.getElementById("pageTitle");
+        this.productGrid = document.getElementById("productGrid") || null;
+        this.loadMoreBtn = document.getElementById("loadMoreBtn") || null;
+        this.filters = document.querySelectorAll(".filter-input") || [];
+        this.pageTitle = document.getElementById("pageTitle") || null; 
         this.products = [];
         this.displayedProducts = 0;
         this.productsPerPage = 9;
@@ -15,7 +15,9 @@ class ProductPage {
         this.updateHeader = this.updateHeader.bind(this);
 
         // Fetch products on page load
-        this.fetchProducts();
+        if (this.productGrid) {
+            this.fetchProducts();
+        }
     }
 
     // Fetch products from the JSON file
@@ -32,18 +34,24 @@ class ProductPage {
 
     // Apply filters based on the selected criteria
     applyFilters() {
+        if(!this.productGrid) return;   
+
         const priceFilter = document.getElementById("filterPrice")?.value || "";
         const conditionFilter = document.getElementById("filterCondition")?.value || "all";
 
         const params = new URLSearchParams(window.location.search);
         const selectedCategory = params.get("category");
+        const selectedSubcategory = params.get("subcategory");
 
         let filteredProducts = this.products.filter(product => {
             return (
-                (selectedCategory === null || product.category === selectedCategory) &&
+                (!selectedCategory || product.category === selectedCategory) &&
+                (!selectedSubcategory || product.subcategory === selectedSubcategory) &&
                 (conditionFilter === "all" || product.condition === conditionFilter)
             );
         });
+
+        console.log("Filtered Products:", filteredProducts); // Debugging output
 
         if (priceFilter === "low-to-high") {
             filteredProducts.sort((a, b) => a.price - b.price);
@@ -56,6 +64,8 @@ class ProductPage {
 
     // Display products on the page
     displayProducts(productList) {
+        if (!this.productGrid) return;
+
         this.productGrid.innerHTML = "";
         this.displayedProducts = 0;
 
@@ -69,6 +79,8 @@ class ProductPage {
 
     // Create a product card and append it to the grid
     createProductCard(product) {
+        if(!this.productGrid) return;
+
         const productCard = document.createElement("div");
         productCard.classList.add("product-card");
 
@@ -85,9 +97,10 @@ class ProductPage {
         `;
 
         productCard.addEventListener("click", () => {
-            const category = encodeURIComponent(product.category || "Uncategorised");
+            const category = encodeURIComponent(product.category || "Uncategorized");
+            const subcategory = encodeURIComponent(product.subcategory || "All");
             const title = encodeURIComponent(product.title || "Product");
-            const url = `product-details.html?id=${product._id}&category=${category}&title=${title}`;
+            const url = `product-details.html?id=${product._id}&category=${category}&subcategory=${subcategory}&title=${title}`;
             console.log("Navigating to:", url);
             window.location.href = url;
         });
@@ -97,18 +110,27 @@ class ProductPage {
 
     // Update the header based on selected category
     updateHeader() {
+        if (!this.pageTitle) return;
+
         const params = new URLSearchParams(window.location.search);
         const selectedCategory = params.get("category");
+        const selectedSubcategory = params.get("subcategory");
 
-        if (selectedCategory && this.pageTitle) {
+        console.log("Category from Navbar:", selectedCategory); // Debugging output
+        console.log("Subcategory from Navbar:", selectedSubcategory); // Debugging output
+
+        if (selectedSubcategory) {
+            this.pageTitle.innerText = decodeURIComponent(selectedSubcategory); 
+        } else if (selectedCategory) {
             this.pageTitle.innerText = decodeURIComponent(selectedCategory);
-
-            const filterCategory = document.getElementById("filterCategory");
-            if (filterCategory) {
-                filterCategory.value = selectedCategory;
-                this.applyFilters();  // Apply filters after setting the category
-            }
         }
+    
+        const filterCategory = document.getElementById("filterCategory");
+        if (filterCategory) {
+            filterCategory.value = selectedCategory || "";
+        }
+    
+        this.applyFilters();
     }
 
     // Initialize event listeners
@@ -121,17 +143,19 @@ class ProductPage {
             filter.addEventListener("change", this.applyFilters);
         });
 
-        this.loadMoreBtn.addEventListener("click", () => {
-            let currentProducts = this.productGrid.childNodes.length;
-            let additionalProducts = this.products.slice(currentProducts, currentProducts + this.productsPerPage);
-
-            additionalProducts.forEach(product => {
-                this.createProductCard(product);
-                this.displayedProducts++;
+        if (this.loadMoreBtn) {
+            this.loadMoreBtn.addEventListener("click", () => {
+                let currentProducts = this.productGrid.childNodes.length;
+                let additionalProducts = this.products.slice(currentProducts, currentProducts + this.productsPerPage);
+    
+                additionalProducts.forEach(product => {
+                    this.createProductCard(product);
+                    this.displayedProducts++;
+                });
+    
+                this.loadMoreBtn.style.display = this.displayedProducts < this.products.length ? "block" : "none";
             });
-
-            this.loadMoreBtn.style.display = this.displayedProducts < this.products.length ? "block" : "none";
-        });
+        } 
     }
 }
 
@@ -139,4 +163,12 @@ class ProductPage {
 document.addEventListener("DOMContentLoaded", () => {
     const productPage = new ProductPage();
     productPage.init();
+
+    // Ensure navbar links reload the page with correct parameters
+    document.querySelectorAll(".nav-links a").forEach(link => {
+        link.addEventListener("click", (event) => {
+            event.preventDefault();
+            window.location.href = event.target.href;
+        });
+    });
 });

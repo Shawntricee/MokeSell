@@ -206,28 +206,12 @@ body{
 .nav-buttons .nav-icon:hover, .auth-button:hover{
   transform: scale(1.1);
 }
-.cart-badge{
-  color: #342519;
-  background-color: #EDE6D9;
-  font-size: 12px;
-  display: flex;
-  width: 20px;
-  height: 20px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  display: none; /* Hidden by default */
-}
 .nav-categories{
   display: flex;
   justify-content: flex-start;
   align-items: center;
   padding: 0 40px;
   height: 60px;
-  border-bottom: 2px solid #312f2c5e;
 }
 .nav-links {
   display: flex;
@@ -3736,22 +3720,37 @@ thead th{
   .how-it-works .step p{
     font-size: 16px;
   }
-  
+
+  /*PRODUCTS.HTML STYLES*/
+  .product-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   /*PRODUCT-DETAILS.HTML STYLES*/
   #breadcrumbNavigation, #breadcrumbNavigation a{
-    font-size: 12px;
+    font-size: 18px;
   }
-  .details-container{
-    align-items: flex-start;
+  .product-container{
+    flex-direction: column;
+  }
+  .product-details{
+    padding: 0;
+  }
+  .details-container h3{
+    text-align: left;
   }
   .details h4{
-    font-size: 14px;
+    font-size: 16px;
+    text-align: flex-start;
   }
-  .details p{
-    font-size: 12px;
+  .details p, .product-points{
+    font-size: 16px;
   }
-  .product-points{
-    font-size: 14px;
+  #productTitle{
+    font-size: 30px;
+  }
+  #productPrice{
+    font-size: 26px;
   }
   .seller-profile h2{
     font-size: 18px;
@@ -4018,11 +4017,14 @@ thead th{
   }
 
   /*PRODUCT-DETAILS.HTML STYLES*/
-  .product-container{
-    flex-direction: column;
+  #breadcrumbNavigation, #breadcrumbNavigation a{
+    font-size: 14px;
   }
-  .product-details{
-    padding: 0;
+  #productTitle{
+    font-size: 22px;
+  }
+  #productPrice{
+    font-size: 20px;
   }
 
   /*LISTING.HTML STYLES*/

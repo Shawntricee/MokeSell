@@ -29,7 +29,10 @@ class Registration {
     }
 
     showPopupAfterDelay() {
-        if (sessionStorage.getItem("userLoggedIn") !== "true") {
+        if (
+            sessionStorage.getItem("userLoggedIn") !== "true" &&
+            sessionStorage.getItem("popupClosed") !== "true"
+        ) {
             setTimeout(() => {
                 document.getElementById("registrationPopup").classList.add("show");
                 document.getElementById("popupOverlay").classList.add("show");
@@ -122,6 +125,7 @@ class Registration {
         const overlay = document.getElementById("popupOverlay");
         popup.classList.remove("show");
         overlay.classList.remove("show");
+        sessionStorage.setItem("popupClosed", "true");
         setTimeout(() => { overlay.style.display = "none"; }, 300);
     }
 
