@@ -13,7 +13,7 @@
                 "price": 1699,
                 "quantity": 2,
                 "size": "XL",
-                "image_url": "dining-chair-1-main.jpg"
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593089/dining-chair-1-main_vvlmku.jpg"
             }
         ],
         "shipping_address": "870 Bukit Timah Ave, SG 654198",
@@ -34,7 +34,7 @@
                 "price": 100,
                 "quantity": 1,
                 "size": "M",
-                "image_url": "dining-chair-1-main.jpg"
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593089/dining-chair-1-main_vvlmku.jpg"
             }
         ],
         "shipping_address": "123 Bukit Timah Ave, SG 654198",
@@ -55,7 +55,7 @@
                 "price": 1200,
                 "quantity": 1,
                 "size": "L",
-                "image_url": "dining-chair-1-main.jpg"
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593089/dining-chair-1-main_vvlmku.jpg"
             }
         ],
         "shipping_address": "870 Bukit Timah Ave, SG 654198",
@@ -76,7 +76,7 @@
                 "price": 1699,
                 "quantity": 1,
                 "size": "XL",
-                "image_url": "dining-chair-1-main.jpg"
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593089/dining-chair-1-main_vvlmku.jpg"
             }
         ],
         "shipping_address": "870 Bukit Timah Ave, SG 654198",
@@ -97,7 +97,7 @@
                 "price": 1699,
                 "quantity": 1,
                 "size": "M",
-                "image_url": "dining-chair-1-main.jpg"
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593089/dining-chair-1-main_vvlmku.jpg"
             }
         ],
         "shipping_address": "870 Bukit Timah Ave, SG 654198",
@@ -118,7 +118,7 @@
                 "price": 1699,
                 "quantity": 1,
                 "size": "L",
-                "image_url": "dining-chair-1-main.jpg"
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593089/dining-chair-1-main_vvlmku.jpg"
             }
         ],
         "shipping_address": "870 Bukit Timah Ave, SG 654198",
@@ -139,7 +139,7 @@
                 "price": 1699,
                 "quantity": 1,
                 "size": "XL",
-                "image_url": "dining-chair-1-main.jpg"
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738593089/dining-chair-1-main_vvlmku.jpg"
             }
         ],
         "shipping_address": "870 Bukit Timah Ave, SG 654198",
@@ -160,7 +160,7 @@
                 "price": 99,
                 "quantity": 1,
                 "size": "M",
-                "image_url": "dining-table-2-main.jpg"
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592989/dining-table-2-main_xoenpn.jpg"
             }
         ],
         "shipping_address": "678 Bukit Timah Ave, SG 654198",

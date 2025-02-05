@@ -8,7 +8,7 @@
                 "title": "Timber 90\" Sofa - Olio Green",
                 "price": 1299,
                 "quantity": 1,
-                "image_url": "fabric-sofa-1-main.jpg",
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592060/fabric-sofa-1-main_efmw7m.jpg",
                 "points": 129.9
             }
         ],
@@ -26,7 +26,7 @@
                 "title": "Timber 100\" Sofa - Blue",
                 "price": 1599,
                 "quantity": 1,
-                "image_url": "fabric-sofa-2-main.jpg",
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592529/fabric-sofa-2-main_mfuokc.jpg",
                 "points": 159.9
             }
         ],
@@ -41,10 +41,10 @@
         "items": [
             {
                 "product_id": "679796bbbb50491a00009ee9",
-                "title": "Timber 120\" Sofa - White",
+                "title": "Abisko 94.5\" Right Sectional - Quartz White",
                 "price": 1899,
                 "quantity": 1,
-                "image_url": "fabric-sofa-3-main.jpg",
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592819/metal-sofa-1-main_iyjmio.jpg",
                 "points": 189.9
             }
         ],
@@ -62,7 +62,7 @@
                 "title": "Timber 140\" Sofa - Black",
                 "price": 2199,
                 "quantity": 1,
-                "image_url": "fabric-sofa-4-main.jpg",
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592819/metal-sofa-1-main_iyjmio.jpg",
                 "points": 219.9
             }
         ],
@@ -80,7 +80,7 @@
                 "title": "Timber 160\" Sofa - Red",
                 "price": 2499,
                 "quantity": 1,
-                "image_url": "fabric-sofa-5-main.jpg",
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592819/metal-sofa-1-main_iyjmio.jpg",
                 "points": 249.9
             }
         ],
@@ -98,7 +98,7 @@
                 "title": "Timber 180\" Sofa - Yellow",
                 "price": 2799,
                 "quantity": 1,
-                "image_url": "fabric-sofa-6-main.jpg",
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592819/metal-sofa-1-main_iyjmio.jpg",
                 "points": 279.9
             }
         ],
@@ -116,7 +116,7 @@
                 "title": "Timber 200\" Sofa - Green",
                 "price": 3099,
                 "quantity": 1,
-                "image_url": "fabric-sofa-7-main.jpg",
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592819/metal-sofa-1-main_iyjmio.jpg",
                 "points": 309.9
             }
         ],
@@ -134,7 +134,7 @@
                 "title": "Timber 220\" Sofa - Blue",
                 "price": 3399,
                 "quantity": 1,
-                "image_url": "fabric-sofa-8-main.jpg",
+                "image_url": "https://res.cloudinary.com/dygllvmdk/image/upload/v1738592819/metal-sofa-1-main_iyjmio.jpg",
                 "points": 339.9
             }
         ],
