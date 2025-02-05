@@ -370,6 +370,36 @@ body{
   transform: translateY(-3px) translateX(-5px);
   text-decoration: underline;
 }
+/*fixed buttons styles section*/
+.fixed-buttons{
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1000;
+}
+.fixed-buttons a{
+  text-decoration: none;
+}
+.fixed-buttons img{
+  width: 38px;
+  height: auto;
+}
+.fixed-button{
+  background-color: #684F36;
+  border: none;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.fixed-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
 /*registration popup styles section*/
 .popup-overlay{
   display: none;
@@ -3980,6 +4010,65 @@ thead th{
   }
   .how-it-works .step h4{
     font-size: 16px;
+  }
+
+  /*PRODUCTS.HTML STYLES*/
+  .product-grid {
+    grid-template-columns: 1fr; /* Only one column */
+  }
+
+  /*PRODUCT-DETAILS.HTML STYLES*/
+  .product-container{
+    flex-direction: column;
+  }
+  .product-details{
+    padding: 0;
+  }
+
+  /*LISTING.HTML STYLES*/
+  .progress-bar{
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  .upload-images{
+    width: 400px;
+  }
+
+  /*GAME.HTML STYLES*/
+  .video-container .content h1{
+    font-size: 18px;
+  }
+  .step-container{
+    padding: 10px;
+    height: 56px;
+  }
+  #step-text{
+    font-size: 10px;
+  }
+  #step-description-container{
+    margin-top: 5px;
+    gap: 5px;
+  }
+  #step-description-container p{
+    font-size: 8px;
+  }
+  #start-playing{
+    font-size: 10px;
+    padding: 6px 12px;
+  }
+  .game-section{
+    padding-top: 10px;
+  }
+  .dino-game-container h2{
+    font-size: 24px;
+  }
+  .dino-game-container p{
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  #dino-game button{
+    padding: 6px 12px;
+    font-size: 10px;
   }
   /*cart sidebar styles*/
   .cart-sidebar {
