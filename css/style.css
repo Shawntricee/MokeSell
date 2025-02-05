@@ -158,7 +158,7 @@ body{
   background-color: rgba(95, 74, 52, 0.1);
   cursor: pointer;
 }
-.user-dropdown a{
+.user-dropdown #logoutButton{
   text-decoration: none;
   color: #342519;
   font-size:16px;
