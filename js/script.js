@@ -140,9 +140,71 @@ class BreadcrumbNavigation {
     }
 }
 
-// Initialize Breadcrumb
-new BreadcrumbNavigation("breadcrumbNavigation");
+class SearchFeature {
+    constructor() {
+        this.searchBar = document.getElementById("search-bar");
+        this.suggestionsList = document.getElementById("suggestions-list");
+        this.products = [];
 
+        if (this.searchBar) {
+            this.fetchProducts();
+            this.searchBar.addEventListener("input", () => this.showSuggestions());
+            this.searchBar.addEventListener("keydown", (event) => this.handleEnter(event));
+        }
+    }
+
+    // Fetch product data
+    fetchProducts() {
+        fetch("../json/products.json") // Update path if needed
+            .then(response => response.json())
+            .then(data => {
+                this.products = data;
+            })
+            .catch(error => console.error("Error fetching products:", error));
+    }
+
+    // Show search suggestions
+    showSuggestions() {
+        const query = this.searchBar.value.toLowerCase().trim();
+        this.suggestionsList.innerHTML = "";
+
+        if (query.length === 0) {
+            return;
+        }
+
+        const matchedProducts = this.products.filter(product =>
+            product.title.toLowerCase().includes(query) ||
+            product.category.toLowerCase().includes(query) ||
+            product.subcategory.toLowerCase().includes(query)
+        );
+
+        matchedProducts.slice(0, 5).forEach(product => {
+            const suggestionItem = document.createElement("li");
+            suggestionItem.textContent = `${product.title} (${product.category} - ${product.subcategory})`;
+            suggestionItem.addEventListener("click", () => this.navigateToResults(product));
+            this.suggestionsList.appendChild(suggestionItem);
+        });
+    }
+
+    // Handle Enter key press
+    handleEnter(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            const query = this.searchBar.value.toLowerCase().trim();
+            if (query) {
+                window.location.href = `../html/products.html?search=${encodeURIComponent(query)}`;
+            }
+        }
+    }
+
+    // Navigate to product results when clicking a suggestion
+    navigateToResults(product) {
+        const url = `../html/product-details.html?id=${product._id}`;
+        window.location.href = url;
+    }
+}
+
+// Initialize search functionality
 document.addEventListener("DOMContentLoaded", function () {
     // Menu button toggle for nav-categories
     const menuBtn = document.querySelector(".menu-btn");
@@ -153,27 +215,11 @@ document.addEventListener("DOMContentLoaded", function () {
             navCategories.classList.toggle("show");
         });
     }
-
-    // Dropdown toggle for mobile (click to show)
-    const dropdowns = document.querySelectorAll('.dropdown');
-
-    dropdowns.forEach(dropdown => {
-        dropdown.addEventListener('click', function () {
-            
-            // Toggle the "show" class on the clicked dropdown
-            this.classList.toggle('show');
-        });
-    });
-
-    // Close all dropdowns if clicked outside
-    document.addEventListener('click', function () {
-        dropdowns.forEach(dropdown => {
-            dropdown.classList.remove('show');
-        });
-    });
+    new SearchFeature();
 });
 
-
+// Initialize Breadcrumb
+new BreadcrumbNavigation("breadcrumbNavigation");
 
 // List of background images
 const heroImages = [

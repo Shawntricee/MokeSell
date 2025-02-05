@@ -206,6 +206,25 @@ body{
 .nav-buttons .nav-icon:hover, .auth-button:hover{
   transform: scale(1.1);
 }
+.suggestions-list{
+  position: absolute;
+  background-color: #ede3d9d9;
+  max-height: 200px;
+  overflow-y: auto;
+  top: 100%;
+  width: 96%;
+  z-index: 100;
+  border-radius: 30px;
+}
+.suggestions-list li{
+  padding: 16px 20px;
+  cursor: pointer;
+  list-style: none;
+}
+.suggestions-list li:hover{
+  background-color: #684F3635;
+  color: #342519;
+}
 .nav-categories{
   display: flex;
   justify-content: flex-start;
@@ -362,7 +381,7 @@ body{
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
-  z-index: 1000;
+  z-index: 2;
 }
 .fixed-buttons a{
   text-decoration: none;
@@ -372,7 +391,7 @@ body{
   height: auto;
 }
 .fixed-button{
-  background-color: #684F36;
+  background-color: #342519;
   border: none;
   width: 70px;
   height: 70px;
@@ -3430,24 +3449,16 @@ thead th{
     display: flex;
     justify-content: space-between;
     margin: 0 20px;
+    color: #342519;
   }
   .nav-links{
     width: 30%;
-    background-color: #684F36;
+    background-color: #EDE3D9;
     flex-direction: column;
     gap: 0;
   }
-  .nav-links li a img{
-    width: 16px;
-  }
-  /*dropdown styles*/
-  .dropdown-menu{
-    left: 300px;
-    background-color: #EDE6D9;
-  }
-  .dropdown-menu li a{
-    width: 100%;
-    color: #684F36;
+  .nav-links li a img, .dropdown-menu{
+    display: none;
   }
   /*footer section styles*/
   .footer-left p{
@@ -3609,10 +3620,6 @@ thead th{
   }
   .nav-links li a{
     font-size: 16px;
-  }
-  /*dropdown styles*/
-  .dropdown-menu{
-    left: 250px;
   }
   /*registration popup styles section*/
   #registrationPopup{
@@ -3865,10 +3872,6 @@ thead th{
   }
   .nav-links li a{
     font-size: 12px;
-  }
-  /*dropdown styles*/
-  .dropdown-menu{
-    left: 184px;
   }
   /*registration popup styles section*/
   #registrationPopup{
