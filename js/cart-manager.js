@@ -15,7 +15,6 @@ class CartManager {
         this.cartItems = document.getElementById('cartItems');
         this.emptyCart = document.getElementById('emptyCart');
         this.itemTemplate = document.getElementById('cartItemTemplate');
-
         //initialize cart
         this.init();
     }
@@ -24,16 +23,12 @@ class CartManager {
         try {
             //load cart data from localStorage
             this.loadCartState();
-            
             //set up event listeners
             this.setupEventListeners();
-            
             //initialize empty cart animation
             this.initEmptyCartAnimation();
-            
             //initial render
             this.render();
-
             console.log('Cart initialized successfully');
         } catch (error) {
             console.error('Error initializing cart:', error);
@@ -46,24 +41,22 @@ class CartManager {
         if (closeBtn) {
             closeBtn.addEventListener('click', () => this.closeCart());
         }
-
         //cart overlay click
         if (this.cartOverlay) {
             this.cartOverlay.addEventListener('click', () => this.closeCart());
         }
-
         //voucher application
         const applyVoucherBtn = document.getElementById('applyVoucher');
         if (applyVoucherBtn) {
             applyVoucherBtn.addEventListener('click', () => this.applyVoucher());
         }
-
         //checkout button
         const checkoutBtn = document.getElementById('checkoutButton');
         if (checkoutBtn) {
-            checkoutBtn.addEventListener('click', () => this.proceedToCheckout());
+            checkoutBtn.addEventListener('click', () => {
+                window.location.href = '../html/checkout.html';  // Add this line
+            });
         }
-
         //event delegation for quantity controls and remove buttons
         if (this.cartItems) {
             this.cartItems.addEventListener('click', (e) => {
@@ -81,7 +74,6 @@ class CartManager {
                 }
             });
         }
-
         //add event listener to all "Add to Cart" buttons
         document.getElementById('addToCart')?.addEventListener('click', (e) => {
             e.preventDefault();
@@ -112,7 +104,6 @@ class CartManager {
             console.error('No product ID provided');
             return;
         }
-
         try {
             //get product data from your existing product details
             const productElement = document.querySelector('.product-details');
@@ -120,14 +111,12 @@ class CartManager {
                 console.error('Product details not found');
                 return;
             }
-
             const product = {
                 id: productId,
                 title: document.getElementById('productTitle').textContent,
                 price: parseFloat(document.getElementById('productPrice').textContent.replace('S$', '')),
                 image: document.getElementById('mainImage').src
             };
-
             //add to cart state
             const existingItem = this.state.items.find(item => item.id === productId);
             if (existingItem) {
@@ -138,16 +127,12 @@ class CartManager {
                     quantity: 1
                 });
             }
-
             //update cart
             this.updateCart();
-            
             //open cart sidebar
             this.openCart();
-            
             //show success message
             this.showNotification('Product added to cart!', 'success');
-
         } catch (error) {
             console.error('Error adding to cart:', error);
             this.showNotification('Failed to add product to cart', 'error');
@@ -182,13 +167,10 @@ class CartManager {
     updateCart() {
         //calculate totals
         this.calculateTotals();
-        
         //save state
         this.saveCartState();
-        
         //update UI
         this.render();
-        
         //update cart badge
         this.updateCartBadge();
     }
@@ -196,47 +178,38 @@ class CartManager {
     calculateTotals() {
         this.state.subtotal = this.state.items.reduce((sum, item) => 
             sum + (item.price * item.quantity), 0);
-        
         //calculate shipping (free over $500)
         this.state.shipping = this.state.subtotal > 500 ? 0 : 35;
-        
         //calculate final total
         this.state.total = this.state.subtotal + this.state.shipping - this.state.discount;
     }
 
     render() {
         if (!this.cartItems) return;
-
         //clear current items
         this.cartItems.innerHTML = '';
-        
         if (this.state.items.length === 0) {
             this.emptyCart.style.display = 'flex';
             this.cartItems.style.display = 'none';
         } else {
             this.emptyCart.style.display = 'none';
             this.cartItems.style.display = 'block';
-            
             //render each item
             this.state.items.forEach(item => this.renderItem(item));
         }
-
         //update summary
         this.updateSummary();
     }
 
     renderItem(item) {
         if (!this.itemTemplate) return;
-
         const template = this.itemTemplate.content.cloneNode(true);
         const itemElement = template.querySelector('.cart-item');
-        
         itemElement.dataset.productId = item.id;
         itemElement.querySelector('img').src = item.image;
         itemElement.querySelector('.item-title').textContent = item.title;
         itemElement.querySelector('.quantity').textContent = item.quantity;
         itemElement.querySelector('.item-price').textContent = this.formatPrice(item.price * item.quantity);
-
         this.cartItems.appendChild(itemElement);
     }
 
@@ -268,9 +241,7 @@ class CartManager {
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
         notification.textContent = message;
-        
         document.body.appendChild(notification);
-        
         setTimeout(() => {
             notification.classList.add('fade-out');
             setTimeout(() => notification.remove(), 300);
@@ -280,7 +251,6 @@ class CartManager {
     updateCartBadge() {
         const badges = document.querySelectorAll('.cart-badge');
         const itemCount = this.state.items.reduce((sum, item) => sum + item.quantity, 0);
-        
         badges.forEach(badge => {
             badge.textContent = itemCount;
             badge.style.display = itemCount > 0 ? 'flex' : 'none';
@@ -293,20 +263,18 @@ class CartManager {
             currency: 'USD'
         }).format(amount);
     }
-
     loadCartState() {
         const savedState = localStorage.getItem('cartState');
         if (savedState) {
             this.state = JSON.parse(savedState);
         }
     }
-
     saveCartState() {
         localStorage.setItem('cartState', JSON.stringify(this.state));
     }
 }
 
-//initialize cart manager when dom is loaded
+//initialize cart manager when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     window.cartManager = new CartManager();
 });

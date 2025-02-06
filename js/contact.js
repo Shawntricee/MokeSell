@@ -8,15 +8,18 @@ class ContactManager {
         this.initComponents();
         this.setupEventListeners();
     }
-
     /*initialize all page components*/
     initComponents() {
         this.initLottieAnimations();
         this.initMaps();
         this.chatWindow = null;
+        this.chatState = {
+            messages: [],
+            isTyping: false
+        };
+        this.loadChatHistory(); //load previous chat if exists
         this.isSubmitting = false;
     }
-
     /*initialize Lottie animations*/
     initLottieAnimations() {
         //loading animation for form submissions
@@ -46,7 +49,6 @@ class ContactManager {
                 }
             ]
         };
-
         //initialize headquarters map
         const hqMap = new google.maps.Map(
             document.getElementById('headquartersMap'),
@@ -55,13 +57,11 @@ class ContactManager {
                 center: { lat: 1.3521, lng: 103.8198 }
             }
         );
-
         new google.maps.Marker({
             position: { lat: 1.3521, lng: 103.8198 },
             map: hqMap,
             title: 'MokeSell Headquarters'
         });
-
         //initialize other office maps similarly
         const berlinMap = new google.maps.Map(
             document.getElementById('berlinMap'),
@@ -70,7 +70,6 @@ class ContactManager {
                 center: { lat: 52.5200, lng: 13.4050 }
             }
         );
-
         const viennaMap = new google.maps.Map(
             document.getElementById('viennaMap'),
             {
@@ -78,14 +77,12 @@ class ContactManager {
                 center: { lat: 48.2082, lng: 16.3738 }
             }
         );
-
         //add markers for other offices
         new google.maps.Marker({
             position: { lat: 52.5200, lng: 13.4050 },
             map: berlinMap,
             title: 'MokeSell Berlin Office'
         });
-
         new google.maps.Marker({
             position: { lat: 48.2082, lng: 16.3738 },
             map: viennaMap,
@@ -100,13 +97,11 @@ class ContactManager {
         if (contactForm) {
             contactForm.addEventListener('submit', (e) => this.handleFormSubmit(e));
         }
-
         //live chat button
         const chatButton = document.querySelector('.live-chat-btn');
         if (chatButton) {
             chatButton.addEventListener('click', () => this.toggleChat());
         }
-
         //form input validation
         const formInputs = document.querySelectorAll('input, textarea');
         formInputs.forEach(input => {
@@ -118,19 +113,14 @@ class ContactManager {
     /*handle contact form submission*/
     async handleFormSubmit(event) {
         event.preventDefault();
-
         if (this.isSubmitting) return;
-
         const form = event.target;
         if (!this.validateForm(form)) return;
-
         try {
             this.isSubmitting = true;
             this.showLoading(true);
-
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
-
             const response = await fetch(`${RESTDB_API_URL}/contact-messages`, {
                 method: 'POST',
                 headers: {
@@ -139,9 +129,7 @@ class ContactManager {
                 },
                 body: JSON.stringify(data)
             });
-
             if (!response.ok) throw new Error('Failed to send message');
-
             this.showSuccess('Message sent successfully! We\'ll get back to you soon.');
             form.reset();
         } catch (error) {
@@ -156,17 +144,14 @@ class ContactManager {
     /*validate individual form input*/
     validateInput(input) {
         const value = input.value.trim();
-        
         if (!value) {
             this.showInputError(input, 'This field is required');
             return false;
         }
-
         if (input.type === 'email' && !this.isValidEmail(value)) {
             this.showInputError(input, 'Please enter a valid email address');
             return false;
         }
-
         this.clearError(input);
         return true;
     }
@@ -176,12 +161,10 @@ class ContactManager {
         const inputs = form.querySelectorAll('input, textarea');
         return Array.from(inputs).every(input => this.validateInput(input));
     }
-
     /*email validation helper*/
     isValidEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
-
     /*show error for specific input*/
     showInputError(input, message) {
         this.clearError(input);
@@ -198,7 +181,6 @@ class ContactManager {
         if (errorDiv) errorDiv.remove();
         input.classList.remove('form-error');
     }
-
     /*toggle live chat window*/
     toggleChat() {
         if (this.chatWindow) {
@@ -207,7 +189,6 @@ class ContactManager {
             this.openChat();
         }
     }
-
     /*open live chat window*/
     openChat() {
         if (!this.chatWindow) {
@@ -215,7 +196,6 @@ class ContactManager {
             chatWindow.style.display = 'flex';
             setTimeout(() => chatWindow.classList.add('active'), 10);
             this.chatWindow = chatWindow;
-
             //setup chat event listeners
             this.setupChatEventListeners();
         }
@@ -237,6 +217,50 @@ class ContactManager {
         });
     }
 
+    /*send chat message*/
+    sendChatMessage() {
+        const textarea = this.chatWindow.querySelector('textarea');
+        const message = textarea.value.trim();
+        if (!message) return;
+        const messagesContainer = this.chatWindow.querySelector('.chat-messages');
+        //add user message
+        const messageElement = document.createElement('div');
+        messageElement.className = 'message user-message';
+        messageElement.textContent = message;
+        messagesContainer.appendChild(messageElement);
+        //save to chat state
+        this.chatState.messages.push({
+            type: 'user',
+            content: message,
+            timestamp: new Date()
+        });
+
+        //clear input
+        textarea.value = '';
+        //auto-scroll to bottom
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        //show typing indicator
+        this.showTypingIndicator();
+        //simulate bot response with typing delay
+        setTimeout(() => {
+            this.hideTypingIndicator();
+            const botMessage = document.createElement('div');
+            botMessage.className = 'message bot-message';
+            botMessage.textContent = this.getSmartResponse(message);
+            messagesContainer.appendChild(botMessage);
+            //save bot message to chat state
+            this.chatState.messages.push({
+                type: 'bot',
+                content: botMessage.textContent,
+                timestamp: new Date()
+            });
+            //save chat history
+            this.saveChatHistory();
+            //scroll to latest message
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }, 1000);
+    }
+
     /*close live chat window*/
     closeChat() {
         if (this.chatWindow) {
@@ -246,37 +270,6 @@ class ContactManager {
                 this.chatWindow = null;
             }, 300);
         }
-    }
-
-    /*send chat message*/
-    sendChatMessage() {
-        const textarea = this.chatWindow.querySelector('textarea');
-        const message = textarea.value.trim();
-        
-        if (!message) return;
-
-        const messagesContainer = this.chatWindow.querySelector('.chat-messages');
-        
-        //add user message
-        const userMessage = document.createElement('div');
-        userMessage.className = 'message user-message';
-        userMessage.textContent = message;
-        messagesContainer.appendChild(userMessage);
-
-        //clear input
-        textarea.value = '';
-
-        //auto-scroll to bottom
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-        //simulate bot response
-        setTimeout(() => {
-            const botMessage = document.createElement('div');
-            botMessage.className = 'message bot-message';
-            botMessage.textContent = 'Thank you for your message! Our support team will assist you shortly.';
-            messagesContainer.appendChild(botMessage);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }, 1000);
     }
 
     /*show/hide loading animation*/
@@ -296,10 +289,8 @@ class ContactManager {
         const successDiv = document.createElement('div');
         successDiv.className = 'success-message';
         successDiv.textContent = message;
-        
         const form = document.getElementById('contactForm');
         form.insertBefore(successDiv, form.firstChild);
-        
         setTimeout(() => successDiv.remove(), 5000);
     }
 
@@ -308,11 +299,48 @@ class ContactManager {
         const errorDiv = document.createElement('div');
         errorDiv.className = 'error-message';
         errorDiv.textContent = message;
-        
         const form = document.getElementById('contactForm');
         form.insertBefore(errorDiv, form.firstChild);
-        
         setTimeout(() => errorDiv.remove(), 5000);
+    }
+    /*save chat history to localstorage*/
+    saveChatHistory() {
+        localStorage.setItem('mokesell_chat_history', JSON.stringify(this.chatState.messages));
+    }
+    /*load chat history from localstorage*/
+    loadChatHistory() {
+        const history = localStorage.getItem('mokesell_chat_history');
+        if (history) {
+            this.chatState.messages = JSON.parse(history);
+        }
+    }
+    /*show typing indicator in chat*/
+    showTypingIndicator() {
+        const messagesContainer = this.chatWindow.querySelector('.chat-messages');
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message bot-message typing-indicator';
+        typingDiv.textContent = 'Agent is typing...';
+        messagesContainer.appendChild(typingDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    /*hide typing indicator in chat*/
+    hideTypingIndicator() {
+        const typingIndicator = this.chatWindow.querySelector('.typing-indicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+    /*get context aware response*/
+    getSmartResponse(message) {
+        const lowerMessage = message.toLowerCase();
+        if (lowerMessage.includes('order')) {
+            return "I can help you with your order. Could you please provide your order number?";
+        } else if (lowerMessage.includes('delivery')) {
+            return "For delivery inquiries, please provide your order number and I'll check the status for you.";
+        } else if (lowerMessage.includes('return')) {
+            return "I'll be happy to assist you with returns. Please note our return policy allows returns within 30 days of purchase.";
+        }
+        return "Thank you for your message! Our support team will assist you shortly.";
     }
 }
 
