@@ -137,16 +137,13 @@
     </header>
     <!--main content -->
     <main class="checkout-page">
-        <!--page title-->
-        <h1>MY SHOPPING BAG (<span id="itemCount">3</span> ITEMS)</h1>
-
+        <h1>MY SHOPPING BAG (<span id="itemCount">0</span> ITEMS)</h1>
         <div class="checkout-container">
-            <!--left column-->
             <div class="checkout-main">
                 <!--order summary section-->
                 <section class="order-summary">
                     <h2>
-                        <img src="../images/icons/cart-icon.png" alt="Cart">
+                        <img src="../images/icons/shopping-cart-icon.png" alt="Cart">
                         Order summary
                     </h2>
                     <div class="order-items">
@@ -161,28 +158,11 @@
                                 </tr>
                             </thead>
                             <tbody id="orderItemsBody">
-                                <!--sample item row - will be populated by javascript-->
-                                <tr>
-                                    <td class="product-info">
-                                        <div class="product-image">image</div>
-                                        <span>Sven 88" Tufted Leather Sofa - Charme Tan</span>
-                                    </td>
-                                    <td>$1,699</td>
-                                    <td>
-                                        <div class="quantity-control">
-                                            <button class="quantity-btn" data-action="decrease">-</button>
-                                            <span>2</span>
-                                            <button class="quantity-btn" data-action="increase">+</button>
-                                        </div>
-                                    </td>
-                                    <td>$3,398</td>
-                                    <td><button class="remove-btn" aria-label="Remove item">×</button></td>
-                                </tr>
+                                <!--items will be dynamically inserted here-->
                             </tbody>
                         </table>
                     </div>
                 </section>
-
                 <!--delivery options section-->
                 <section class="delivery-options">
                     <h2>
@@ -231,31 +211,29 @@
                         </div>
                     </div>
                 </section>
-
                 <!--customer information section-->
                 <section class="customer-information">
                     <h2>
                         <img src="../images/icons/user-icon.png" alt="User">
                         Customer information
                     </h2>
-                    <form class="customer-form" id="customerForm">
+                    <form id="customerForm" class="customer-form">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="fullname">Full name</label>
-                                <input type="text" id="fullname" name="fullname" placeholder="ShawnBrice Yip" required>
+                                <input type="text" id="fullname" name="fullname" required>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone number</label>
-                                <input type="tel" id="phone" name="phone" placeholder="+65 82024995" required>
+                                <input type="tel" id="phone" name="phone" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <input type="text" id="address" name="address" 
-                                   placeholder="8 Jurong Lake Link, Lake Grande, Singapore 648159" required>
+                            <input type="text" id="address" name="address" required>
                         </div>
                         <label class="save-default">
-                            <input type="checkbox" id="save-default" name="saveDefault">
+                            <input type="checkbox" id="saveDefault">
                             <span>Save as default</span>
                         </label>
                         <div class="delivery-note">
@@ -266,21 +244,21 @@
                 </section>
             </div>
 
-            <!--right column - payment summary-->
             <div class="checkout-sidebar">
                 <section class="payment-method">
                     <h2>Payment method</h2>
                     <div class="payment-selection">
                         <h3>Payment card</h3>
                         <div class="card-option">
-                            <div class="card-image">image</div>
+                            <div class="card-image">
+                                <img src="../images/icons/visa-icon.png" alt="Visa">
+                            </div>
                             <div class="card-details">
-                                <span>Mastercard</span>
+                                <span>Visa</span>
                                 <span>**** 5987</span>
                             </div>
                         </div>
                     </div>
-
                     <div class="voucher-section">
                         <h3>Voucher</h3>
                         <div class="voucher-input">
@@ -288,24 +266,23 @@
                             <button type="button" id="applyVoucher">Apply</button>
                         </div>
                     </div>
-
-                    <div class="order-summary">
+                    <div class="summary">
                         <h3>Summary</h3>
                         <div class="summary-row">
                             <span>Subtotal</span>
-                            <span id="subtotal">$3,398</span>
+                            <span id="subtotal">$0.00</span>
                         </div>
                         <div class="summary-row">
                             <span>Discount</span>
-                            <span id="discount">-$15</span>
+                            <span id="discount">-$0.00</span>
                         </div>
                         <div class="summary-row">
                             <span>Delivery Fee</span>
-                            <span id="deliveryFee">$22</span>
+                            <span id="deliveryFee">$22.00</span>
                         </div>
                         <div class="summary-row total">
                             <span>Total</span>
-                            <span id="total">$3,405</span>
+                            <span id="total">$0.00</span>
                         </div>
                         <button type="button" class="proceed-btn" id="proceedToPayment">
                             Proceed to payment
@@ -314,9 +291,6 @@
                 </section>
             </div>
         </div>
-
-        <!--loading animation container-->
-        <div id="loadingAnimation" class="loading-container" style="display: none;"></div>
     </main>
     <!--footer section-->
         <footer class="footer">
