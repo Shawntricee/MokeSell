@@ -9,18 +9,106 @@
                 {
                     "message_id": "m001",
                     "sender": "user",
-                    "content": "Hi, I need help with my order",
+                    "content": "Hi, I need help with my order.",
                     "timestamp": "2025-02-02T03:30:00Z"
                 },
                 {
                     "message_id": "m002",
                     "sender": "agent",
-                    "content": "Hello! I'd be happy to help. Could you share your order number?",
+                    "content": "Hello! I'd be happy to assist. Could you share your order number?",
                     "timestamp": "2025-02-02T03:31:00Z"
+                },
+                {
+                    "message_id": "m003",
+                    "sender": "user",
+                    "content": "My order number is 202581596.",
+                    "timestamp": "2025-02-02T03:32:00Z"
+                },
+                {
+                    "message_id": "m004",
+                    "sender": "agent",
+                    "content": "Thank you! Let me check the status of your order.",
+                    "timestamp": "2025-02-02T03:32:30Z"
+                },
+                {
+                    "message_id": "m005",
+                    "sender": "agent",
+                    "content": "Your order is confirmed and will be shipped by tomorrow. 🚚",
+                    "timestamp": "2025-02-02T03:33:15Z"
+                },
+                {
+                    "message_id": "m006",
+                    "sender": "user",
+                    "content": "Awesome! Also, do I have any available vouchers?",
+                    "timestamp": "2025-02-02T03:34:00Z"
+                },
+                {
+                    "message_id": "m007",
+                    "sender": "agent",
+                    "content": "Yes! 🎉 You have a 10% discount voucher for orders over $100. Would you like me to apply it to your next purchase?",
+                    "timestamp": "2025-02-02T03:34:45Z"
+                },
+                {
+                    "message_id": "m008",
+                    "sender": "user",
+                    "content": "Yes, please! Thank you.",
+                    "timestamp": "2025-02-02T03:35:10Z"
+                },
+                {
+                    "message_id": "m009",
+                    "sender": "agent",
+                    "content": "You're welcome! 🎁 The voucher has been applied. Let me know if you need anything else.",
+                    "timestamp": "2025-02-02T03:36:00Z"
                 }
             ],
             "started_at": "2025-02-02T03:30:00Z",
-            "last_message": "2025-02-02T03:31:00Z"
+            "last_message": "2025-02-02T03:36:00Z"
+        },
+        {
+            "chat_id": "chat002",
+            "user_id": 7,
+            "agent_id": "agent002",
+            "status": "closed",
+            "messages": [
+                {
+                    "message_id": "m010",
+                    "sender": "user",
+                    "content": "Do you deliver to Vienna?",
+                    "timestamp": "2025-02-03T10:00:00Z"
+                },
+                {
+                    "message_id": "m011",
+                    "sender": "agent",
+                    "content": "Yes! 📦 We deliver to Vienna within 5-7 business days.",
+                    "timestamp": "2025-02-03T10:01:00Z"
+                },
+                {
+                    "message_id": "m012",
+                    "sender": "user",
+                    "content": "Great! How much does shipping cost?",
+                    "timestamp": "2025-02-03T10:02:15Z"
+                },
+                {
+                    "message_id": "m013",
+                    "sender": "agent",
+                    "content": "Standard shipping to Vienna is $12. If your order exceeds $500, shipping is free! 🚀",
+                    "timestamp": "2025-02-03T10:03:00Z"
+                },
+                {
+                    "message_id": "m014",
+                    "sender": "user",
+                    "content": "Thanks! I'll place my order soon.",
+                    "timestamp": "2025-02-03T10:04:20Z"
+                },
+                {
+                    "message_id": "m015",
+                    "sender": "agent",
+                    "content": "Looking forward to it! 🎉 Let me know if you need anything else.",
+                    "timestamp": "2025-02-03T10:05:00Z"
+                }
+            ],
+            "started_at": "2025-02-03T10:00:00Z",
+            "last_message": "2025-02-03T10:05:00Z"
         }
     ],
     "agents": [
@@ -29,6 +117,37 @@
             "name": "Support Team",
             "status": "online",
             "avatar": "support-avatar.jpg"
+        },
+        {
+            "agent_id": "agent002",
+            "name": "Sales Consultant",
+            "status": "offline",
+            "avatar": "sales-avatar.jpg"
         }
-    ]
+    ],
+    "settings": {
+        "auto_response": {
+            "delay": 3,
+            "messages": [
+                {
+                    "message_id": "auto001",
+                    "sender": "agent",
+                    "content": "Hello! 👋 How can I assist you today?",
+                    "timestamp": "auto"
+                },
+                {
+                    "message_id": "auto002",
+                    "sender": "agent",
+                    "content": "If you're asking about your order, please provide your order number. 📦",
+                    "timestamp": "auto"
+                },
+                {
+                    "message_id": "auto003",
+                    "sender": "agent",
+                    "content": "Looking for discounts? I can check if you have any available vouchers! 🎟️",
+                    "timestamp": "auto"
+                }
+            ]
+        }
+    }
 }
