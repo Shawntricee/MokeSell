@@ -155,13 +155,20 @@ class SearchFeature {
 
     // Fetch product data
     fetchProducts() {
-        fetch("../json/products.json") // Update path if needed
+        // Check if the current page is "index.html" or the root "/"
+        const isIndexPage = window.location.pathname.endsWith("index.html") || window.location.pathname === "/";
+
+        // Set the correct JSON file path
+        const jsonPath = isIndexPage ? "/json/products.json" : "../json/products.json";
+
+        fetch(jsonPath)
             .then(response => response.json())
             .then(data => {
                 this.products = data;
             })
             .catch(error => console.error("Error fetching products:", error));
     }
+
 
     // Show search suggestions
     showSuggestions() {
