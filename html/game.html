@@ -163,6 +163,7 @@
             </div>
             <div class="leaderboard-container">
                 <h2>LEADERBOARD</h2>
+                <p>Your Points: <span id="currentPoints">0</span></p>
                 <table>
                     <thead>
                         <tr>
@@ -177,6 +178,7 @@
         </section>
         <!--dino game section-->
         <section class="dino-game-container">
+            <dotlottie-player id="endGameAnimation" src="https://lottie.host/c2f2e380-d6dd-415f-b76c-8c634b80579c/M0IWaGgEGO.lottie" background="transparent" speed="1" style="width: 300px; height: 300px; display: none;" loop autoplay></dotlottie-player>
             <h2>PLAY THE GAME</h2>
             <p>Help the dino jump over the furniture and earn points!</p>
             <div id="dino-game">
@@ -249,7 +251,9 @@
         </a>
     </div>
     <!--registration popup section-->
-    <div id="popupOverlay" class="popup-overlay">s</div>
+    <div id="popupOverlay" class="popup-overlay"></div>
+    <!--loading lottie animation-->
+    <dotlottie-player id="signInAnimation" src="https://lottie.host/e438b05a-929d-4dc4-bf5b-ec9acabefed7/GrnJKaAVK8.lottie" background="transparent" speed="1" style="width: 300px; height: 300px; display: none;" loop autoplay></dotlottie-player>
     <div id="registrationPopup" class="popup">
         <div class="popup-container">
             <div class="popup-logo">
@@ -294,6 +298,9 @@
             </div>
         </div>
     </div>
+    <!--external libaries-->
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <!--custom scripts-->
     <script src="../js/registration.js"></script>
     <script src="../js/products.js"></script>
     <script src="../js/game.js"></script>

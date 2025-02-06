@@ -217,6 +217,38 @@ document.addEventListener("DOMContentLoaded", function () {
     const menuBtn = document.querySelector(".menu-btn");
     const navCategories = document.querySelector(".nav-categories");
 
+    const steps = document.querySelectorAll(".how-it-works .step");
+    
+    const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.2
+    };
+
+    // Animate steps (staggered delay)
+    if (steps.length > 0) {
+        steps.forEach((step, index) => {
+            step.style.opacity = "0";
+            step.style.transform = "translateY(50px)";
+        });
+
+        const stepsObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.transition = "opacity 0.8s ease-out, transform 0.8s ease-out";
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }, 300 * index);
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        steps.forEach(step => stepsObserver.observe(step));
+    }
+
     if (menuBtn && navCategories) {
         menuBtn.addEventListener("click", function () {
             navCategories.classList.toggle("show");

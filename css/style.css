@@ -27,6 +27,16 @@ body{
   width: 100%;
   height:100%;
 }
+
+/*animation styles*/
+dotlottie-player {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
 /*header styles*/
 .header{
   position: fixed;
@@ -55,6 +65,7 @@ body{
   border-bottom: 2px solid #312f2c5e;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 80px;
 }
 .menu-btn{
@@ -63,7 +74,7 @@ body{
 .nav-container .logo{
   display: flex;
   max-height: 100%;
-  width: auto;
+  width: 20%;
   align-items: center;
   justify-content: center;
 }
@@ -73,12 +84,13 @@ body{
   max-height: 78px;
   width: auto;
 }
+/*search bar styles*/
 .search-container{
   display: flex;
   justify-content: center;
   position: relative;
   height: 70%;
-  width: 100%;
+  width: 50%;
   padding: 0 20px;
 }
 #search-bar{
@@ -104,19 +116,40 @@ body{
   height: 40%;
   width: auto;
 }
+/*search bar suggestions styles*/
+.suggestions-list{
+  position: absolute;
+  background-color: #ede3d9e6;
+  max-height: 200px;
+  overflow-y: auto;
+  top: 100%;
+  width: 96%;
+  z-index: 100;
+  border-radius: 30px;
+}
+.suggestions-list li{
+  padding: 16px 20px;
+  cursor: pointer;
+  list-style: none;
+}
+.suggestions-list li:hover{
+  background-color: #684F3635;
+  color: #342519;
+}
 .nav-buttons{
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 20px 40px;
   height: 100%;
-  width: 50%;
+  width: 30%;
   font-size: 18px;
   font-weight: 700;
 }
 .nav-buttons a{
   text-decoration: none;
 }
+/*guest and user navbar styles*/
 #guestNav{
   width: 60%;
   display: flex;
@@ -129,6 +162,47 @@ body{
   display: none;
   justify-content: flex-end;
 }
+/*sell button styles*/
+.sell-button{
+  display: inline-block;
+  background-color: #684F36;
+  color: #EDE6D9;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid #EDE6D9;
+  padding: 10px 20px;
+  width: 100%;
+  flex-shrink: 1;
+  transition: all 0.3s ease-in-out;
+}
+.sell-button:hover{
+  background-color: #EDE6D9;
+  color: #684F36;
+  border: 2px solid #684F36;
+}
+/*guest navbar styles*/
+.auth-button{
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  background: none;
+  color: #EDE6D9;
+  border: none;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+.nav-buttons .nav-icon{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 26px;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+/*user profile dropdown styles*/
 .profile-container{
   position: relative;
   display: flex;
@@ -158,73 +232,22 @@ body{
   background-color: rgba(95, 74, 52, 0.1);
   cursor: pointer;
 }
-.user-dropdown #logoutButton{
+.user-dropdown a, .user-dropdown #logoutButton{
   text-decoration: none;
   color: #342519;
   font-size:16px;
   font-weight: 400;
   display: block;
 }
-.sell-button{
-  display: inline-block;
-  background-color: #684F36;
-  color: #EDE6D9;
-  font-weight: 500;
-  border: 1px solid #EDE6D9;
-  padding: 12px 20px;
-  transition: all 0.3s ease-in-out;
-}
-.sell-button:hover{
-  background-color: #EDE6D9;
-  color: #684F36;
-  border: 2px solid #684F36;
-}
-.auth-button{
-  text-decoration: none;
-  font-weight: 500;
-  background: none;
-  color: #EDE6D9;
-  border: none;
-  transition: transform 0.2s ease;
-  cursor: pointer;
-}
-.nav-buttons .nav-icon{
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 40px;
-  transition: transform 0.2s ease;
-  cursor: pointer;
-}
 .nav-buttons .nav-icon img, .profile-container img{
-  width: 60%;
+  width: 100%;
   height: auto;
   object-fit: contain;
 }
 .nav-buttons .nav-icon:hover, .auth-button:hover{
   transform: scale(1.1);
 }
-.suggestions-list{
-  position: absolute;
-  background-color: #ede3d9d9;
-  max-height: 200px;
-  overflow-y: auto;
-  top: 100%;
-  width: 96%;
-  z-index: 100;
-  border-radius: 30px;
-}
-.suggestions-list li{
-  padding: 16px 20px;
-  cursor: pointer;
-  list-style: none;
-}
-.suggestions-list li:hover{
-  background-color: #684F3635;
-  color: #342519;
-}
+/*navbar categories styles*/
 .nav-categories{
   display: flex;
   justify-content: flex-start;
@@ -271,7 +294,7 @@ body{
   height: auto;
   display: inline-block;
 }
-/*dropdown styles*/
+/*navbar categories dropdown styles*/
 .dropdown-menu{
   position: absolute;
   top: 100%;
@@ -833,9 +856,9 @@ to { opacity: 0; transform: translateX(30px); }
   justify-content: space-between;
   background: url('../images/hero/hero-image1.png') no-repeat center center;
   background-size: cover;
-  width: 100%;
-  height: 80vh; /*full viewport height*/
   color: #FFFFFF;
+  min-width: 100%;
+  height: 80vh;
 }
 .hero-text{
   position: absolute;
@@ -852,6 +875,7 @@ to { opacity: 0; transform: translateX(30px); }
   font-size: 24px;
   margin-bottom: 50px;
 }
+/*transform your space button styles*/
 .hero-button{
   padding: 14px 26px;
   font-size: 14px;
@@ -869,6 +893,7 @@ to { opacity: 0; transform: translateX(30px); }
   border: 1px solid #FFFFFF;
   color: #FFFFFF;
 }
+/*hero prev and next buttons styles*/
 .prev-button, .next-button{
   position: absolute;
   top: 50%;
@@ -904,6 +929,7 @@ to { opacity: 0; transform: translateX(30px); }
   font-size: 44px;
   font-weight: 600;
 }
+/*category grid styles*/
 .category-grid{
   display: flex;
   flex-direction: row;
@@ -985,6 +1011,7 @@ to { opacity: 0; transform: translateX(30px); }
   font-size: 20px;
   margin-top: 10px;
 }
+/*countdown timer styles*/
 .countdown{
   width: 60%;
   height: 50%;
@@ -1074,6 +1101,7 @@ to { opacity: 0; transform: translateX(30px); }
   border: 1px solid #FFFFFF;
   color:#FFFFFF;
 }
+/*how it works section styles*/
 .how-it-works{
   margin-top: 120px;
   display: flex;
@@ -1222,12 +1250,14 @@ to { opacity: 0; transform: translateX(30px); }
   flex-direction: column;
   gap: 20px;
 }
+/*breadcrumb navigation styles*/
 #breadcrumbNavigation, #breadcrumbNavigation a{
   font-size: 18px;
   font-weight: 500;
   color: #342519;
   text-decoration: none;
 }
+/*product gallery styles*/
 .product-gallery{
   display: flex;
   flex-direction: row-reverse;
@@ -1255,6 +1285,7 @@ to { opacity: 0; transform: translateX(30px); }
 .secondary-images img:hover{
   border: 2px solid #684F36;
 }
+/*product details styles*/
 .product-details{
   flex: 1;
   padding-left: 40px;
@@ -1328,6 +1359,7 @@ to { opacity: 0; transform: translateX(30px); }
   max-height: 20px;
   width: auto;
 }
+/*seller profile section styles*/
 .seller-profile{
   display: flex;
   flex-direction: column;
@@ -1389,6 +1421,7 @@ to { opacity: 0; transform: translateX(30px); }
   background-color: #5A4228;
   color: #FFFFFF;
 }
+/*add to cart button styles*/
 #addToCart{
   display: block;
   width: 100%;
@@ -1406,6 +1439,7 @@ to { opacity: 0; transform: translateX(30px); }
 #addToCart:hover{
   transform: scale(1.01);
 }
+/*reviews section styles*/
 .seller-reviews{
   display: flex;
   flex-direction: column;
@@ -1439,6 +1473,7 @@ to { opacity: 0; transform: translateX(30px); }
   color: #FFFFFF;
   padding: 5px 20px;
 }
+/*review styles*/
 .review{
   display: flex;
   flex-direction: row;
@@ -1469,6 +1504,7 @@ to { opacity: 0; transform: translateX(30px); }
   font-size: 16px;
   font-weight: 500;
 }
+/*similar listings section styles*/
 .similar-listings{
   margin-top: 40px;
   padding: 40px;
@@ -1487,6 +1523,7 @@ to { opacity: 0; transform: translateX(30px); }
 .listings-container::-webkit-scrollbar{
   display: none;
 }
+/*listing card styles*/
 .listing-card{
   min-width: 400px;
   height: auto;
@@ -1515,13 +1552,15 @@ to { opacity: 0; transform: translateX(30px); }
 .listing{
   display: flex;
   flex-direction: column;
-  padding: 20px 40px;
+  padding: 0 40px 20px;
   text-align: left;
 }
-.lisiting h1{
+.listing h1{
   font-size: 40px;
   font-weight: 600;
+  margin-top: 80px;
 }
+/*progress bar styles*/
 .progress-bar{
   display: flex;
   justify-content: space-between;
@@ -1529,6 +1568,10 @@ to { opacity: 0; transform: translateX(30px); }
   font-size: 16px;
   font-weight: 500;
   padding: 10px 0;
+  background: #FFFFFF;
+  position: fixed;
+  left: 0;
+  right: 0;
 }
 .progress-bar .step{
   flex: 1;
@@ -1556,14 +1599,14 @@ to { opacity: 0; transform: translateX(30px); }
   align-items: flex-start;
   justify-content: center;
 }
+/*image upload section styles*/
 .upload-images{
   display: flex;
   flex-direction: column;
   margin-top: 10px;
   padding: 20px;
   border-radius: 10px;
-  width: 600px;
-  height: auto;
+  width: 100%;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Added proper box-shadow */
 }
 .upload-images input[type="file"] {
@@ -1591,6 +1634,7 @@ to { opacity: 0; transform: translateX(30px); }
   width: 60px;
   height: auto;
 }
+/*image preview styles*/
 #imagePreview{
   display: flex;
   flex-direction: row;
@@ -1616,7 +1660,7 @@ to { opacity: 0; transform: translateX(30px); }
 }
 .image-box button{
   position: absolute;
-    top: -6px;
+  top: -6px;
   background: #FF0000;
   color: #FFFFFF;
   border: none;
@@ -1627,6 +1671,7 @@ to { opacity: 0; transform: translateX(30px); }
 .listing-right{
   flex: 1;
 }
+/*listing input fields styles*/
 .listing-section{
   margin-bottom: 40px;
 }
@@ -2819,6 +2864,7 @@ to {
 }
 
 /*GAME.HTML STYLES*/
+/*game page hero section styles*/
 .video-container{
   display: flex;
   justify-content: center;
@@ -2857,6 +2903,7 @@ to {
   font-size: 56px;
   text-shadow: rgba(95, 74, 52, 0.3) 2px 2px 5px;
 }
+/*steps section styles*/
 .step-container{
   display: flex;
   flex-direction: row;
@@ -2903,6 +2950,7 @@ to {
   height: auto;
   object-fit: fill;
 }
+/*start playing button styles*/
 #start-playing{
   display: block;
   padding: 10px 30px;
@@ -2930,6 +2978,7 @@ to {
   font-size: 28px;
   font-weight: 600;
 }
+/*voucher section styles*/
 .vouchers-container{
   display: flex;
   flex-direction: column;
@@ -2969,6 +3018,7 @@ to {
 .voucher button:hover{
   background-color: #5A4228;
 }
+/*leaderboard section styles*/
 .leaderboard-container{
   display: flex;
   flex-direction: column;
@@ -2976,6 +3026,11 @@ to {
   gap: 20px;
   width: 40%;
 }
+.leaderboard-container p{
+  font-size: 18px;
+  font-weight: 500;
+}
+/*leaderboard table styles*/
 .leaderboard-container table{
   width: 100%;
 }
@@ -3007,12 +3062,12 @@ thead th{
   font-weight: 400;
   margin-bottom: 30px;
 }
-#dino-game {
+#dino-game{
   position: relative;
   padding: 20px;
   width: 100%;
 }
-#board {
+#board{
   background-color: #FFFFFF;
   background-size: cover;
   background-position: center;
@@ -3406,29 +3461,21 @@ thead th{
   .proflie-container{
     gap: 10px;
   }
-  .nav-buttons{
-    padding-left: 0;
-    width: 40%;
-  }
   .nav-buttons .nav-icon img, .profile-container img{
     width: 24px;
   }
   .sell-button{
     display: none;
   }
-  #search-container{
-    padding: 30px 0;
-  }
   #search-bar{
    padding: 5px 15px 5px 45px;
   }
   #guestNav{
-    width: 100%;
     font-size: 16px;
-    gap: 14px;
+    width: 100%;
   }
   #userNav{
-    width: 40%;
+    width: 100%;
   }
   .nav-categories{
     display: none;
@@ -3460,6 +3507,15 @@ thead th{
   .nav-links li a img, .dropdown-menu{
     display: none;
   }
+  .dropdown:hover .dropdown-menu{
+    display: none;
+  }
+  .dropdown:hover{
+    background-color: #684F3635;
+  }
+  .nav-links .link:hover::after{
+    display: none;
+  }
   /*footer section styles*/
   .footer-left p{
     font-size: 18px;
@@ -3477,7 +3533,8 @@ thead th{
   }
   /*hero section styles*/
   .hero{
-    height: 30vh;
+    width: 100%;
+    height: 50vh;
   }
   .hero-text h1{
     font-size: 50px;
@@ -3554,10 +3611,7 @@ thead th{
 
   /*LISTING.HTML STYLES*/
   .listing-form{
-    gap: 10px;
-  }
-  .upload-images{
-    max-width: 400px;
+    gap: 40px;
   }
 
   /*GAME.HTML STYLES*/
@@ -3596,7 +3650,6 @@ thead th{
     height: 58px;
   }
   .search-container{
-    width: 50%;
     padding: 0;
   }
   #search-bar{
@@ -3607,16 +3660,12 @@ thead th{
   }
   .nav-buttons{
     padding-right: 20px;
-    width: 30%;
   }
   #guestNav{
     gap: 20px;
   }
-  #userNav{
-    width: 30%;
-  }
   .nav-categories{
-    top: 238px;
+    top: 236px;
   }
   .nav-links li a{
     font-size: 16px;
@@ -3680,17 +3729,30 @@ thead th{
   .top-categories h2{
     font-size: 32px;
   }
+  .category-grid{
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    gap: 30px;
+    padding-bottom: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+  }
+  .category{
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
   .limited-offers-header{
     padding-left: 10px;
   }
   .limited-offers-header h2{
-    font-size: 40px;
+    font-size: 36px;
   }
   .limited-offers-header p{
-    font-size: 18px;
+    font-size: 16px;
   }
   .countdown{
-    width: 100%;
+    width: 80%;
   }
   .time-box{
     padding:8px 14px;
@@ -3700,14 +3762,14 @@ thead th{
     padding: 20px 10px;
   }
   .list-browse-listings h3{
-    font-size: 36px;
+    font-size: 34px;
   }
   .list-browse-listings p{
-    font-size: 18px;
+    font-size: 16px;
   }
   .list-browse-listings button{
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 8px 16px;
+    font-size: 14px;
   }
   .how-it-works{
     padding: 40px 20px;
@@ -3717,6 +3779,9 @@ thead th{
   }
   .how-it-works p{
     font-size: 18px;
+  }
+  .how-it-works .steps{
+    flex-direction: column;
   }
   .how-it-works .step img{
     width: 60px;
@@ -3786,8 +3851,10 @@ thead th{
   .listing-form{
     flex-direction: column;
   }
+  .listing-left{
+    width: 100%;
+  }
   .upload-images{
-    max-width: 100%;
     margin-bottom: 10px;
   }
 
@@ -3798,6 +3865,8 @@ thead th{
   .step-container{
     padding: 20px 20px 20px 40px;
     height: 110px;
+    width: 100%;
+    margin-bottom: 16px;
   }
   #step-text{
     font-size: 16px;
@@ -3810,7 +3879,8 @@ thead th{
     font-size: 14px;
   }
   #start-playing{
-    font-size: 16px;
+    font-size: 14px;
+    padding: 8px 16px;
   }
   .game-section{
     flex-direction: column;
@@ -3852,9 +3922,6 @@ thead th{
   .search-container{
     display: none;
   }
-  .nav-buttons{
-    width: 80%;
-  }
   .auth-button{
     font-size: 14px;
   }
@@ -3864,11 +3931,8 @@ thead th{
   #guestNav{
     gap: 10px;
   }
-  #userNav{
-    width: 60%;
-  }
   .nav-categories{
-    top: 216px;
+    top: 208px;
   }
   .nav-links li a{
     font-size: 12px;
@@ -3924,13 +3988,13 @@ thead th{
   }
   /*hero section styles*/
   .hero{
-    height: 20vh;
+    height: 28vh;
   }
   .hero-text h1{
-    font-size: 32px;
+    font-size: 28px;
   }
   .hero-text p{
-    font-size: 16px;
+    font-size: 14px;
   }
   .hero-button{
     padding: 6px 12px;
@@ -3945,12 +4009,7 @@ thead th{
     max-width: 480px;
   }
   .category-grid{
-    overflow-y: hidden;
-    flex-wrap: nowrap;
-    gap: 10px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
+    gap: 20px;
   }
   .category{
     flex: 0 0 auto;
@@ -3963,7 +4022,7 @@ thead th{
     height: 160px;
   }
   .limited-offers-header h2{
-    font-size: 26px;
+    font-size: 24px;
     width: 50%;
   }
   .limited-offers-header p{
@@ -3973,12 +4032,12 @@ thead th{
     font-size: 16px;
   }
   .countdown{
-    height: 30%;
+    height: 40%;
     width: 100%;
   }
   .time-box{
     padding: 6px 10px;
-    font-size: 8px;
+    font-size: 10px;
   }
   .list-browse-listings{
     flex-direction: column;
@@ -4006,9 +4065,6 @@ thead th{
   }
   .how-it-works p{
     font-size: 12px;
-  }
-  .how-it-works .steps{
-    flex-direction: column;
   }
   .how-it-works .step h4{
     font-size: 16px;

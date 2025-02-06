@@ -138,7 +138,6 @@
     <main class="main-content">
         <!--listing section-->
         <section class="listing">
-            <h1>MAKE A LISTING</h1>
             <!--progress bar section-->
             <div class="progress-bar">
                 <div class="step active">Upload images</div>
@@ -147,20 +146,19 @@
                 <div class="step">Item Details</div>
                 <div class="step">Set price</div>
             </div>
+            <h1>MAKE A LISTING</h1>
             <!--listing form section-->
             <form class="listing-form" id="listingForm">
                 <div class="listing-left">
                     <!--1. Upload Images-->
-                    <div class="section">
-                        <h2>1. Upload images</h2>
-                        <div class="upload-images">
-                            <div class="upload-icon">
-                                <img src="../images/icons/upload-icon.png" alt="upload icon">
-                            </div>
-                            <label for="imageUpload">Upload images</label>
-                            <input type="file" id="imageUpload" multiple accept="image/*">
-                            <div id="imagePreview">
-                            </div>
+                    <h2>1. Upload images</h2>
+                    <div class="upload-images">
+                        <div class="upload-icon">
+                            <img src="../images/icons/upload-icon.png" alt="upload icon">
+                        </div>
+                        <label for="imageUpload">Upload images</label>
+                        <input type="file" id="imageUpload" multiple accept="image/*">
+                        <div id="imagePreview">
                         </div>
                     </div>
                 </div>
@@ -284,7 +282,9 @@
         </a>
     </div>
     <!--registration popup section-->
-    <div id="popupOverlay" class="popup-overlay">s</div>
+    <div id="popupOverlay" class="popup-overlay"></div>
+    <!--loading lottie animation-->
+    <dotlottie-player id="signInAnimation" src="https://lottie.host/e438b05a-929d-4dc4-bf5b-ec9acabefed7/GrnJKaAVK8.lottie" background="transparent" speed="1" style="width: 300px; height: 300px; display: none;" loop autoplay></dotlottie-player>
     <div id="registrationPopup" class="popup">
         <div class="popup-container">
             <div class="popup-logo">
@@ -329,6 +329,9 @@
             </div>
         </div>
     </div>
+    <!--external libaries-->
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <!--custom scripts-->
     <script src="../js/registration.js"></script>
     <script src="../js/products.js"></script>
     <script src="../js/listing.js"></script>

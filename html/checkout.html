@@ -372,7 +372,9 @@
         </footer>
     </main>
     <!--registration popup section-->
-    <div id="popupOverlay" class="popup-overlay">s</div>
+    <div id="popupOverlay" class="popup-overlay"></div>
+    <!--loading lottie animation-->
+    <dotlottie-player id="signInAnimation" src="https://lottie.host/e438b05a-929d-4dc4-bf5b-ec9acabefed7/GrnJKaAVK8.lottie" background="transparent" speed="1" style="width: 300px; height: 300px; display: none;" loop autoplay></dotlottie-player>
     <div id="registrationPopup" class="popup">
         <div class="popup-container">
             <div class="popup-logo">
@@ -419,8 +421,8 @@
     </div>
     <!--external libraries-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.14/lottie.min.js"></script>
-    
-    <!--custom javascript-->
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <!--custom scripts-->
     <script src="../js/registration.js"></script>
     <script src="../js/checkout.js"></script>
     <script src="../js/products.js"></script>

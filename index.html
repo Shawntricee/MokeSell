@@ -37,6 +37,7 @@
                     <a href="html/listing.html">
                         <button class="sell-button">Sell an item</button>
                     </a>
+                    <!--guest navbar-->
                     <div id="guestNav">
                         <button class="auth-button" id="navSignIn">Sign in</button>
                         <button class="auth-button" id="navSignUp">Sign up</button>
@@ -44,6 +45,7 @@
                             <img src="images/icons/cart-icon.png" alt="cart icon">
                         </div>
                     </div>
+                    <!--user navbar-->
                     <div id="userNav">
                         <div class="profile-container">
                             <a href="#" class="nav-icon">
@@ -328,7 +330,10 @@
         </a>
     </div>
     <!--registration popup section-->
-    <div id="popupOverlay" class="popup-overlay">s</div>
+    <div id="popupOverlay" class="popup-overlay"></div>
+    <!--loading lottie animation-->
+    <dotlottie-player id="signInAnimation" src="https://lottie.host/e438b05a-929d-4dc4-bf5b-ec9acabefed7/GrnJKaAVK8.lottie" background="transparent" speed="1" style="width: 300px; height: 300px; display: none;" loop autoplay></dotlottie-player>
+    <!--registration popup-->
     <div id="registrationPopup" class="popup">
         <div class="popup-container">
             <div class="popup-logo">
@@ -373,6 +378,9 @@
             </div>
         </div>
     </div>
+    <!--external libraries-->
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <!--custom scripts-->
     <script src="js/script.js"></script>
     <script src="js/registration.js"></script>
     <script src="js/products.js"></script>

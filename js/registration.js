@@ -17,15 +17,36 @@ class Registration {
             const closeButton = document.querySelector('.close-button');
             const popupOverlay = document.getElementById('popupOverlay');
             
+            // Select the Lottie animation player
+            const animationPlayer = document.getElementById('animationPlayer');
+
             if (navSignUp) navSignUp.addEventListener("click", (e) => this.openPopup(e, "signup"));
             if (navSignIn) navSignIn.addEventListener("click", (e) => this.openPopup(e, "signin"));
-            if (signupButton) signupButton.addEventListener("click", (e) => this.registerUser(e));
-            if (signinButton) signinButton.addEventListener("click", (e) => this.loginUser(e));
+
+            if (signupButton) signupButton.addEventListener("click", (e) => {
+                this.registerUser(e);
+            });
+            if (signinButton) signinButton.addEventListener("click", (e) => {
+                this.loginUser(e);
+            });
+
             if (signupTab) signupTab.addEventListener("click", () => this.switchForm("signup"));
             if (signinTab) signinTab.addEventListener("click", () => this.switchForm("signin"));
+
             if (closeButton) closeButton.addEventListener("click", () => this.closePopup());
             if (popupOverlay) popupOverlay.addEventListener("click", () => this.closePopup());
         });
+    }
+
+    // Function to display the Lottie animation
+    showAnimation() {
+        const lottiePlayer = document.getElementById('signInAnimation'); 
+        lottiePlayer.style.display = 'block'; // Show the Lottie animation
+        popupOverlay.style.display = 'block'; // Show the overlay
+        // Optionally, hide it after a certain amount of time or when the sign-in/sign-up process finishes
+        setTimeout(() => {
+            lottiePlayer.style.display = 'none'; // Hide animation after some time (adjust as needed)
+        }, 4000); // 7 seconds, adjust as per your animation duration or process
     }
 
     showPopupAfterDelay() {
@@ -71,7 +92,6 @@ class Registration {
             .then(users => {
                 const user = users.find(u => u.username === username && u.password === password);
                 if (user) {
-                    alert("Login Successful!");
                     sessionStorage.setItem("userLoggedIn", "true");
                     sessionStorage.setItem("currentUsername", username);
                     sessionStorage.setItem("userEmail", user.email);
@@ -80,6 +100,8 @@ class Registration {
                     
                     this.updateNavBar();
                     this.closePopup();
+
+                    this.showAnimation();
                 } else {
                     alert("Invalid username or password.");
                 }
@@ -109,8 +131,11 @@ class Registration {
     }
 
     logoutUser() {
-        sessionStorage.clear();
-        location.reload();
+        this.showAnimation(); // Show animation first
+        sessionStorage.clear(); // Clear sessionStorage
+        setTimeout(() => {
+            location.reload(); // Reload the page after the animation
+        }, 4000); // Delay the page reload for 5 seconds (adjust to match your animation duration)
     }
 
     switchForm(form) {
@@ -126,7 +151,7 @@ class Registration {
         popup.classList.remove("show");
         overlay.classList.remove("show");
         sessionStorage.setItem("popupClosed", "true");
-        setTimeout(() => { overlay.style.display = "none"; }, 300);
+        setTimeout(() => { overlay.style.display = "none"; }, 4000);
     }
 
     openPopup(e, formType) {
