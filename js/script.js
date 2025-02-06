@@ -159,7 +159,7 @@ class SearchFeature {
         const isIndexPage = window.location.pathname.endsWith("index.html") || window.location.pathname === "/";
 
         // Set the correct JSON file path
-        const jsonPath = isIndexPage ? "/json/products.json" : "../json/products.json";
+        const jsonPath = isIndexPage ? "json/products.json" : "../json/products.json";
 
         fetch(jsonPath)
             .then(response => response.json())

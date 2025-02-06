@@ -249,7 +249,7 @@ class Product {
                         imgElement.addEventListener("mouseout", () => imgElement.src = firstImage);
 
                         productCard.addEventListener("click", () => {
-                            window.location.href = `/product.html?id=${product._id}`;
+                            window.location.href = `product-details.html?id=${product._id}`;
                         });
 
                         similarListingsContainer.appendChild(productCard);
