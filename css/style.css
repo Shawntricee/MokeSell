@@ -3426,42 +3426,6 @@ thead th{
 .hotspot-dot {
     animation: pulse 2s infinite;
 }
-/*responsive design*/
-@media (max-width: 1024px) {
-    .workspace-grid,
-    .homes-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .look-grid,
-    .series-grid,
-    .guide-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-@media (max-width: 768px) {
-    .lamps-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .benefits-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-}
-@media (max-width: 480px) {
-    .workspace-grid,
-    .look-grid,
-    .homes-grid,
-    .series-grid,
-    .lamps-grid,
-    .guide-grid {
-        grid-template-columns: 1fr;
-    }
-    .showroom-page section {
-        margin-bottom: 40px;
-    }
-}
 
 
 /*RESPONSIVE DESIGN*/ /*NOTE: can u consolidate all ur responsive media query here THANKS (one spacing between each html page, no spacing between each style target)*/
@@ -3671,6 +3635,29 @@ thead th{
   .checkout-sidebar {
     width: 100%;
   }
+
+  /*SHOWROOM.HTML STYLES*/
+  .showroom-hero-section h1 {
+        font-size: 40px;
+        margin-top: 120px;
+    }
+    .showroom-hero-image {
+        height: 400px;
+    }
+    /*featured workspaces grid*/
+    .workspace-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    /*series section*/
+    .series-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    /*real homes section*/
+    .home-image {
+        width: 40%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -3985,6 +3972,61 @@ thead th{
   .quantity-control {
     justify-content: center;
   }
+
+  /*SHOWROOM.HTML STYLES*/
+  /*showroom hero section*/
+    .showroom-hero-section h1 {
+        font-size: 32px;
+        margin-top: 100px;
+    }
+    .showroom-hero-section p {
+        font-size: 16px;
+    }
+    .showroom-hero-image {
+        height: 300px;
+    }
+    /*hotspots*/
+    .hotspot-dot {
+        width: 20px;
+        height: 20px;
+    }
+    .hotspot-content {
+        padding: 10px;
+        min-width: 150px;
+    }
+    /*workspace grid*/
+    .workspace-grid {
+        grid-template-columns: 1fr;
+    }
+    /*series section*/
+    .series-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    /*redesigning section*/
+    .redesigning-section {
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+    .redesigning-content {
+        padding-right: 0;
+        text-align: center;
+    }
+    .redesigning-content h2 {
+        font-size: 28px;
+    }
+    .redesigning-content p {
+        font-size: 16px;
+    }
+    /*real homes section*/
+    .homes-container {
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+    }
+    .home-image {
+        width: 80%;
+        min-width: 250px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -4227,8 +4269,8 @@ thead th{
       height: 80px;
   }
 
-   /*CONTACT.HTML STYLES*/
-   .reach-team {
+  /*CONTACT.HTML STYLES*/
+  .reach-team {
     padding: 100px 20px 40px;
   }
   .office {
@@ -4268,4 +4310,55 @@ thead th{
   .delivery-note img {
     margin: 0 auto 10px;
   }
+
+  /*SHOWROOM.HTML STYLES*/
+  /*showroom hero section*/
+    .showroom-hero-section h1 {
+        font-size: 24px;
+        margin-top: 80px;
+    }
+    .showroom-hero-section p {
+        font-size: 14px;
+    }
+    .showroom-hero-image {
+        height: 250px;
+    }
+    /*hotspots*/
+    .hotspot-dot {
+        width: 16px;
+        height: 16px;
+    }
+    .hotspot-content {
+        padding: 8px;
+        min-width: 120px;
+        font-size: 12px;
+    }
+    /*benefits section*/
+    .benefits-container {
+        flex-direction: column;
+        padding: 20px;
+    }
+    .benefit-divider {
+        display: none;
+    }
+    .benefit-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px 0;
+    }
+    .benefit-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+    }
+    /*view more button*/
+    .view-more-btn {
+        padding: 8px 24px;
+        font-size: 14px;
+    }
+    /*series section button*/
+    .series-btn {
+        font-size: 14px;
+        padding: 6px 16px;
+    }
 }
