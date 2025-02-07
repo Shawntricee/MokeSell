@@ -135,13 +135,16 @@
     </header>
     <main>
         <div class="confirmation-container">
-            <!--lottie animation container-->
-            <div class="confirmation-image" id="successAnimation">image</div>
+            <div class="confirmation-image" id="successAnimation"></div>
+            <div class="success-icon-container">
+                <div class="success-icon-bg"></div>
+                <img src="../images/icons/order-confirmation-icon.png" alt="Success" class="success-icon">
+                <div id="successAnimation"></div>
+            </div>
 
             <!--thank you message-->
             <h1 class="thank-you-title">Thank you for your purchase!</h1>
-            <p class="confirmation-message">You will receive an confirmation letter through your email</p>
-
+            <p class="confirmation-message">You will receive a confirmation letter through your email</p>
             <!--order details card-->
             <div class="order-details-card">
                 <!--order information-->
@@ -150,63 +153,43 @@
                         <img src="../images/icons/calendar-icon.png" alt="Date">
                         Date
                     </div>
-                    <div class="detail-value" data-field="date">2/2/2025</div>
+                    <div class="detail-value" data-field="date"></div>
                 </div>
-
                 <div class="detail-row">
                     <div class="detail-label">
                         <img src="../images/icons/user-icon.png" alt="Customer">
                         Customer
                     </div>
-                    <div class="detail-value" data-field="customer">Shawntrice Yip</div>
+                    <div class="detail-value" data-field="customer"></div>
                 </div>
-
                 <div class="detail-row">
                     <div class="detail-label">
                         <img src="../images/icons/payment-icon.png" alt="Payment">
                         Payment Method
                     </div>
-                    <div class="payment-image">image</div>
+                    <div class="payment-image">
+                        <img src="../images/icons/visa-icon.png" alt="Visa">
+                    </div>
                 </div>
-
                 <div class="detail-row">
                     <div class="detail-label">
                         <img src="../images/icons/order-icon.png" alt="Order">
                         Order Number
                     </div>
-                    <div class="detail-value" data-field="orderNumber">202581596</div>
+                    <div class="detail-value" data-field="orderNumber"></div>
                 </div>
-
                 <div class="detail-row">
                     <div class="detail-label">
                         <img src="../images/icons/total-icon.png" alt="Total">
                         Total
                     </div>
-                    <div class="detail-value" data-field="total">$3,699</div>
+                    <div class="detail-value" data-field="total"></div>
                 </div>
-
                 <!--order line items-->
                 <div class="order-line">
-                    <div class="product-card">
-                        <div class="product-image">image</div>
-                        <div class="product-details">
-                            <div class="product-title">Sven 88" Tufted Leather Sofa - Charme Tan</div>
-                            <span class="product-size">XL</span>
-                        </div>
-                        <div class="product-price">$1,699</div>
-                    </div>
-
-                    <div class="product-card">
-                        <div class="product-image">image</div>
-                        <div class="product-details">
-                            <div class="product-title">Sven 88" Tufted Leather Sofa - Charme Tan</div>
-                            <span class="product-size">XL</span>
-                        </div>
-                        <div class="product-price">$1,699</div>
-                    </div>
+                    <!--items will be populated dynamically-->
                 </div>
             </div>
-
             <!--continue shopping button-->
             <a href="../index.html" class="continue-shopping">CONTINUE SHOPPING</a>
         </div>
