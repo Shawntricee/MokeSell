@@ -1,186 +1,210 @@
-const API_ENDPOINT = ''; //API endpoint
-
 class ShowroomManager {
     constructor() {
-        this.initializeHotspots();
+        this.initializeAnimations();
         this.initializeImageGallery();
-        this.initializeShopButtons();
+        this.initializeScrollAnimations();
         this.initializeLazyLoading();
+        this.initializeInteractiveElements();
     }
 
-    initializeHotspots() {
-        const hotspots = document.querySelectorAll('.hotspot');
-        
-        hotspots.forEach(hotspot => {
-            //position the content based on screen edges
-            hotspot.addEventListener('mouseenter', () => {
-                const content = hotspot.querySelector('.hotspot-content');
-                const rect = content.getBoundingClientRect();
-                const viewport = {
-                    width: window.innerWidth,
-                    height: window.innerHeight
-                };
+    //advanced animations for various sections
+    initializeAnimations() {
+        //GSAP or Web Animations API for smooth, professional animations
+        this.animateHeroSection();
+        this.animateFeaturedWorkspaces();
+        this.animateRealHomes();
+        this.animateSeries();
+    }
 
-                //adjust position if content goes off screen
-                if (rect.right > viewport.width) {
-                    content.style.left = 'auto';
-                    content.style.right = '0';
-                }
-                if (rect.bottom > viewport.height) {
-                    content.style.top = 'auto';
-                    content.style.bottom = '0';
-                }
-            });
+    animateHeroSection() {
+        const heroImage = document.querySelector('.showroom-hero-image');
+        const heroText = document.querySelector('.showroom-hero-section h1');
+        const heroSubtext = document.querySelector('.showroom-hero-section p');
 
-            //load product data when hovering
-            hotspot.addEventListener('mouseenter', async () => {
-                const productId = hotspot.dataset.product;
-                if (!hotspot.dataset.loaded) {
-                    try {
-                        await this.loadProductData(hotspot, productId);
-                        hotspot.dataset.loaded = 'true';
-                    } catch (error) {
-                        console.error('Error loading product data:', error);
+        //staggered entrance animation
+        gsap.fromTo(heroImage, 
+            { opacity: 0, y: 50 }, 
+            { 
+                opacity: 1, 
+                y: 0, 
+                duration: 1, 
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: heroImage,
+                    start: "top 80%"
+                }
+            }
+        );
+
+        gsap.fromTo([heroText, heroSubtext], 
+            { opacity: 0, x: -50 }, 
+            { 
+                opacity: 1, 
+                x: 0, 
+                stagger: 0.3,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: heroText,
+                    start: "top 80%"
+                }
+            }
+        );
+    }
+
+    animateFeaturedWorkspaces() {
+        const workspaceCards = document.querySelectorAll('.workspace-card');
+        workspaceCards.forEach((card, index) => {
+            gsap.fromTo(card, 
+                { opacity: 0, scale: 0.8 }, 
+                { 
+                    opacity: 1, 
+                    scale: 1, 
+                    duration: 0.8,
+                    delay: index * 0.2,
+                    ease: "back.out(1.7)",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 80%"
                     }
                 }
-            });
+            );
         });
     }
 
-    async loadProductData(hotspot, productId) {
-        try {
-            const response = await fetch(`${API_ENDPOINT}/products/${productId}`);
-            if (!response.ok) throw new Error('Failed to load product data');
-            
-            const data = await response.json();
-            const content = hotspot.querySelector('.hotspot-content');
-            
-            content.innerHTML = `
-                <img src="${data.image}" alt="${data.name}">
-                <div class="product-info">
-                    <h3>${data.name}</h3>
-                    <p>$${data.price}</p>
-                    <button class="shop-button">Shop now</button>
-                </div>
-            `;
-        } catch (error) {
-            console.error('Error:', error);
-        }
+    animateRealHomes() {
+        const homesContainer = document.querySelector('.homes-container');
+        gsap.fromTo(homesContainer, 
+            { opacity: 0, y: 50 }, 
+            { 
+                opacity: 1, 
+                y: 0, 
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: homesContainer,
+                    start: "top 80%"
+                }
+            }
+        );
     }
 
+    animateSeries() {
+        const seriesColumns = document.querySelectorAll('.series-column');
+        seriesColumns.forEach((column, index) => {
+            gsap.fromTo(column, 
+                { opacity: 0, x: -50 }, 
+                { 
+                    opacity: 1, 
+                    x: 0, 
+                    duration: 0.8,
+                    delay: index * 0.3,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: column,
+                        start: "top 80%"
+                    }
+                }
+            );
+        });
+    }
+
+    //scroll-triggered animations
+    initializeScrollAnimations() {
+        //use ScrollTrigger for revealing elements
+        ScrollTrigger.batch('.fade-in', {
+            onEnter: batch => gsap.fromTo(batch, 
+                { opacity: 0, y: 50 }, 
+                { opacity: 1, y: 0, stagger: 0.15, duration: 0.8 }
+            ),
+            start: "top 90%"
+        });
+    }
+
+    //enhanced image gallery with smooth transitions
     initializeImageGallery() {
         const galleryImages = document.querySelectorAll('.home-image img');
-        
-        galleryImages.forEach(img => {
-            img.addEventListener('click', () => {
-                this.openGalleryModal(img.src);
+        const prevButton = document.querySelector('.homes-nav.prev');
+        const nextButton = document.querySelector('.homes-nav.next');
+        const container = document.querySelector('.homes-container');
+        let currentIndex = 0;
+        const navigateGallery = (direction) => {
+            const imageWidth = galleryImages[0].offsetWidth + 20; //include gap
+            currentIndex = direction === 'next' 
+                ? Math.min(currentIndex + 1, galleryImages.length - 4)
+                : Math.max(currentIndex - 1, 0);
+            gsap.to(container, {
+                x: -currentIndex * imageWidth,
+                duration: 0.5,
+                ease: "power2.inOut"
             });
-        });
+        };
+        prevButton.addEventListener('click', () => navigateGallery('prev'));
+        nextButton.addEventListener('click', () => navigateGallery('next'));
     }
 
-    openGalleryModal(imageSrc) {
-        const modal = document.createElement('div');
-        modal.className = 'gallery-modal';
-        modal.innerHTML = `
-            <div class="modal-content">
-                <button class="close-modal">×</button>
-                <img src="${imageSrc}" alt="Gallery image">
-                <div class="modal-products">
-                    <!-- Products in the image will be loaded here -->
-                </div>
-            </div>
-        `;
-
-        document.body.appendChild(modal);
-        this.loadModalProducts(imageSrc, modal);
-
-        //close modal on click outside or close button
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal || e.target.className === 'close-modal') {
-                modal.remove();
-            }
-        });
-    }
-
-    async loadModalProducts(imageSrc, modal) {
-        try {
-            const response = await fetch(`${API_ENDPOINT}/image-products?image=${encodeURIComponent(imageSrc)}`);
-            if (!response.ok) throw new Error('Failed to load image products');
-            
-            const products = await response.json();
-            const productsContainer = modal.querySelector('.modal-products');
-            
-            productsContainer.innerHTML = products.map(product => `
-                <div class="modal-product">
-                    <img src="${product.thumbnail}" alt="${product.name}">
-                    <div class="product-info">
-                        <h4>${product.name}</h4>
-                        <p>$${product.price}</p>
-                        <button class="shop-button" data-product-id="${product.id}">Shop now</button>
-                    </div>
-                </div>
-            `).join('');
-
-            //add click handlers for shop buttons
-            productsContainer.querySelectorAll('.shop-button').forEach(button => {
-                button.addEventListener('click', () => {
-                    window.location.href = `/product.html?id=${button.dataset.productId}`;
-                });
-            });
-        } catch (error) {
-            console.error('Error loading products:', error);
-        }
-    }
-
-    initializeShopButtons() {
-        document.querySelectorAll('.shop-button').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const card = e.target.closest('[data-product-id]');
-                if (card) {
-                    const productId = card.dataset.productId;
-                    window.location.href = `/product.html?id=${productId}`;
-                }
-            });
-        });
-    }
-
+    //advanced lazy loading with intersection observer
     initializeLazyLoading() {
-        const images = document.querySelectorAll('img[loading="lazy"]');
+        const lazyImages = document.querySelectorAll('img[data-src]');
         const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
                     img.src = img.dataset.src;
                     img.removeAttribute('data-src');
+                    //fade-in effect
+                    gsap.fromTo(img, 
+                        { opacity: 0 }, 
+                        { opacity: 1, duration: 0.5 }
+                    );
                     observer.unobserve(img);
                 }
             });
-        });
+        }, { rootMargin: "50px" });
 
-        images.forEach(img => imageObserver.observe(img));
+        lazyImages.forEach(img => imageObserver.observe(img));
+    }
+
+    //interactive element enhancements
+    initializeInteractiveElements() {
+        //hover effects for shop buttons
+        const shopButtons = document.querySelectorAll('.shop-button');
+        shopButtons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                gsap.to(button, {
+                    scale: 1.05,
+                    duration: 0.2,
+                    ease: "power1.inOut"
+                });
+            });
+            button.addEventListener('mouseleave', () => {
+                gsap.to(button, {
+                    scale: 1,
+                    duration: 0.2,
+                    ease: "power1.inOut"
+                });
+            });
+        });
     }
 }
 
-//add smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = document.querySelector(anchor.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-//initialize when DOM is loaded
+//initialize on DOM load with error handling
 document.addEventListener('DOMContentLoaded', () => {
-    new ShowroomManager();
-
-    //add CSS class for fade-in animations
-    document.querySelectorAll('.workspace-card, .look-card, .home-image').forEach(el => {
-        el.classList.add('fade-in');
-    });
+    try {
+        //dynamically load GSAP and ScrollTrigger
+        const gsapScript = document.createElement('script');
+        gsapScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js';
+        gsapScript.onload = () => {
+            const scrollTriggerScript = document.createElement('script');
+            scrollTriggerScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js';
+            scrollTriggerScript.onload = () => {
+                gsap.registerPlugin(ScrollTrigger);
+                new ShowroomManager();
+            };
+            document.head.appendChild(scrollTriggerScript);
+        };
+        document.head.appendChild(gsapScript);
+    } catch (error) {
+        console.error('Initialization failed:', error);
+    }
 });
