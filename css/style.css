@@ -1737,17 +1737,16 @@ to { opacity: 0; transform: translateX(30px); }
 /*contact cards styles*/
 .contact-cards {
   display: flex;
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
   justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
 }
 .contact-card {
   background-color: #684F36;
   color: #FFFFFF;
   padding: 40px;
   border-radius: 8px;
-  width: 400px;
+  width: 45%;
   text-align: left;
   transition: transform 0.3s ease;
 }
@@ -1781,6 +1780,11 @@ to { opacity: 0; transform: translateX(30px); }
   font-weight: 500;
   transition: opacity 0.3s ease;
 }
+.phone-link img, .live-chat-btn img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
 .phone-link:hover {
   opacity: 0.8;
 }
@@ -1795,10 +1799,6 @@ to { opacity: 0; transform: translateX(30px); }
 }
 .live-chat-btn:hover {
   background-color: #E5E5E5;
-}
-.live-chat-btn img {
-  width: 20px;
-  height: 20px;
 }
 /*office section styles*/
 .global-offices {
@@ -2145,48 +2145,6 @@ to { opacity: 0; transform: translateX(30px); }
   border-radius: 4px;
   margin-bottom: 20px;
 }
-/*responsive styles*/
-@media (max-width: 1024px) {
-.office {
-    flex-direction: column;
-}
-.office-map {
-    width: 100%;
-    order: 2;
-}
-}
-@media (max-width: 768px) {
-.contact-cards {
-    flex-direction: column;
-    align-items: center;
-}
-.contact-card {
-    width: 100%;
-    max-width: 400px;
-}
-.form-row {
-    flex-direction: column;
-}
-.regions {
-    flex-direction: column;
-    gap: 40px;
-}
-}
-@media (max-width: 480px) {
-.reach-team {
-    padding: 100px 20px 40px;
-}
-.office {
-    padding: 40px 20px;
-}
-.chat-window {
-    width: 100%;
-    height: 100%;
-    bottom: 0;
-    right: 0;
-    border-radius: 0;
-}
-}
 
 
 /*CHECKOUT.HTML STYLES*/
@@ -2460,72 +2418,6 @@ to { opacity: 0; transform: translateX(30px); }
 @keyframes fadeIn {
   from { opacity: 0; transform: translate(-50%, -20px); }
   to { opacity: 1; transform: translate(-50%, 0); }
-}
-/*responsive styles*/
-@media screen and (max-width: 1200px) {
-  .checkout-container {
-      flex-direction: column;
-  }
-  .checkout-sidebar {
-      width: 100%;
-  }
-}
-@media screen and (max-width: 768px) {
-  .checkout-page {
-      padding: 100px 20px 40px;
-  }
-  .form-row {
-      flex-direction: column;
-  }
-  .delivery-times {
-      flex-direction: column;
-    }
-    .checkout-page .product-info {
-        flex-direction: column;
-        text-align: center;
-    }
-    .operators {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    .order-items table {
-        display: block;
-        overflow-x: auto;
-    }
-    .order-items th,
-    .order-items td {
-        min-width: 120px;
-    }
-    .quantity-control {
-        justify-content: center;
-    }
-}
-@media screen and (max-width: 480px) {
-    .checkout-page h1 {
-        font-size: 24px;
-    }
-    .checkout-main section,
-    .checkout-sidebar section {
-        padding: 20px;
-    }
-    .product-image {
-        width: 60px;
-        height: 60px;
-    }
-    .card-option {
-        flex-direction: column;
-        text-align: center;
-    }
-    .delivery-option .option-details {
-        padding: 15px;
-    }
-    .delivery-note {
-        flex-direction: column;
-        text-align: center;
-    }
-    .delivery-note img {
-        margin: 0 auto 10px;
-    }
 }
 /*voucher section styles*/
 .voucher-section {
@@ -3638,6 +3530,23 @@ thead th{
   #step-description-container p{
     font-size: 16px;
   }
+
+  /*CONTACT.HTML STYLES*/
+  .office {
+    flex-direction: column;
+  }
+  .office-map {
+    width: 100%;
+    order: 2;
+  }
+
+  /*CHECKOUT.HTML STYLES*/
+  .checkout-container {
+    flex-direction: column;
+  }
+  .checkout-sidebar {
+    width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -3905,6 +3814,53 @@ thead th{
     font-size: 20px;
     margin-bottom: 10px;
   }
+
+  /*CONTACT.HTML STYLES*/
+  .contact-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .contact-card {
+    width: 100%;
+    max-width: 400px;
+  }
+  .form-row {
+    flex-direction: column;
+  }
+  .regions {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  /*CHECKOUT.HTML STYLES*/
+  .checkout-page {
+    padding: 100px 20px 40px;
+  }
+  .form-row {
+    flex-direction: column;
+  }
+  .delivery-times {
+    flex-direction: column;
+  }
+  .checkout-page .product-info {
+    flex-direction: column;
+    text-align: center;
+  }
+  .operators {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .order-items table {
+    display: block;
+    overflow-x: auto;
+  }
+  .order-items th,
+  .order-items td {
+    min-width: 120px;
+  }
+  .quantity-control {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 480px) {
@@ -4145,5 +4101,47 @@ thead th{
   .item-image {
       width: 80px;
       height: 80px;
+  }
+
+   /*CONTACT.HTML STYLES*/
+   .reach-team {
+    padding: 100px 20px 40px;
+  }
+  .office {
+    padding: 40px 20px;
+  }
+  .chat-window {
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+    border-radius: 0;
+  }
+
+  /*CHECKOUT.HTML STYLES*/
+  .checkout-page h1 {
+    font-size: 24px;
+  }
+  .checkout-main section,
+  .checkout-sidebar section {
+    padding: 20px;
+  }
+  .product-image {
+    width: 60px;
+    height: 60px;
+  }
+  .card-option {
+    flex-direction: column;
+    text-align: center;
+  }
+  .delivery-option .option-details {
+    padding: 15px;
+  }
+  .delivery-note {
+    flex-direction: column;
+    text-align: center;
+  }
+  .delivery-note img {
+    margin: 0 auto 10px;
   }
 }

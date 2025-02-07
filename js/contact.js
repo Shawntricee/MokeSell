@@ -1,6 +1,6 @@
 //constants and configurations
-const RESTDB_API_KEY = 'my-restdb-api-key';
-const RESTDB_API_URL = 'https://mokesell-d5a1.restdb.io/rest';
+const RESTDB_API_KEY = 'api-key';
+const RESTDB_API_URL = '';
 
 /*contactmanager class to handle all contact page functionality*/
 class ContactManager {
