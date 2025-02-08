@@ -213,13 +213,26 @@ class SearchFeature {
             event.preventDefault();
             const query = this.searchBar.value.toLowerCase().trim();
             if (query) {
-                window.location.href = `../html/products.html?search=${encodeURIComponent(query)}`;
+                // Check if the current page is index.html
+                const path = window.location.pathname.split("/").pop();
+                if (path === "index.html") {
+                    window.location.href = `html/products.html?search=${encodeURIComponent(query)}`;
+                } else {
+                    window.location.href = `../html/products.html?search=${encodeURIComponent(query)}`;
+                }
             }
         }
     }
     // navigate to product results when clicking a suggestion
     navigateToResults(product) {
-        const url = `../html/product-details.html?id=${product._id}`;
+        // Check if the current page is index.html
+        const path = window.location.pathname.split("/").pop();
+        let url;
+        if (path === "index.html") {
+            url = `html/product-details.html?id=${product._id}`;
+        } else {
+            url = `../html/product-details.html?id=${product._id}`;
+        }
         window.location.href = url;
     }
 }

@@ -4,8 +4,8 @@ class ReviewManager {
         this.productId = productId;
         this.currentUsername = currentUsername;
         this.sellerUsername = "";
-        this.apiUrl = /*"https://mokesell-7cde.restdb.io/rest/reviews"*/"https://mokesell-39a1.restdb.io/rest/reviews";
-        this.apiKey = /*"67a4f3a7fd5d586e56efe120"*/"67a5a5b09c979727011b2a7b";
+        this.apiUrl = "https://mokesell-7cde.restdb.io/rest/reviews"/*"https://mokesell-39a1.restdb.io/rest/reviews"*/;
+        this.apiKey = "67a4f3a7fd5d586e56efe120"/*"67a5a5b09c979727011b2a7b"*/;
         this.reviewsFetched = false;
     }
     // initialize the ReviewManager
