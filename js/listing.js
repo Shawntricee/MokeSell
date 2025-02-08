@@ -206,12 +206,12 @@ class Listing {
 
     // function to send data to your API
     sendProductData(product) {
-        const apiUrl = /*'https://mokesell-7cde.restdb.io/rest/products'*/"https://mokesell-39a1.restdb.io/rest/products";
+        const apiUrl = "https://mokesell-7cde.restdb.io/rest/products"/*"https://mokesell-39a1.restdb.io/rest/products"*/;
         fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-apikey': /*'67a4f3a7fd5d586e56efe120'*/"67a5a5b09c979727011b2a7b",
+                'x-apikey': "67a4f3a7fd5d586e56efe120"/*"67a5a5b09c979727011b2a7b"*/,
                 'Cache-Control': 'no-cache'
             },
             body: JSON.stringify(product)

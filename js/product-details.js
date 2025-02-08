@@ -157,8 +157,8 @@ class Product {
     constructor(productId, currentUsername = null) {
         this.productId = productId;
         this.currentUsername = currentUsername;
-        this.apiUrl = /*"https://mokesell-7cde.restdb.io/rest/products"*/"https://mokesell-39a1.restdb.io/rest/products";
-        this.apiKey = /*"67a4f3a7fd5d586e56efe120"*/"67a5a5b09c979727011b2a7b";
+        this.apiUrl = "https://mokesell-7cde.restdb.io/rest/products"/*"https://mokesell-39a1.restdb.io/rest/products"*/;
+        this.apiKey = "67a4f3a7fd5d586e56efe120"/*"67a5a5b09c979727011b2a7b"*/;
         // initialize the review manager
         this.reviewManager = new ReviewManager(productId, this.currentUsername);
         this.init();

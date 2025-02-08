@@ -1,8 +1,8 @@
 class GameRewards {
     constructor() {
         // define the API base URL and API key
-        this.apiBaseUrl = /*"https://mokesell-7cde.restdb.io/rest"*/"https://mokesell-39a1.restdb.io/rest";
-        this.apiKey = "67a5a5b09c979727011b2a7b";
+        this.apiBaseUrl = "https://mokesell-7cde.restdb.io/rest"/*"https://mokesell-39a1.restdb.io/rest"*/;
+        this.apiKey = "67a4f3a7fd5d586e56efe120"/*"67a5a5b09c979727011b2a7b"*/;
         // define the steps for the game page hero section
         this.steps = [
             {

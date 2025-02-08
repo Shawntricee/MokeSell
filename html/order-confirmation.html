@@ -137,6 +137,7 @@
     </header>
     <main>
         <div class="confirmation-container">
+            <!--lottie animation container-->
             <div class="confirmation-image" id="successAnimation"></div>
             <div class="success-icon-container">
                 <div class="success-icon-bg"></div>
@@ -146,7 +147,8 @@
 
             <!--thank you message-->
             <h1 class="thank-you-title">Thank you for your purchase!</h1>
-            <p class="confirmation-message">You will receive a confirmation letter through your email</p>
+            <p class="confirmation-message">You will receive an confirmation letter through your email</p>
+
             <!--order details card-->
             <div class="order-details-card">
                 <!--order information-->
@@ -155,8 +157,9 @@
                         <img src="../images/icons/calendar-icon.png" alt="Date">
                         Date
                     </div>
-                    <div class="detail-value" data-field="date"></div>
+                    <div class="detail-value" data-field="date">2/2/2025</div>
                 </div>
+
                 <div class="detail-row">
                     <div class="detail-label">
                         <img src="../images/icons/user-icon.png" alt="Customer">
@@ -164,34 +167,36 @@
                     </div>
                     <div class="detail-value" data-field="customer"></div>
                 </div>
+
                 <div class="detail-row">
                     <div class="detail-label">
                         <img src="../images/icons/payment-icon.png" alt="Payment">
                         Payment Method
                     </div>
-                    <div class="payment-image">
-                        <img src="../images/icons/visa-icon.png" alt="Visa">
-                    </div>
+                    <div class="payment-image"><img src="../images/others/dhl-logo.png" alt="payment image"></div>
                 </div>
+
                 <div class="detail-row">
                     <div class="detail-label">
                         <img src="../images/icons/order-icon.png" alt="Order">
                         Order Number
                     </div>
-                    <div class="detail-value" data-field="orderNumber"></div>
+                    <div class="detail-value" data-field="orderNumber">202581596</div>
                 </div>
+
                 <div class="detail-row">
                     <div class="detail-label">
                         <img src="../images/icons/total-icon.png" alt="Total">
                         Total
                     </div>
-                    <div class="detail-value" data-field="total"></div>
+                    <div class="detail-value" data-field="total">$3,699</div>
                 </div>
+
                 <!--order line items-->
                 <div class="order-line">
-                    <!--items will be populated dynamically-->
+                        <!--order items added here dynamically-->
                 </div>
-            </div>
+
             <!--continue shopping button-->
             <a href="../index.html" class="continue-shopping">CONTINUE SHOPPING</a>
         </div>

@@ -1,7 +1,7 @@
 class Registration {
     constructor() {
-        this.apiUrl = /*"https://mokesell-7cde.restdb.io/rest/accounts"*/"https://mokesell-39a1.restdb.io/rest/accounts";
-        this.apiKey = /*"67a4f3a7fd5d586e56efe120"*/"67a5a5b09c979727011b2a7b";
+        this.apiUrl = "https://mokesell-7cde.restdb.io/rest/accounts"/*"https://mokesell-39a1.restdb.io/rest/accounts"*/;
+        this.apiKey = "67a4f3a7fd5d586e56efe120"/*"67a5a5b09c979727011b2a7b"*/;
         this.initEventListeners();
         this.showPopupAfterDelay();
         this.checkLoginStatus();

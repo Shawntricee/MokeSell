@@ -163,11 +163,11 @@ class SearchFeature {
 
     // fetch product data from the API
     fetchProducts() {
-        fetch(/*"https://mokesell-7cde.restdb.io/rest/products"*/"https://mokesell-39a1.restdb.io/rest/products", {
+        fetch("https://mokesell-7cde.restdb.io/rest/products"/*"https://mokesell-39a1.restdb.io/rest/products"*/, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "x-apikey": /*"67a4f3a7fd5d586e56efe120"*/"67a5a5b09c979727011b2a7b",
+                "x-apikey": "67a4f3a7fd5d586e56efe120"/*"67a5a5b09c979727011b2a7b"*/,
                 "Cache-Control": "no-cache"
             }
         })

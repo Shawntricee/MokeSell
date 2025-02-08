@@ -29,7 +29,6 @@ class OrderConfirmation {
             renderer: 'svg',
             loop: false,
             autoplay: true,
-            path: '../animations/success-checkmark.json'
         }).addEventListener('complete', () => {
             //second wave of confetti after checkmark
             setTimeout(() => this.launchConfetti(), 500);

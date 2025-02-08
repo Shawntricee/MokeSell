@@ -1,4 +1,24 @@
 {
+    "messages": [
+        {
+            "message_id": "auto001",
+            "sender": "agent",
+            "content": "Hello! 👋 How can I assist you today?",
+            "timestamp": "auto"
+        },
+        {
+            "message_id": "auto002",
+            "sender": "agent",
+            "content": "If you're asking about your order, please provide your order number. 📦",
+            "timestamp": "auto"
+        },
+        {
+            "message_id": "auto003",
+            "sender": "agent",
+            "content": "Looking for discounts? I can check if you have any available vouchers! 🎟️",
+            "timestamp": "auto"
+        }
+    ]
     "chats": [
         {
             "_id": "chat001_m001",

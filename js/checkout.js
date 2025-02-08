@@ -200,7 +200,7 @@ class CheckoutManager {
 
     showMessage(message, type = 'info') {
         const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${type}`;
+        messageDiv.className = `checkout-message ${type}`;
         messageDiv.textContent = message;
         
         document.body.appendChild(messageDiv);

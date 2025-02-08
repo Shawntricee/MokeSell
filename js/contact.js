@@ -15,7 +15,6 @@ class ContactManager {
             messages: [],
             isTyping: false
         };
-        this.loadChatHistory();
         this.isSubmitting = false;
         this.loadChatData();
     }
@@ -28,7 +27,6 @@ class ContactManager {
             renderer: 'svg',
             loop: true,
             autoplay: false,
-            path: '../animations/loading.json'
         });
     }
     /*initialize google maps*/
@@ -105,16 +103,32 @@ class ContactManager {
             `;
         });
     }
-    //load chat data from JSON
+    //load chat data from API
     async loadChatData() {
         try {
-            const response = await fetch('../chat.json');
+            // Replace with your API URL
+            const apiUrl = 'https://mokesell-7cde.restdb.io/rest/chat';  // Example API URL
+            
+            const response = await fetch(apiUrl, {
+                method: 'GET',  // Using GET method to fetch data
+                headers: {
+                    'Content-Type': 'application/json',
+                    "x-apikey": "67a4f3a7fd5d586e56efe120",
+                    "Cache-Control": "no-cache"
+                }
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to fetch chat data');
+            }
+    
             this.chatData = await response.json();
-            console.log('Chat data loaded', this.chatData);
+            console.log('Chat data loaded from API', this.chatData);
         } catch (error) {
             console.error('Error loading chat data:', error);
         }
     }
+    
 
     /*setup event listeners for the page*/
     setupEventListeners() {
@@ -128,44 +142,42 @@ class ContactManager {
         if (chatButton) {
             chatButton.addEventListener('click', () => this.toggleChat());
         }
-        //form input validation
+        //form input validation for form fields, exclude the chat textarea
         const formInputs = document.querySelectorAll('input, textarea');
         formInputs.forEach(input => {
-            input.addEventListener('blur', () => this.validateInput(input));
-            input.addEventListener('input', () => this.clearError(input));
+            if (input.id !== 'chatMessageInput') { // Exclude the chat textarea
+                input.addEventListener('blur', () => this.validateInput(input));
+                input.addEventListener('input', () => this.clearError(input));
+            }
         });
     }
 
     /*handle contact form submission*/
-    async handleFormSubmit(event) {
+     async handleFormSubmit(event) {
         event.preventDefault();
         if (this.isSubmitting) return;
+        
         const form = event.target;
         if (!this.validateForm(form)) return;
+        
         try {
             this.isSubmitting = true;
             this.showLoading(true);
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData);
-            const response = await fetch(`${RESTDB_API_URL}/contact-messages`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-apikey': RESTDB_API_KEY
-                },
-                body: JSON.stringify(data)
-            });
-            if (!response.ok) throw new Error('Failed to send message');
-            this.showSuccess('Message sent successfully! We\'ll get back to you soon.');
+            
+            // Simulating form processing delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            this.showSuccess("Message sent successfully! We'll get back to you soon.");
             form.reset();
         } catch (error) {
-            console.error('Form submission error:', error);
-            this.showError('Failed to send message. Please try again later.');
+            console.error("Form submission error:", error);
+            this.showError("Failed to send message. Please try again later.");
         } finally {
             this.isSubmitting = false;
             this.showLoading(false);
         }
     }
+
 
     /*validate individual form input*/
     validateInput(input) {
@@ -212,7 +224,7 @@ class ContactManager {
 
     /*toggle live chat window*/
     toggleChat() {
-        if (this.chatWindow) {
+        if (this.chatWindow && this.chatWindow.classList.contains('active')) {
             this.closeChat();
         } else {
             this.openChat();
@@ -221,13 +233,11 @@ class ContactManager {
     /*open live chat window*/
     openChat() {
         if (!this.chatWindow) {
-            const chatWindow = document.getElementById('chatWindow');
-            chatWindow.style.display = 'flex';
-            setTimeout(() => chatWindow.classList.add('active'), 10);
-            this.chatWindow = chatWindow;
-            //setup chat event listeners
-            this.setupChatEventListeners();
+            this.chatWindow = document.getElementById('chatWindow');
+            this.setupChatEventListeners();  // Ensure chat event listeners are set up once
         }
+        this.chatWindow.style.display = 'flex';  // show the chat window
+        setTimeout(() => this.chatWindow.classList.add('active'), 10);  // Add the active class
     }
     /*setup chat event listeners*/
     setupChatEventListeners() {
@@ -249,7 +259,6 @@ class ContactManager {
     sendChatMessage() {
         const textarea = this.chatWindow.querySelector('textarea');
         const message = textarea.value.trim();
-        if (!message) return;
 
         const messagesContainer = this.chatWindow.querySelector('.chat-messages');
         
@@ -276,8 +285,11 @@ class ContactManager {
             const botMessage = document.createElement('div');
             botMessage.className = 'message bot-message';
             
-            //use auto-response messages from JSON
-            const autoResponses = this.chatData?.settings?.auto_response?.messages || [];
+            //use auto-response messages from API
+            console.log('Checking chatData before assignment:', this.chatData);
+            const autoResponses = (this.chatData.length > 0 && this.chatData[0].messages) ? this.chatData[0].messages : [];
+            console.log('Auto-responses:', autoResponses);
+            
             const smartResponse = this.getSmartResponse(message, autoResponses);
             botMessage.textContent = smartResponse;
             messagesContainer.appendChild(botMessage);
@@ -287,8 +299,6 @@ class ContactManager {
                 content: botMessage.textContent,
                 timestamp: new Date()
             });
-            //save chat history
-            this.saveChatHistory();
             //scroll to latest message
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }, 1000);
@@ -297,10 +307,13 @@ class ContactManager {
     /*close live chat window*/
     closeChat() {
         if (this.chatWindow) {
-            this.chatWindow.classList.remove('active');
+            this.chatWindow.classList.remove('active');  // remove the active class
+            const messagesContainer = this.chatWindow.querySelector('.chat-messages');
+            if (messagesContainer) {
+                messagesContainer.innerHTML = '';  // clear all messages
+            }
             setTimeout(() => {
-                this.chatWindow.style.display = 'none';
-                this.chatWindow = null;
+                this.chatWindow.style.display = 'none';  //hide the chat window after a slight delay
             }, 300);
         }
     }
@@ -335,18 +348,6 @@ class ContactManager {
         const form = document.getElementById('contactForm');
         form.insertBefore(errorDiv, form.firstChild);
         setTimeout(() => errorDiv.remove(), 5000);
-    }
-
-    /*save chat history to localstorage*/
-    saveChatHistory() {
-        localStorage.setItem('mokesell_chat_history', JSON.stringify(this.chatState.messages));
-    }
-    /*load chat history from localstorage*/
-    loadChatHistory() {
-        const history = localStorage.getItem('mokesell_chat_history');
-        if (history) {
-            this.chatState.messages = JSON.parse(history);
-        }
     }
 
     /*show typing indicator in chat*/
