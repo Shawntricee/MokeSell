@@ -41,8 +41,9 @@
                     <div id="guestNav">
                         <button class="auth-button" id="navSignIn">Sign in</button>
                         <button class="auth-button" id="navSignUp">Sign up</button>
-                        <div class="nav-icon">
+                        <div class="cart-icon" id="guestCartIcon">
                             <img src="images/icons/cart-icon.png" alt="cart icon">
+                            <span class="cart-badge">0</span>
                         </div>
                     </div>
                     <!--user navbar-->
@@ -51,10 +52,11 @@
                             <a href="#" class="nav-icon">
                                 <img src="images/icons/favourites-icon.png" id="favouritesIcon" alt="favourites icon">
                             </a>
-                            <div class="nav-icon">
+                            <div class="cart-icon" id="userCartIcon">
                                 <img src="images/icons/cart-icon.png" alt="cart icon">
+                                <span class="cart-badge">0</span>
                             </div>
-                            <div class="nav-icon">
+                            <div class="profile-icon">
                                 <img src="images/icons/profile-icon.png" id="profileIcon" alt="profile icon">
                             </div>
                             <ul class="user-dropdown" id="userDropdown">
@@ -320,6 +322,79 @@
             </div>
         </footer>
     </main>
+
+    <!--cart overlay and sidebar-->
+    <div id="cartOverlay" class="cart-overlay"></div>
+    <div id="cartSidebar" class="cart-sidebar">
+        <!--cart header-->
+        <div class="cart-header">
+            <h2>Your cart</h2>
+            <button class="close-cart">×</button>
+        </div>
+        <!--cart items container-->
+        <div id="cartItems" class="cart-items">
+            <!--cart items-->
+        </div>
+        <!--empty cart state-->
+        <div id="emptyCart" class="empty-cart">
+            <div id="emptyCartLottie"></div>
+            <h3>Your cart is empty</h3>
+            <p>Looks like you haven't added any items yet</p>
+            <button class="continue-shopping"><a href="html/products.html">Continue Shopping</a></button>
+        </div>
+        <!--cart summary-->
+        <div class="cart-summary">
+            <!--voucher input-->
+            <div class="voucher-input">
+                <input type="text" id="voucherCode" placeholder="Enter voucher code">
+                <button id="applyVoucher">Apply</button>
+            </div>
+            <!--summary details-->
+            <div class="summary-details">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span id="shippingCost">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Discount</span>
+                    <span id="discountAmount">$0.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="cartTotal">$0.00</span>
+                </div>
+            </div>
+            <!--checkout button-->
+            <button id="checkoutButton" class="checkout-button">
+                Continue to check out
+            </button>
+        </div>
+    </div>
+    <!--cart item template-->
+    <template id="cartItemTemplate">
+        <div class="cart-item">
+            <div class="item-image">
+                <img src="image" alt="Product">
+            </div>
+            <div class="item-details">
+                <h3 class="item-title"></h3>
+                <div class="item-controls">
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity">1</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <span class="item-price"></span>
+                </div>
+            </div>
+            <button class="remove-item" aria-label="Remove item">×</button>
+        </div>
+    </template>
+
     <!--fixed buttons section-->
     <div class="fixed-buttons">
         <a href="html/game.html">
@@ -384,5 +459,6 @@
     <script src="js/script.js"></script>
     <script src="js/registration.js"></script>
     <script src="js/products.js"></script>
+    <script src="js/cart-manager.js"></script>
 </body>
 </html>

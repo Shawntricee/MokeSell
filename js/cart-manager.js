@@ -25,8 +25,8 @@ class CartManager {
             this.loadCartState();
             //set up event listeners
             this.setupEventListeners();
-            //initialize empty cart animation
-            this.initEmptyCartAnimation();
+            //set up cart icon listener
+            this.setupCartIconListener();
             //initial render
             this.render();
             console.log('Cart initialized successfully');
@@ -77,22 +77,31 @@ class CartManager {
         //add event listener to all "Add to Cart" buttons
         document.getElementById('addToCart')?.addEventListener('click', (e) => {
             e.preventDefault();
+
             const productId = e.target.getAttribute('data-product-id');
             if (productId) {
                 this.addToCart(productId);
             }
         });
+        // add event listener to the cart sidebar
+        this.setupCartIconListener();
     }
-
-    initEmptyCartAnimation() {
-        const container = document.getElementById('emptyCartLottie');
-        if (container) {
-            lottie.loadAnimation({
-                container: container,
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: '../animations/empty-cart.json'
+    // cart icon click listener method
+    setupCartIconListener() {
+        // add event listeners for both guest and user cart icons
+        const guestCartIcon = document.getElementById('guestCartIcon');
+        const userCartIcon = document.getElementById('userCartIcon');
+        
+        // check if the icons exist and add the event listener to open the cart
+        if (guestCartIcon) {
+            guestCartIcon.addEventListener('click', () => {
+                this.openCart();  // open the cart sidebar
+            });
+        }
+        
+        if (userCartIcon) {
+            userCartIcon.addEventListener('click', () => {
+                this.openCart();  // open the cart sidebar
             });
         }
     }
@@ -129,6 +138,8 @@ class CartManager {
             }
             //update cart
             this.updateCart();
+            // update cart badge
+            this.updateCartBadge();
             //open cart sidebar
             this.openCart();
             //show success message
@@ -136,6 +147,24 @@ class CartManager {
         } catch (error) {
             console.error('Error adding to cart:', error);
             this.showNotification('Failed to add product to cart', 'error');
+        }
+    }
+
+    setupCartIconListener() {
+        // check if the guestCartIcon exists and add the event listener
+        const guestCartIcon = document.getElementById('guestCartIcon');
+        if (guestCartIcon) {
+            guestCartIcon.addEventListener('click', () => {
+                this.openCart();  // open the cart sidebar
+            });
+        }
+    
+        // check if the userCartIcon exists and add the event listener
+        const userCartIcon = document.getElementById('userCartIcon');
+        if (userCartIcon) {
+            userCartIcon.addEventListener('click', () => {
+                this.openCart();  // open the cart sidebar
+            });
         }
     }
 
@@ -178,10 +207,32 @@ class CartManager {
     calculateTotals() {
         this.state.subtotal = this.state.items.reduce((sum, item) => 
             sum + (item.price * item.quantity), 0);
-        //calculate shipping (free over $500)
+        
+        // Ensure subtotal is not NaN
+        if (isNaN(this.state.subtotal)) {
+            this.state.subtotal = 0;
+        }
+    
+        // Calculate shipping (free over $500)
         this.state.shipping = this.state.subtotal > 500 ? 0 : 35;
-        //calculate final total
+    
+        // Ensure shipping is valid
+        if (isNaN(this.state.shipping)) {
+            this.state.shipping = 0;
+        }
+    
+        // Calculate final total
         this.state.total = this.state.subtotal + this.state.shipping - this.state.discount;
+    
+        // Ensure total is valid
+        if (isNaN(this.state.total)) {
+            this.state.total = 0;
+        }
+         // Debug logs to ensure correct calculations
+        console.log(`Subtotal: ${this.state.subtotal}`);
+        console.log(`Shipping: ${this.state.shipping}`);
+        console.log(`Discount: ${this.state.discount}`);
+        console.log(`Total: ${this.state.total}`);
     }
 
     render() {
@@ -267,6 +318,14 @@ class CartManager {
         const savedState = localStorage.getItem('cartState');
         if (savedState) {
             this.state = JSON.parse(savedState);
+            if (this.state.discount === undefined) {
+                this.state.discount = 0;  // set a default discount if it's undefined
+            }
+            if (this.state.items.length === 0) {
+                this.state.subtotal = 0;
+                this.state.shipping = 0;
+                this.state.total = 0;
+            }
         }
     }
     saveCartState() {
@@ -274,7 +333,9 @@ class CartManager {
     }
 }
 
-//initialize cart manager when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    window.cartManager = new CartManager();
-});
+// initialize cart manager only once
+if (!window.cartManager) {
+    document.addEventListener('DOMContentLoaded', () => {
+        window.cartManager = new CartManager();
+    });
+}

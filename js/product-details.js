@@ -1,39 +1,45 @@
 class ReviewManager {
+    // initialize the ReviewManager with the product ID and the current user's username
     constructor(productId, currentUsername) {
         this.productId = productId;
-        this.reviewsFile = "../json/reviews.json";
         this.currentUsername = currentUsername;
         this.sellerUsername = "";
+        this.apiUrl = /*"https://mokesell-7cde.restdb.io/rest/reviews"*/"https://mokesell-39a1.restdb.io/rest/reviews";
+        this.apiKey = /*"67a4f3a7fd5d586e56efe120"*/"67a5a5b09c979727011b2a7b";
+        this.reviewsFetched = false;
     }
-
+    // initialize the ReviewManager
     init() {
+        // fetch the reviews for the product
         if (this.reviewsFetched) {
             console.log("Reviews already fetched");
-            return; // Prevent fetching if reviews are already fetched
+            return; // prevent fetching if reviews are already fetched
         }
-
         console.log("ReviewManager initialized");
+        // set up the review form
         this.setupReviewForm();
         this.fetchReviews();
     }
-
+    // set the seller's username
     setSellerUsername(sellerUsername) {
         this.sellerUsername = sellerUsername || "Unknown";
-        console.log("Setting seller username:", this.sellerUsername);  // Debug log
+        console.log("Setting seller username:", this.sellerUsername);
+        // update the review header with the seller's username
         this.updateReviewHeader();
     }
-
+    // function to update the review header with the seller's username
     updateReviewHeader() {
         const reviewSeller = document.getElementById("sellerReviewUsername");
         if (reviewSeller) {
+            // set the seller's username in the review header
             reviewSeller.textContent = this.sellerUsername;
         }
     }
-
+    // function to set up the review form
     setupReviewForm() {
         const reviewForm = document.getElementById("reviewForm");
         const postReviewButton = document.getElementById("postReviewButton");
-
+        // add event listener to the review form
         if (reviewForm && postReviewButton) {
             console.log("Review form and button found!");
             reviewForm.addEventListener("submit", (event) => {
@@ -49,26 +55,31 @@ class ReviewManager {
             console.warn("Review form or button not found!");
         }
     }
-
+    // function to post a review
     postReview(reviewText) {
+        // get the current username from session storage
         const currentUsername = sessionStorage.getItem("currentUsername");
+        // check if the user is logged in
         if (!currentUsername) {
             alert("You must be logged in to post a review!");
             return;
         }
-    
+        // create a new review object
         const newReview = {
             productId: this.productId,
             username: currentUsername,
             review: reviewText,
             datePosted: new Date().toISOString(),
         };
-    
         console.log("Posting Review:", newReview);
     
-        fetch(this.reviewsFile, { 
+        fetch(this.apiUrl, { 
             method: "POST", 
-            headers: { "Content-Type": "application/json" }, 
+            headers: { 
+                "Content-Type": "application/json", 
+                "x-apikey": this.apiKey,
+                "Cache-Control": "no-cache"
+            }, 
             body: JSON.stringify(newReview) 
         })
         .then(response => {
@@ -79,7 +90,6 @@ class ReviewManager {
         })
         .then(createdReview => {
             console.log("Review posted successfully:", createdReview);
-            // Now `addReviewToUI` will work because `this` context is preserved
             this.addReviewToUI(createdReview);
             document.getElementById("reviewInput").value = "";
         })
@@ -88,15 +98,15 @@ class ReviewManager {
             alert("Failed to post review. Please try again.");
         });
     }
-    
+    // function to add a review to the UI
     addReviewToUI(review) {
         const reviewsList = document.getElementById("reviewsList");
         if (reviewsList) {
+            // create a new review element
             reviewsList.appendChild(this.renderReview(review));
         }
     }
-    
-
+    // function to render a review element
     renderReview(review) {
         const reviewDiv = document.createElement("div");
         reviewDiv.classList.add("review-item");
@@ -114,14 +124,23 @@ class ReviewManager {
         `;
         return reviewDiv;
     }
-
+    // function to fetch reviews for the product
     fetchReviews() {
         if (this.reviewsFetched) {
             console.log("Reviews already fetched.");
             return;
         }
         console.log("Fetching reviews...");
-        fetch(this.reviewsFile)
+
+        // fetch reviews from the API
+        fetch(`${this.apiUrl}?productId=${this.productId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": this.apiKey,
+                "Cache-Control": "no-cache"
+            }
+        })
             .then(response => response.json())
             .then(reviews => {
                 reviews.forEach(review => {
@@ -134,44 +153,61 @@ class ReviewManager {
 }
 
 class Product {
+    // initialize the Product with the product ID and the current user's username
     constructor(productId, currentUsername = null) {
         this.productId = productId;
-        this.productFile = "../json/products.json";
         this.currentUsername = currentUsername;
+        this.apiUrl = /*"https://mokesell-7cde.restdb.io/rest/products"*/"https://mokesell-39a1.restdb.io/rest/products";
+        this.apiKey = /*"67a4f3a7fd5d586e56efe120"*/"67a5a5b09c979727011b2a7b";
+        // initialize the review manager
         this.reviewManager = new ReviewManager(productId, this.currentUsername);
         this.init();
     }
-
+    // initialize the product details page
     init() {
         this.fetchProductData();
         this.reviewManager.init();
         this.fetchSimilarProducts();
     }
-
+    // function to fetch product data
     fetchProductData() {
-        fetch(this.productFile)
-            .then(response => response.json())
+        console.log("Fetching product data...");
+        fetch(`${this.apiUrl}?productId=${this.productId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": this.apiKey,
+                "Cache-Control": "no-cache"
+            }
+        })
+            .then(response => {
+                console.log("Response Status:", response.status); // Check the status
+                return response.json();
+            })
             .then(productsArray => {
                 const product = productsArray.find(p => p._id === this.productId);
                 if (!product) {
                     console.error(`Product with ID ${this.productId} not found.`);
                     return;
                 }
-
                 console.log("Fetched product data:", product);
+                // update the product details
                 this.updateProductDetails(product);
                 this.updateProductImages(product.image_url);
+                // update the breadcrumb navigation
                 const breadcrumb = new BreadcrumbNavigation("#breadcrumbNavigation");
                 breadcrumb.generateBreadcrumb(product.category, product.subcategory, product.title);
 
-                // Set seller details and handle the reviews
+                // set seller details and handle the reviews
                 const seller = product.seller_id[0] || {};
                 this.updateSellerDetails(seller);
                 this.reviewManager.setSellerUsername(seller.username || "Unknown");
+                this.fetchSimilarProducts(product.category);
             })
             .catch((error) => console.error("Error fetching product data:", error));
     }
-
+    
+    // function to update the product details on the page
     updateProductDetails(product) {
         document.getElementById("productTitle").textContent = product.title || "No title available";
         document.getElementById("productPrice").textContent = product.price ? `S$${product.price.toFixed(2)}` : "S$0.00";
@@ -186,21 +222,20 @@ class Product {
         document.getElementById("productDescription").textContent = product.description || "No description available";
         document.getElementById("productPoints").textContent = product.points || "No points available";
     }
-
+    // function to update the seller details on the page
     updateSellerDetails(seller) {
         document.getElementById("sellerUsername").textContent = `@${seller.username || "Unknown"}`;
-        document.getElementById("sellerJoined").textContent = seller.date_joined ? new Date(seller.date_joined).toLocaleDateString() : "Joined: N/A";
+        document.getElementById("sellerJoined").textContent = seller.dateJoined ? new Date(seller.dateJoined).toLocaleDateString() : "Joined: N/A";
     }
-
+    // function to update the product images on the page
     updateProductImages(image_url) {
         const mainImageElem = document.getElementById("mainImage");
         const secondaryImagesContainer = document.getElementById("secondaryImages");
-
         const images = image_url;
-
+        // update the main image and secondary images
         if (mainImageElem && images.length > 0) {
             mainImageElem.src = `${images[0]}`;
-
+            // update the secondary images
             if (secondaryImagesContainer) {
                 secondaryImagesContainer.innerHTML = "";
                 images.slice(0).forEach(image_url => {
@@ -212,15 +247,22 @@ class Product {
                     imgElement.addEventListener("click", () => {
                         mainImageElem.src = imgElement.src;
                     });
-
+                    // append the image to the secondary images container
                     secondaryImagesContainer.appendChild(imgElement);
                 });
             }
         }
     }
-
-    fetchSimilarProducts() {
-        fetch(this.productFile)
+    // function to fetch similar products
+    fetchSimilarProducts(category) {
+        fetch(`${this.apiUrl}?category=${category}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": this.apiKey,
+                "Cache-Control": "no-cache"
+            }
+        })
             .then(response => response.json())
             .then(products => {
                 const filteredProducts = products.filter(p => p._id !== this.productId);
@@ -249,7 +291,8 @@ class Product {
                         imgElement.addEventListener("mouseout", () => imgElement.src = firstImage);
 
                         productCard.addEventListener("click", () => {
-                            window.location.href = `product-details.html?id=${product._id}`;
+                            const productUrl = `product-details.html?id=${product._id}&category=${encodeURIComponent(category)}&title=${encodeURIComponent(product.title)}`;
+                            window.location.href = productUrl;
                         });
 
                         similarListingsContainer.appendChild(productCard);
@@ -260,32 +303,20 @@ class Product {
     }
 }
 
-//initialize the product page with the product ID from the URL
-// Initialize the product page and set up "Add to Cart" button
+// initialize the product details page with product ID from URL
 document.addEventListener("DOMContentLoaded", () => {
+    // get the product ID from the URL
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get("id");
-    const currentUsername = sessionStorage.getItem("currentUsername");
-
+    const addToCart = document.getElementById("addToCart");
+    console.log("Product ID:", productId);  // check if productId is retrieved correctly
+    if (addToCart) {
+        addToCart.setAttribute("data-product-id", productId);
+    }
+    // initialize the Product class with the product ID
     if (productId) {
-        const product = new Product(productId, currentUsername);
-
-        // Handle "Add to Cart" button
-        const addToCartBtn = document.getElementById("addToCart");
-        if (addToCartBtn) {
-            addToCartBtn.setAttribute("data-product-id", productId);
-
-            addToCartBtn.addEventListener("click", (e) => {
-                e.preventDefault();
-                console.log("Add to cart clicked");
-
-                if (window.cartManager) {
-                    window.cartManager.addToCart(productId);
-                } else {
-                    console.error("Cart manager not initialized");
-                }
-            });
-        }
+        // initialize the Product class
+        const product = new Product(productId);
     } else {
         console.error("Product ID not found in URL.");
     }

@@ -40,8 +40,9 @@
                     <div id="guestNav">
                         <button class="auth-button" id="navSignIn">Sign in</button>
                         <button class="auth-button" id="navSignUp">Sign up</button>
-                        <div class="nav-icon">
+                        <div class="cart-icon" id="guestCartIcon">
                             <img src="../images/icons/cart-icon.png" alt="cart icon">
+                            <span class="cart-badge">0</span>
                         </div>
                     </div>
                     <div id="userNav">
@@ -49,10 +50,11 @@
                             <a href="#" class="nav-icon">
                                 <img src="../images/icons/favourites-icon.png" id="favouritesIcon" alt="favourites icon">
                             </a>
-                            <div class="nav-icon">
+                            <div class="cart-icon" id="userCartIcon">
                                 <img src="../images/icons/cart-icon.png" alt="cart icon">
+                                <span class="cart-badge">0</span>
                             </div>
-                            <div class="nav-icon">
+                            <div class="profile-icon">
                                 <img src="../images/icons/profile-icon.png" id="profileIcon" alt="profile icon">
                             </div>
                             <ul class="user-dropdown" id="userDropdown">
@@ -216,6 +218,11 @@
                         <input type="number" id="price" placeholder="Price">
                     </div>
                     <button type="submit" id="listItemBtn">LIST ITEM</button>
+                    <div id="listingOverlay" class="listing-overlay" style="display: none;">
+                        <div id="animationWrapper" class="listing-animation">
+                            <dotlottie-player id="listingAnimation" src="https://lottie.host/24f5fadc-103d-4d86-bc0e-368eac0a91f0/b5Wy4tc2Yu.lottie" background="transparent" speed="1" loop autoplay></dotlottie-player>
+                        </div>
+                    </div>  
                 </form>
             </div>
         </section>
@@ -272,6 +279,79 @@
             </div>
         </footer>
     </main>
+
+    <!--cart overlay and sidebar-->
+    <div id="cartOverlay" class="cart-overlay"></div>
+    <div id="cartSidebar" class="cart-sidebar">
+        <!--cart header-->
+        <div class="cart-header">
+            <h2>Your cart</h2>
+            <button class="close-cart">×</button>
+        </div>
+        <!--cart items container-->
+        <div id="cartItems" class="cart-items">
+            <!--cart items-->
+        </div>
+        <!--empty cart state-->
+        <div id="emptyCart" class="empty-cart">
+            <div id="emptyCartLottie"></div>
+            <h3>Your cart is empty</h3>
+            <p>Looks like you haven't added any items yet</p>
+            <button class="continue-shopping"><a href="../html/products.html">Continue Shopping</a></button>
+        </div>
+        <!--cart summary-->
+        <div class="cart-summary">
+            <!--voucher input-->
+            <div class="voucher-input">
+                <input type="text" id="voucherCode" placeholder="Enter voucher code">
+                <button id="applyVoucher">Apply</button>
+            </div>
+            <!--summary details-->
+            <div class="summary-details">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span id="shippingCost">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Discount</span>
+                    <span id="discountAmount">$0.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="cartTotal">$0.00</span>
+                </div>
+            </div>
+            <!--checkout button-->
+            <button id="checkoutButton" class="checkout-button">
+                Continue to check out
+            </button>
+        </div>
+    </div>
+    <!--cart item template-->
+    <template id="cartItemTemplate">
+        <div class="cart-item">
+            <div class="item-image">
+                <img src="image" alt="Product">
+            </div>
+            <div class="item-details">
+                <h3 class="item-title"></h3>
+                <div class="item-controls">
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity">1</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <span class="item-price"></span>
+                </div>
+            </div>
+            <button class="remove-item" aria-label="Remove item">×</button>
+        </div>
+    </template>
+
     <!--fixed buttons section-->
     <div class="fixed-buttons">
         <a href="../html/game.html">
@@ -334,6 +414,7 @@
     <!--custom scripts-->
     <script src="../js/registration.js"></script>
     <script src="../js/products.js"></script>
+    <script src="../js/cart-manager.js"></script>
     <script src="../js/listing.js"></script>
     <script src="../js/script.js"></script>
 </body>

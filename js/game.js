@@ -1,5 +1,9 @@
 class GameRewards {
     constructor() {
+        // define the API base URL and API key
+        this.apiBaseUrl = /*"https://mokesell-7cde.restdb.io/rest"*/"https://mokesell-39a1.restdb.io/rest";
+        this.apiKey = "67a5a5b09c979727011b2a7b";
+        // define the steps for the game page hero section
         this.steps = [
             {
                 title: "STEP 1: EARN POINTS",
@@ -22,74 +26,90 @@ class GameRewards {
         ];
         this.currentStepIndex = 0;
         this.init();
+        this.loggedInAlertShown = false;
     }
-
-    init() {
-        document.getElementById("next-step").addEventListener("click", () => this.nextStep());
-        document.getElementById("start-playing").addEventListener("click", () => this.scrollToGame());
-
-        this.loadUserPoints();
-        this.fetchVouchers();
-        this.fetchLeaderboard();
-        window.addEventListener("beforeunload", () => this.updatedUserPointsToAPI());
-    }
-
+    // function to check if the user is logged in
     checkLoginStatus() {
         let userId = sessionStorage.getItem("userId");
         if (!userId) {
-            console.warn("User is not logged in.");
-            alert("Please log in to access the rewards.");
+            if (!this.loggedInAlertShown) {
+                console.warn("User is not logged in.");
+                alert("Please log in to access the rewards.");
+                this.loggedInAlertShown = true; // set flag to true after alert is shown
+            }
             return false;
         }
         return true;
     }
-
+    // initialize the game page
+    init() {
+        document.getElementById("next-step").addEventListener("click", () => this.nextStep());
+        document.getElementById("start-playing").addEventListener("click", () => this.scrollToGame());
+        if (this.checkLoginStatus()) {
+            // load user points and fetch vouchers
+            this.loadUserPoints();
+            this.fetchVouchers();
+            this.fetchLeaderboard();
+        }
+    }
+    // function to load user points from session storage
     loadUserPoints() {
         if (!this.checkLoginStatus()) return;
-
+        // load user points from session storage
         let userPoints = sessionStorage.getItem("userPoints") || 0;
         if (!userPoints) {
             console.warn("User points not found in session storage.");
             sessionStorage.setItem("userPoints", 0);
             userPoints = 0;
         }
+        // display the user points
         document.getElementById("currentPoints").textContent = userPoints;
         console.log("Loaded user points:", userPoints);
     }
-
+    // function to navigate to the next step in the hero section
     nextStep() {
         this.currentStepIndex = (this.currentStepIndex + 1) % this.steps.length;
         const step = this.steps[this.currentStepIndex];
-
-        // Change the title
+        // change the text content of the step
         document.getElementById("step-text").textContent = step.title;
-        
-        // Update descriptions
+        // update step descriptions
         const descriptionsContainer = document.querySelector("#step-description-container");
-        descriptionsContainer.innerHTML = ""; // Clear the current descriptions
+        descriptionsContainer.innerHTML = ""; // clear the current descriptions
         step.descriptions.forEach(description => {
             const p = document.createElement("p");
             p.textContent = description;
             descriptionsContainer.appendChild(p);
         });
     }
-
+    // function to scroll to the game section
     scrollToGame() {
         document.getElementById("dino-game").scrollIntoView({ behavior: "smooth" });
     }
-
-    // Fetch vouchers available for the user
+    // fetch vouchers available for the user
     fetchVouchers() {
-
+        if (!this.checkLoginStatus()) return;
         let userPoints = parseInt(sessionStorage.getItem("userPoints")) || 0;
         console.log("Fectching vouchers for user with points:", userPoints);
-        fetch(/*`/api/vouchers?user=${userId}`*/ '../json/vouchers.json')
-            .then(response => response.json())
+        // fetch vouchers from the API
+        fetch(`${this.apiBaseUrl}/vouchers`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": this.apiKey,
+                "Cache-Control": "no-cache"
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
             .then(vouchers => {
-                console.log(vouchers);
+                console.log("Fetched vouchers:", vouchers);
                 let vouchersDiv = document.getElementById("vouchers");
                 vouchersDiv.innerHTML = "";
-
+                // display the vouchers available for the user
                 vouchers.forEach(voucher => {
                     let voucherElem = document.createElement("div");
                     voucherElem.classList.add("voucher");
@@ -100,68 +120,90 @@ class GameRewards {
                         </div>
                         <button onclick="gameRewards.claimVoucher('${voucher._id}')">Claim</button>
                     `;
-                    // Only show vouchers the user can afford
+                    // only show vouchers the user can afford
                     let userPoints = sessionStorage.getItem("userPoints") || 0;
                     if (voucher.points <= userPoints) {
                         vouchersDiv.appendChild(voucherElem);
                     }
                 });
-
+                // display a message if no vouchers are available
                 if (vouchersDiv.innerHTML === "") {
                     vouchersDiv.innerHTML = "<p>Not enough points to claim vouchers.</p>";
                 }
             });
     }
-
-    // Claim the voucher and update the user points
+    // claim the voucher and update the user points
     claimVoucher(voucherId) {
-
         let userPoints = parseInt(sessionStorage.getItem("userPoints")) || 0;
         console.log("Attempting to claim voucher:", voucherId);
         console.log("User points:", userPoints);
-        // Temporarily fetch the vouchers from the local JSON file (simulating a fetch)
-        fetch(/*'/path/to/vouchers.json'*/ "../json/vouchers.json")
-            .then(response => response.json())
+        // fetch the vouchers from the API
+        fetch(`${this.apiBaseUrl}/vouchers`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": this.apiKey,
+                "Cache-Control": "no-cache"
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
             .then(vouchers => {
-                // Find the claimed voucher
-                console.log("Fetched vouchers:", vouchers);
+                // find the voucher with the given ID
                 const voucher = vouchers.find(v => v._id === voucherId);
-
+                // check if the voucher exists
                 if (!voucher) {
-                    console.error("Voucher not found with ID:", voucherId);  // Log error if voucher not found
-                    return;  // Exit early if the voucher is not found
+                    console.error("Voucher not found with ID:", voucherId); 
+                    return;
                 }
-
-                // Ensure voucher points are an integer and do the comparison
-                const voucherPoints = parseInt(voucher.points) || 0;  // Ensure it's an integer
-                console.log("Voucher points (after parseInt):", voucherPoints); // Debugging the parsed points
-
-
+                // ensure voucher points are an integer
+                const voucherPoints = parseInt(voucher.points) || 0;
+                console.log("Voucher points (after parseInt):", voucherPoints);
+                // check if the user has enough points to claim the voucher
                 if (voucher && voucher.points <= userPoints) {
-                    // Update the user's points
+                    // update the user's points
                     let updatedPoints = userPoints - voucher.points;
+                    // store the updated points in session storage
                     sessionStorage.setItem("userPoints", updatedPoints);
+                    // display the updated points
                     document.getElementById("currentPoints").textContent = updatedPoints;
                     console.log("Voucher claimed successfully:", updatedPoints);
-
+                    // show success alert
+                    alert("Voucher has been claimed successfully!");
+                    // update the user points in the API
                     this.updateUserPointsToAPI(updatedPoints);
+                    // fetch the vouchers again
                     this.fetchVouchers();
                 } else {
                     console.log("Not enough points to claim this voucher.");
                 }
             });
     }
-
-    // Fetch leaderboard and sort by points
+    // fetch leaderboard and sort by points
     fetchLeaderboard() {
-        fetch(/*"/api/accounts"*/ "../json/accounts.json")  // Fetch accounts data from the API
-            .then(response => response.json())
+        fetch(`${this.apiBaseUrl}/accounts`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": this.apiKey,
+                "Cache-Control": "no-cache"
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
             .then(users => {
                 console.log("Fetched leaderboard data:", users);
                 let leaderboardBody = document.getElementById("leaderboard");
-                leaderboardBody.innerHTML = "";  // Clear the current leaderboard
-
-                // Sort users by points in descending order
+                leaderboardBody.innerHTML = "";
+                // sort users by points in descending order
                 users.sort((a, b) => b.points - a.points).forEach((user, index) => {
                     let row = document.createElement("tr");
                     row.innerHTML = `<td>${index + 1}</td><td>${user.username}</td><td>${user.points}</td>`;
@@ -172,21 +214,28 @@ class GameRewards {
                 console.error("Error fetching leaderboard:", error);
             });
     }
-
-    // Update user's points after game over
+    // update user's points after game over
     updateGamePoints(score) {
+        // check if the user is logged in
         if (!this.checkLoginStatus()) return;
-
+        // get the user points from session storage
         let userPoints = parseInt(sessionStorage.getItem("userPoints")) || 0;
-        let pointsEarned = Math.floor(score / 800);  // Convert game score to points (1 point per 800 game points)
-        let newTotal = userPoints + pointsEarned;
-        sessionStorage.setItem("userPoints", newTotal);
-        document.getElementById("currentPoints").textContent = newTotal;
-        console.log(`Game Over! Earned ${pointsEarned} points. New total: ${newTotal}`);
-
-        this.updateUserPointsToAPI();
+        let pointsEarned = Math.floor(score / 300);  // convert game score to points (1 point per 300 game points)
+        if (pointsEarned > 0) {
+            // calculate the new total points
+            let newTotal = userPoints + pointsEarned;
+            // store the new total points in session storage
+            sessionStorage.setItem("userPoints", newTotal);
+            // display the new total points
+            document.getElementById("currentPoints").textContent = newTotal;
+            console.log(`Game Over! Earned ${pointsEarned} points. New total: ${newTotal}`);
+            // update the user points in the API
+            this.updateUserPointsToAPI(newTotal);
+        } else {
+            console.log("No points earned. Score:", score);
+        }
     }
-
+    // update user points in the API
     updateUserPointsToAPI(newTotal) {
         let userId = sessionStorage.getItem("userId");
 
@@ -198,21 +247,31 @@ class GameRewards {
         console.log("Updating API. User ID:", userId, "New Points:", newTotal); 
 
         if (userId && newTotal) {
-            fetch(`/api/accounts/${userId}`, {
+            fetch(`${this.apiBaseUrl}/accounts/${userId}`, {
                 method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ points: newTotal })
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-apikey": this.apiKey,
+                    "Cache-Control": "no-cache"
+                },
+                body: JSON.stringify({
+                    points: newTotal,
+                    _id: userId,
+                }),
             })
             .then(response => response.json())
-            .then(data => console.log("Successfully updated user points in API:", data))
-            .catch(error => console.error("Failed to update API:", error));
+            .then(data => {
+                console.log('API update data:', data);
+                // after updating the user points, refresh the leaderboard
+                this.fetchLeaderboard();
+            })
+            .catch(error => console.error('Error:', error));
         }
     }
 }
-
 const gameRewards = new GameRewards();
 
-/*DINO GAME CODE*/
+/*DINO GAME CODE TAKEN ONLINE WITH OWN MINOR ADJUSTMENTS*/
 //board
 let board;
 let boardWidth = 750;
@@ -280,14 +339,14 @@ window.onload = function () {
     cactusImages.push(new Image());
     cactusImages[2].src = "../images/game/sofa3.png";
 
-    // Prevent spacebar from scrolling
+    // prevent spacebar from scrolling
     document.addEventListener("keydown", function (e) {
-        if (gameStarted && (e.code == "Space" || e.keyCode === 32)) {
+        if (gameStarted && (e.code == "Space")) {
             e.preventDefault();
         }
         moveDino(e);
     });
-
+    // Add event listeners for the game buttons
     document.getElementById("startGameBtn").addEventListener("click", startGame);
     document.getElementById("restartGameBtn").addEventListener("click", restartGame);
 };
@@ -328,34 +387,33 @@ function restartGame() {
 
 function update() {
     if (gameOver) {
-        // Ensure the final frame is drawn
+        // ensure the final frame is drawn
         context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
 
-        // Display "GAME OVER"
+        // display "GAME OVER"
         context.fillStyle = "black";
         context.font = "40px courier";
         context.fillText("GAME OVER", boardWidth / 2 - 120, boardHeight / 2 - 20);
 
-        //show final score
+        // show final score
         document.getElementById("restartGameBtn").style.display = "block";
         context.fillStyle = "black";
         context.font = "20px courier";
         context.fillText("Final Score: " + score, boardWidth / 2 - 100, 50);
 
-        // Display the Lottie animation to indicate points earned
+        // display the Lottie animation to indicate points earned
         const endGameAnimation = document.getElementById("endGameAnimation");
         if (score > 800) {
-            endGameAnimation.style.display = "block"; // Show the animation
-             // Hide the Lottie animation after 3 seconds
+            endGameAnimation.style.display = "block";
             setTimeout(() => {
-                endGameAnimation.style.display = "none"; // Hide the animation after 3 seconds
-            }, 3000); // 3000ms = 3 seconds
+                endGameAnimation.style.display = "none"; // hide the animation after 3 seconds
+            }, 3000);
         }
 
-        // After the game ends, update the user's points
+        // after the game ends, update the user's points
         gameRewards.updateGamePoints(score);
         
-        return; // Stop the game loop
+        return;
     }
 
     requestAnimationFrame(update);

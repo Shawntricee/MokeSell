@@ -1,7 +1,6 @@
 [
     
     {
-        "_id": "6797978abb50491a00009ef2",
         "description": "Featuring a dreamy memory foam mattress, this sleeper sofa bed is upholstered in durable fabric with loose, easy-flip seat and back cushions. Entertaining and your guests had one too many? Sofa bed. In-laws unexpectedly show up? Sofa bed. Like to fall asleep in front of the TV? Sofa bed.",
         "price": 1699,
         "category": "Sofas",
@@ -12,7 +11,7 @@
         "material": "Fabric",
         "seller_id": [
             {
-                "_id": "6797923abb50491a00009ed2",
+                "_id": "67a56785bb50491a00011049",
                 "username": "Serene",
                 "email": "Serenekxy@gmail.com",
                 "password": "SEREN4854H",
@@ -34,7 +33,6 @@
         ]
     },
     {
-        "_id": "6797a0debb50491a00009f69",
         "description": "The Sede black leather walnut dining chair is all the elegance of a fancy dinner party, but with the laid-back air of a buddies’ barbeque. These black leather dining chairs are set atop slender, solid walnut legs. ",
         "price": 299,
         "category": "Chairs",
@@ -45,7 +43,7 @@
         "material": "Leather",
         "seller_id": [
             {
-                "_id": "679793e3bb50491a00009ed4",
+                "_id": "67a56785bb50491a0001104b",
                 "username": "shawntrice",
                 "email": "shawntrice@gmail.com",
                 "password": "shawntrice1234",
@@ -67,7 +65,6 @@
         ]
     },
     {
-        "_id": "67979e07bb50491a00009f31",
         "description": "Tapered legs, curved corners, natural wood grain — the whole nine yards. A self-storage butterfly leaf to allow for 6 people.",
         "price": 999,
         "category": "Tables",
@@ -78,7 +75,7 @@
         "material": "Wood",
         "seller_id": [
             {
-                "_id": "679793a1bb50491a00009ed3",
+                "_id": "67a56785bb50491a0001104a",
                 "username": "Bobby",
                 "email": "bobby@gmail.com",
                 "password": "bobby1234",
@@ -100,7 +97,6 @@
         ]
     },
     {
-        "_id": "6797a05bbb50491a00009f5e",
         "description": "With a perfectly curved backrest seamlessly blending into its mini-elbow armrests, topped off with a plump upholstered seat, you'll never want to leave the dining table.",
         "price": 199,
         "category": "Chairs",
@@ -111,7 +107,7 @@
         "material": "Wood",
         "seller_id": [
             {
-                "_id": "679793e3bb50491a00009ed4",
+                "_id": "67a56785bb50491a0001104b",
                 "username": "shawntrice",
                 "email": "shawntrice@gmail.com",
                 "password": "shawntrice1234",
@@ -133,7 +129,6 @@
         ]
     },
     {
-        "_id": "67979cb8bb50491a00009f26",
         "description": "The Loda fuses form and function with a powder coated metal frame, springy rope suspension, and tremendously plush high-density UV- and water-resistant Olefin fabric cushions. Both the back and seat cushions are loose from the frame, making them easy to clean and store.",
         "price": 999,
         "category": "Sofas",
@@ -144,7 +139,7 @@
         "material": "Metal",
         "seller_id": [
             {
-                "_id": "6797923abb50491a00009ed2",
+                "_id": "67a56785bb50491a00011049",
                 "username": "Serene",
                 "email": "Serenekxy@gmail.com",
                 "password": "SEREN4854H",
@@ -166,7 +161,6 @@
         ]
     },
     {
-        "_id": "67979e85bb50491a00009f3c",
         "description": "Minimal, sleek, timeless — what else can we say? Well, we should probably also mention that the Madera Table is made of heavy solid oak wood.",
         "price": 999,
         "category": "Tables",
@@ -177,7 +171,7 @@
         "material": "Wood",
         "seller_id": [
             {
-                "_id": "679793a1bb50491a00009ed3",
+                "_id": "67a56785bb50491a0001104a",
                 "username": "Bobby",
                 "email": "bobby@gmail.com",
                 "password": "bobby1234",
@@ -199,7 +193,6 @@
         ]
     },
     {
-        "_id": "67979f4ebb50491a00009f47",
         "description": "Accentuate your space with the mid century modern Amoeba end table. Several pieces of American Black Walnut are laminated together to form a beautiful table top with visible knots and color variation.",
         "price": 149,
         "category": "Tables",
@@ -210,7 +203,7 @@
         "material": "Wood",
         "seller_id": [
             {
-                "_id": "679793a1bb50491a00009ed3",
+                "_id": "67a56785bb50491a0001104a",
                 "username": "Bobby",
                 "email": "bobby@gmail.com",
                 "password": "bobby1234",
@@ -232,7 +225,6 @@
         ]
     },
     {
-        "_id": "67979fb9bb50491a00009f52",
         "description": "This glass-topped table avoids clutter and adds an open, airy feel to your space. The unique solid wood leg design will also always be in clear view.",
         "price": 199,
         "category": "Tables",
@@ -243,7 +235,7 @@
         "material": "Glass",
         "seller_id": [
             {
-                "_id": "679793a1bb50491a00009ed3",
+                "_id": "67a56785bb50491a0001104a",
                 "username": "Bobby",
                 "email": "bobby@gmail.com",
                 "password": "bobby1234",
@@ -265,7 +257,6 @@
         ]
     },
     {
-        "_id": "6797a43abb50491a00009f77",
         "description": "ith a low, exposed veneer back,  a total mid-century modern dream seat, the Sede Swivel Bar Stool proves that good design always comes full circle. ",
         "price": 429,
         "category": "Chairs",
@@ -276,7 +267,7 @@
         "material": "Leather",
         "seller_id": [
             {
-                "_id": "679793e3bb50491a00009ed4",
+                "_id": "67a56785bb50491a0001104b",
                 "username": "shawntrice",
                 "email": "shawntrice@gmail.com",
                 "password": "shawntrice1234",
@@ -298,7 +289,6 @@
         ]
     },
     {
-        "_id": "67979b36bb50491a00009f1b",
         "description": "The Abisko right sectional offers a wide lounging chaise so you never have to restrict your relaxation. Made with Quartz White upholstery and titanium-finished legs, the Abisko sectional is here to make a stylish statement.",
         "price": 1599,
         "category": "Sofas",
@@ -309,7 +299,7 @@
         "material": "Metal",
         "seller_id": [
             {
-                "_id": "6797923abb50491a00009ed2",
+                "_id": "67a56785bb50491a00011049",
                 "username": "Serene",
                 "email": "Serenekxy@gmail.com",
                 "password": "SEREN4854H",
@@ -331,7 +321,6 @@
         ]
     },
     {
-        "_id": "6797a4adbb50491a00009f82",
         "description": "Made of solid wood, not only is the Esse the perfect seat for counter-side gossip, it also easily tucks under the counter for when your kitchen party turns into a dance party.",
         "price": 249,
         "category": "Chairs",
@@ -342,7 +331,7 @@
         "material": "Wood",
         "seller_id": [
             {
-                "_id": "679793e3bb50491a00009ed4",
+                "_id": "67a56785bb50491a0001104b",
                 "username": "shawntrice",
                 "email": "shawntrice@gmail.com",
                 "password": "shawntrice1234",
@@ -364,7 +353,6 @@
         ]
     },
     {
-        "_id": "679799d1bb50491a00009f08",
         "description": "Natural color variations, wrinkles and creases are part of the unique characteristics of this leather. It will develop a relaxed vintage look with regular use.",
         "price": 3699,
         "category": "Sofas",
@@ -375,7 +363,7 @@
         "material": "Leather",
         "seller_id": [
             {
-                "_id": "6797923abb50491a00009ed2",
+                "_id": "67a56785bb50491a00011049",
                 "username": "Serene",
                 "email": "Serenekxy@gmail.com",
                 "password": "SEREN4854H",
@@ -397,7 +385,6 @@
         ]
     },
     {
-        "_id": "679796bbbb50491a00009ee6",
         "description": "Picture this: you’re rolling out of bed. Your partner has returned from the cafe with lattes in hand. You migrate to your sofa and sink into its vast plushness — no one spills their drink. It's what weekend dreams are made of (even on a Monday). It's also what we like to call a perfect Timber morning.",
         "price": 1299,
         "category": "Sofas",
@@ -408,7 +395,7 @@
         "material": "Fabric",
         "seller_id": [
             {
-                "_id": "6797923abb50491a00009ed2",
+                "_id": "67a56785bb50491a00011049",
                 "username": "Serene",
                 "email": "Serenekxy@gmail.com",
                 "password": "SEREN4854H",
@@ -430,7 +417,6 @@
         ]
     },
     {
-        "_id": "67979891bb50491a00009efd",
         "description": "Natural color variations, wrinkles and creases are part of the unique characteristics of this leather. It will develop a relaxed vintage look with regular use.",
         "price": 1699,
         "category": "Sofas",
@@ -441,7 +427,7 @@
         "material": "Leather",
         "seller_id": [
             {
-                "_id": "6797923abb50491a00009ed2",
+                "_id": "67a56785bb50491a00011049",
                 "username": "Serene",
                 "email": "Serenekxy@gmail.com",
                 "password": "SEREN4854H",
