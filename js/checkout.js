@@ -190,7 +190,7 @@ class CheckoutManager {
         //clear cart
         localStorage.setItem('cartState', JSON.stringify({ items: [] }));
         //redirect to confirmation page
-        window.location.href = '/html/order-confirmation.html';
+        window.location.href = "order-confirmation.html";
     }
 
     validateForm() {

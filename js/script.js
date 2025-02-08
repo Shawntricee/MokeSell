@@ -215,7 +215,7 @@ class SearchFeature {
             if (query) {
                 // Check if the current page is index.html
                 const path = window.location.pathname.split("/").pop();
-                if (path === "index.html") {
+                if (path === "") {
                     window.location.href = `html/products.html?search=${encodeURIComponent(query)}`;
                 } else {
                     window.location.href = `../html/products.html?search=${encodeURIComponent(query)}`;
@@ -228,7 +228,7 @@ class SearchFeature {
         // Check if the current page is index.html
         const path = window.location.pathname.split("/").pop();
         let url;
-        if (path === "index.html") {
+        if (path === "") {
             url = `html/product-details.html?id=${product._id}`;
         } else {
             url = `../html/product-details.html?id=${product._id}`;
