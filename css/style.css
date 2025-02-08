@@ -9,7 +9,6 @@
 /*font styles*/
 .nunito-sans-font {
   font-family: "Nunito Sans", sans-serif;
-  font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
   font-variation-settings:
@@ -169,7 +168,7 @@ dotlottie-player {
   font-weight: 500;
   border: 1px solid #EDE6D9;
   padding: 10px 20px;
-  width: 100%;
+  text-align: center;
   flex-shrink: 1;
   transition: all 0.3s ease-in-out;
 }
@@ -432,6 +431,9 @@ dotlottie-player {
   height: 70px;
   border-radius: 50%;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .fixed-button:hover {
@@ -465,7 +467,7 @@ dotlottie-player {
   background-color: #FFFFFF;
   border-radius: 20px;
   padding:  20px 40px 40px 40px;
-  box-shadow: 0px 4px  10px rgba(0, 0, 0, 0,2);
+  box-shadow: 0px 4px  10px rgba(0, 0, 0, 0.2);
   opacity: 0;
   transform: translate(-50%, -60%) scale(0.8);
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -898,6 +900,7 @@ to { opacity: 0; transform: translateX(30px); }
   font-weight: 600;
   color: #342519;
   background-color: #FFFFFF;
+  text-decoration: none;
   box-shadow: inset 0 0 0 0 #34251912;
   border: none;
   transition: ease-out 0.4s;
@@ -1081,7 +1084,6 @@ to { opacity: 0; transform: translateX(30px); }
   background-size: cover;
   width: 45%;
   height: 560px;
-  color: 20px;
   text-align: left;
   box-sizing: border-box;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -1102,17 +1104,18 @@ to { opacity: 0; transform: translateX(30px); }
   font-weight: 500;
   margin-bottom: 20px;
 }
-.list-listings button, .browse-listings button{
+.list-listings .list-button, .browse-listings .browse-button{
   padding: 10px 20px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   background-color: #FFFFFF;
   color: #342519;
+  text-decoration: none;
   border:1px solid rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
 }
-.list-listings button:hover, .browse-listings button:hover{
+.list-listings .list-button:hover, .browse-listings .browse-button:hover{
   background-color: transparent;
   border: 1px solid #FFFFFF;
   color:#FFFFFF;
@@ -2282,7 +2285,6 @@ to { opacity: 0; transform: translateX(30px); }
 .quantity-btn:hover {
   background: #684F36;
   color: #fff;
-  border-color: #684F36;
 }
 /*delivery options*/
 .operators {
@@ -2323,21 +2325,14 @@ to { opacity: 0; transform: translateX(30px); }
   gap: 20px;
 }
 .delivery-option {
-  flex: 1;
-}
-.option-details {
+  width: 100%;
   padding: 20px;
-  border: 1px solid #E0E0E0;
-  border-radius: 8px;
   cursor: pointer;
+  flex: 1;
+  background-color: #b4b4b44a;
+  border-radius: 8px;
   transition: all 0.3s ease;
-}
-.delivery-option input[type="radio"] {
-  display: none;
-}
-.delivery-option input[type="radio"]:checked + .option-details {
-  border-color: #684F36;
-  background: rgba(104, 79, 54, 0.05);
+  border: 2px solid transparent;
 }
 .option-details .price {
   font-size: 20px;
@@ -2657,6 +2652,7 @@ to { opacity: 0; transform: translateX(30px); }
 }
 /*order details card*/
 .order-details-card {
+  width: 80%;
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -2885,7 +2881,7 @@ to { opacity: 0; transform: translateX(30px); }
   border-radius: 5px;
   cursor: pointer;
   font-size: 18px;
-  transition: background-color 0.2 ease;
+  transition: background-color 0.2s ease;
 }
 #start-playing:hover{
   background-color: #5A4228;
@@ -3865,7 +3861,6 @@ thead th{
   }
   .details h4{
     font-size: 16px;
-    text-align: flex-start;
   }
   .details p, .product-points{
     font-size: 16px;
@@ -4207,7 +4202,7 @@ thead th{
   .list-browse-listings p{
     font-size: 16px;
   }
-  .list-browse-listings button{
+  .list-browse-listings .list-button, .browse-button{
     padding: 6px 12px;
     font-size: 12px;
   }

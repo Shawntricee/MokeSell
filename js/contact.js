@@ -289,7 +289,7 @@ class ContactManager {
             console.log('Checking chatData before assignment:', this.chatData);
             const autoResponses = (this.chatData.length > 0 && this.chatData[0].messages) ? this.chatData[0].messages : [];
             console.log('Auto-responses:', autoResponses);
-            
+
             const smartResponse = this.getSmartResponse(message, autoResponses);
             botMessage.textContent = smartResponse;
             messagesContainer.appendChild(botMessage);
@@ -390,10 +390,6 @@ class ContactManager {
     }
 }
 
-//global function for google maps API callback
-function initMap() {
-    console.log('Google Maps API loaded');
-}
 //initialize contact manager when dom is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new ContactManager();

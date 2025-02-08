@@ -33,9 +33,7 @@
                 </div>
                 <!--right buttons--> 
                 <div class="nav-buttons">
-                    <a href="../html/listing.html">
-                        <button class="sell-button">Sell an item</button>
-                    </a>
+                    <a href="../html/listing.html" class="sell-button">Sell an item</a>
                     <div id="guestNav">
                         <button class="auth-button" id="navSignIn">Sign in</button>
                         <button class="auth-button" id="navSignUp">Sign up</button>
@@ -73,9 +71,9 @@
                             <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="../html/products.html?category=Sofas&subcategory=Fabric Sofas">Fabric Sofas</a></li>
-                            <li><a href="../html/products.html?category=Sofas&subcategory=Leather Sofas">Leather Sofas</a></li>
-                            <li><a href="../html/products.html?category=Sofas&subcategory=Metal Sofas">Metal Sofas</a></li>
+                            <li><a href="../html/products.html?category=Sofas&subcategory=Fabric%20Sofas">Fabric Sofas</a></li>
+                            <li><a href="../html/products.html?category=Sofas&subcategory=Leather%20Sofas">Leather Sofas</a></li>
+                            <li><a href="../html/products.html?category=Sofas&subcategory=Metal%20Sofas">Metal Sofas</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -83,10 +81,10 @@
                             <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="../html/products.html?category=Tables&subcategory=Dining Tables">Dining Tables</a></li>
-                            <li><a href="../html/products.html?category=Tables&subcategory=Side Tables">Side Tables</a></li>
-                            <li><a href="../html/products.html?category=Tables&subcategory=CoffeeTables">Coffee Tables</a></li>
-                            <li><a href="../html/products.html?category=Tables&subcategory=Study Tables">Study Tables</a></li>
+                            <li><a href="../html/products.html?category=Tables&subcategory=Dining%20Tables">Dining Tables</a></li>
+                            <li><a href="../html/products.html?category=Tables&subcategory=Side%20Tables">Side Tables</a></li>
+                            <li><a href="../html/products.html?category=Tables&subcategory=Coffee%20Tables">Coffee Tables</a></li>
+                            <li><a href="../html/products.html?category=Tables&subcategory=Study%20Tables">Study Tables</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -94,10 +92,10 @@
                             <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="../html/products.html?category=Chairs&subcategory=Dining Chairs">Dining Chairs</a></li>
+                            <li><a href="../html/products.html?category=Chairs&subcategory=Dining%20Chairs">Dining Chairs</a></li>
                             <li><a href="../html/products.html?category=Chairs&subcategory=Stools">Stools</a></li>
                             <li><a href="../html/products.html?category=Chairs&subcategory=Benches">Benches</a></li>
-                            <li><a href="../html/products.html?category=Chairs&subcategory=Office Chairs">Office Chairs</a></li>
+                            <li><a href="../html/products.html?category=Chairs&subcategory=Office%20Chairs">Office Chairs</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -105,7 +103,7 @@
                             <img src="../images/icons/dropdown-icon.png" alt="dropdown button">
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="../html/products.html?category=Beds&subcategory=Bed Frames">Bed Frames</a></li>
+                            <li><a href="../html/products.html?category=Beds&subcategory=Bed%20Frames">Bed Frames</a></li>
                             <li><a href="../html/products.html?category=Beds&subcategory=Mattresses">Mattresses</a></li>
                         </ul>
                     </li>
@@ -117,7 +115,7 @@
                             <li><a href="../html/products.html?category=Decors&subcategory=Accessories">Accessories</a></li>
                             <li><a href="../html/products.html?category=Decors&subcategory=Lamps">Lamps</a></li>
                             <li><a href="../html/products.html?category=Decors&subcategory=Mirrors">Mirrors</a></li>
-                            <li><a href="../html/products.html?category=Decors&subcategory=Pillow Cushions">Pillow Cushions</a></li>
+                            <li><a href="../html/products.html?category=Decors&subcategory=Pillow%20Cushions">Pillow Cushions</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -308,20 +306,19 @@
                 </form>
             </div>
         </section>
-    </main>
-    <!--live chat window container-->
-    <div id="chatWindow" class="chat-window" style="display: none;">
-        <div class="chat-header">
-            <h3>Live Chat Support</h3>
-            <button class="close-chat">×</button>
+        <!--live chat window container-->
+        <div id="chatWindow" class="chat-window" style="display: none;">
+            <div class="chat-header">
+                <h3>Live Chat Support</h3>
+                <button class="close-chat">×</button>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input">
+                <textarea placeholder="Type your message..." id="chatInput"></textarea>
+                <button class="send-message">Send</button>
+            </div>
         </div>
-        <div class="chat-messages" id="chatMessages"></div>
-        <div class="chat-input">
-            <textarea placeholder="Type your message..." id="chatInput"></textarea>
-            <button class="send-message">Send</button>
-        </div>
-    </div>
-    <!--footer section-->
+        <!--footer section-->
         <footer class="footer">
             <!--footer left section-->
             <div class="footer-left">
@@ -392,7 +389,7 @@
             <div id="emptyCartLottie"></div>
             <h3>Your cart is empty</h3>
             <p>Looks like you haven't added any items yet</p>
-            <button class="continue-shopping"><a href="../html/products.html">Continue Shopping</a></button>
+            <a href="../html/products.html" class="continue-shopping">Continue Shopping</a>
         </div>
         <!--cart summary-->
         <div class="cart-summary">
@@ -422,7 +419,7 @@
             </div>
             <!--checkout button-->
             <button id="checkoutButton" class="checkout-button">
-                Continue to check out
+                Continue to checkout
             </button>
         </div>
     </div>
@@ -449,12 +446,8 @@
 
     <!--fixed buttons section-->
     <div class="fixed-buttons">
-        <a href="../html/game.html">
-            <button class="fixed-button"><img src="../images/icons/game-icon.png" alt="game-icon"></button>
-        </a>
-        <a href="../html/listing.html">
-            <button class="fixed-button"><img src="../images/icons/listing-icon.png" alt="listing-icon"></button>
-        </a>
+        <a href="../html/game.html" class="fixed-button"><img src="../images/icons/game-icon.png" alt="game-icon"></a>
+        <a href="../html/listing.html" class="fixed-button"><img src="../images/icons/listing-icon.png" alt="listing-icon"></a>
     </div>
     <!--registration popup section-->
     <div id="popupOverlay" class="popup-overlay">s</div>
@@ -462,7 +455,7 @@
     <div id="registrationPopup" class="popup">
         <div class="popup-container">
             <div class="popup-logo">
-                <img src="../images/others/mokesell-logo-popup.png">
+                <img src="../images/others/mokesell-logo-popup.png" alt="mokesell logo">
             </div>
             <span class="close-button">X</span>
             <div class="popup-header">
