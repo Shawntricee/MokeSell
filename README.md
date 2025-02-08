@@ -151,5 +151,8 @@ You can view the development wireframes here: [Wireframe Link to be inserted]
 - Icons from [Flaticon](https://www.flaticon.com/)
 - Animations from [LottieFiles](https://lottiefiles.com)
 
+### Wireframe Design
+- View my Figma wireframe design here: [Figma Link](https://www.figma.com/design/Vf6cZ8GuLS6Fa0BggLnay0/FED_Shawntrice_Serene_Assg2_Wireframe?node-id=128-407&t=zBQIEY3styoeudrO-1)
+
 ### Acknowledgements
 - Serene Ker and Shawntrice Yip
