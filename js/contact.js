@@ -1,13 +1,11 @@
-//constants and configurations
-const RESTDB_API_KEY = 'my-restdb-api-key';
-const RESTDB_API_URL = 'https://mokesell-d5a1.restdb.io/rest';
-
 /*contactmanager class to handle all contact page functionality*/
 class ContactManager {
     constructor() {
         this.initComponents();
         this.setupEventListeners();
+        this.chatData = null;
     }
+
     /*initialize all page components*/
     initComponents() {
         this.initLottieAnimations();
@@ -17,9 +15,11 @@ class ContactManager {
             messages: [],
             isTyping: false
         };
-        this.loadChatHistory(); //load previous chat if exists
+        this.loadChatHistory();
         this.isSubmitting = false;
+        this.loadChatData();
     }
+
     /*initialize Lottie animations*/
     initLottieAnimations() {
         //loading animation for form submissions
@@ -31,11 +31,10 @@ class ContactManager {
             path: '../animations/loading.json'
         });
     }
-
     /*initialize google maps*/
     initMaps() {
         const mapOptions = {
-            zoom: 15,
+            zoom: 16,
             styles: [
                 {
                     featureType: 'all',
@@ -49,45 +48,72 @@ class ContactManager {
                 }
             ]
         };
-        //initialize headquarters map
-        const hqMap = new google.maps.Map(
-            document.getElementById('headquartersMap'),
-            {
-                ...mapOptions,
-                center: { lat: 1.3521, lng: 103.8198 }
-            }
-        );
-        new google.maps.Marker({
-            position: { lat: 1.3521, lng: 103.8198 },
-            map: hqMap,
-            title: 'MokeSell Headquarters'
+        try {
+            //headquarters
+            const hqMap = new google.maps.Map(
+                document.getElementById('headquartersMap'),
+                {
+                    ...mapOptions,
+                    center: { lat: 1.3455, lng: 103.8168 } //coordinates for bukit timah
+                }
+            );
+            new google.maps.Marker({
+                position: { lat: 1.3455, lng: 103.8168 },
+                map: hqMap,
+                title: 'MokeSell Headquarters - Bukit Timah'
+            });
+            //berlin office
+            const berlinMap = new google.maps.Map(
+                document.getElementById('berlinMap'),
+                {
+                    ...mapOptions,
+                    center: { lat: 52.5200, lng: 13.4050 } //coordinates for berlin
+                }
+            );
+            new google.maps.Marker({
+                position: { lat: 52.5200, lng: 13.4050 },
+                map: berlinMap,
+                title: 'MokeSell Berlin Office'
+            });
+            //vienna office
+            const viennaMap = new google.maps.Map(
+                document.getElementById('viennaMap'),
+                {
+                    ...mapOptions,
+                    center: { lat: 48.2082, lng: 16.3738 } //coordinates for vienna
+                }
+            );
+            new google.maps.Marker({
+                position: { lat: 48.2082, lng: 16.3738 },
+                map: viennaMap,
+                title: 'MokeSell Vienna Office'
+            });
+        } catch (error) {
+            console.error('Error loading Google Maps:', error);
+            this.handleMapLoadError();
+        }
+    }
+
+    //handle map loading errors
+    handleMapLoadError() {
+        const mapContainers = document.querySelectorAll('.office-map');
+        mapContainers.forEach(container => {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 20px; background-color: #f8f8f8;">
+                    <p>Unable to load map. Please check your internet connection.</p>
+                </div>
+            `;
         });
-        //initialize other office maps similarly
-        const berlinMap = new google.maps.Map(
-            document.getElementById('berlinMap'),
-            {
-                ...mapOptions,
-                center: { lat: 52.5200, lng: 13.4050 }
-            }
-        );
-        const viennaMap = new google.maps.Map(
-            document.getElementById('viennaMap'),
-            {
-                ...mapOptions,
-                center: { lat: 48.2082, lng: 16.3738 }
-            }
-        );
-        //add markers for other offices
-        new google.maps.Marker({
-            position: { lat: 52.5200, lng: 13.4050 },
-            map: berlinMap,
-            title: 'MokeSell Berlin Office'
-        });
-        new google.maps.Marker({
-            position: { lat: 48.2082, lng: 16.3738 },
-            map: viennaMap,
-            title: 'MokeSell Vienna Office'
-        });
+    }
+    //load chat data from JSON
+    async loadChatData() {
+        try {
+            const response = await fetch('../chat.json');
+            this.chatData = await response.json();
+            console.log('Chat data loaded', this.chatData);
+        } catch (error) {
+            console.error('Error loading chat data:', error);
+        }
     }
 
     /*setup event listeners for the page*/
@@ -161,10 +187,12 @@ class ContactManager {
         const inputs = form.querySelectorAll('input, textarea');
         return Array.from(inputs).every(input => this.validateInput(input));
     }
+
     /*email validation helper*/
     isValidEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
+
     /*show error for specific input*/
     showInputError(input, message) {
         this.clearError(input);
@@ -181,6 +209,7 @@ class ContactManager {
         if (errorDiv) errorDiv.remove();
         input.classList.remove('form-error');
     }
+
     /*toggle live chat window*/
     toggleChat() {
         if (this.chatWindow) {
@@ -200,7 +229,6 @@ class ContactManager {
             this.setupChatEventListeners();
         }
     }
-
     /*setup chat event listeners*/
     setupChatEventListeners() {
         const closeBtn = this.chatWindow.querySelector('.close-chat');
@@ -222,7 +250,9 @@ class ContactManager {
         const textarea = this.chatWindow.querySelector('textarea');
         const message = textarea.value.trim();
         if (!message) return;
+
         const messagesContainer = this.chatWindow.querySelector('.chat-messages');
+        
         //add user message
         const messageElement = document.createElement('div');
         messageElement.className = 'message user-message';
@@ -234,19 +264,22 @@ class ContactManager {
             content: message,
             timestamp: new Date()
         });
-
         //clear input
         textarea.value = '';
         //auto-scroll to bottom
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
         //show typing indicator
         this.showTypingIndicator();
-        //simulate bot response with typing delay
+        //simulate bot response with smart logic
         setTimeout(() => {
             this.hideTypingIndicator();
             const botMessage = document.createElement('div');
             botMessage.className = 'message bot-message';
-            botMessage.textContent = this.getSmartResponse(message);
+            
+            //use auto-response messages from JSON
+            const autoResponses = this.chatData?.settings?.auto_response?.messages || [];
+            const smartResponse = this.getSmartResponse(message, autoResponses);
+            botMessage.textContent = smartResponse;
             messagesContainer.appendChild(botMessage);
             //save bot message to chat state
             this.chatState.messages.push({
@@ -303,6 +336,7 @@ class ContactManager {
         form.insertBefore(errorDiv, form.firstChild);
         setTimeout(() => errorDiv.remove(), 5000);
     }
+
     /*save chat history to localstorage*/
     saveChatHistory() {
         localStorage.setItem('mokesell_chat_history', JSON.stringify(this.chatState.messages));
@@ -314,6 +348,7 @@ class ContactManager {
             this.chatState.messages = JSON.parse(history);
         }
     }
+
     /*show typing indicator in chat*/
     showTypingIndicator() {
         const messagesContainer = this.chatWindow.querySelector('.chat-messages');
@@ -323,6 +358,7 @@ class ContactManager {
         messagesContainer.appendChild(typingDiv);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
+
     /*hide typing indicator in chat*/
     hideTypingIndicator() {
         const typingIndicator = this.chatWindow.querySelector('.typing-indicator');
@@ -330,20 +366,33 @@ class ContactManager {
             typingIndicator.remove();
         }
     }
-    /*get context aware response*/
-    getSmartResponse(message) {
+
+    /*get context aware response with JSON integration*/
+    getSmartResponse(message, autoResponses) {
         const lowerMessage = message.toLowerCase();
-        if (lowerMessage.includes('order')) {
-            return "I can help you with your order. Could you please provide your order number?";
-        } else if (lowerMessage.includes('delivery')) {
-            return "For delivery inquiries, please provide your order number and I'll check the status for you.";
-        } else if (lowerMessage.includes('return')) {
-            return "I'll be happy to assist you with returns. Please note our return policy allows returns within 30 days of purchase.";
+        
+        //check for specific keywords using JSON auto-responses
+        const keywordResponses = [
+            { keywords: ['order', 'shipping'], response: autoResponses[1]?.content },
+            { keywords: ['voucher', 'discount'], response: autoResponses[2]?.content },
+            { keywords: ['help', 'hi', 'hello'], response: autoResponses[0]?.content }
+        ];
+
+        //find the first matching response
+        for (let item of keywordResponses) {
+            if (item.keywords.some(keyword => lowerMessage.includes(keyword))) {
+                return item.response || "Thank you for your message! Our support team will assist you shortly.";
+            }
         }
+        //fallback default response
         return "Thank you for your message! Our support team will assist you shortly.";
     }
 }
 
+//global function for google maps API callback
+function initMap() {
+    console.log('Google Maps API loaded');
+}
 //initialize contact manager when dom is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new ContactManager();
