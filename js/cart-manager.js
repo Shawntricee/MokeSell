@@ -105,7 +105,7 @@ class CartManager {
             });
         }
     }
-
+    // add to cart method
     async addToCart(productId) {
         console.log('Adding to cart:', productId); //debug log
         
@@ -120,6 +120,7 @@ class CartManager {
                 console.error('Product details not found');
                 return;
             }
+            // create a product object
             const product = {
                 id: productId,
                 title: document.getElementById('productTitle').textContent,
@@ -149,7 +150,7 @@ class CartManager {
             this.showNotification('Failed to add product to cart', 'error');
         }
     }
-
+    // open cart using cart icon method
     setupCartIconListener() {
         // check if the guestCartIcon exists and add the event listener
         const guestCartIcon = document.getElementById('guestCartIcon');
@@ -167,7 +168,7 @@ class CartManager {
             });
         }
     }
-
+    // update quantity method
     updateQuantity(itemId, change) {
         const item = this.state.items.find(item => item.id === itemId);
         if (!item) return;
@@ -181,7 +182,7 @@ class CartManager {
             this.updateCart();
         }
     }
-
+    //remove item method
     removeItem(itemId) {
         const itemElement = this.cartItems.querySelector(`[data-product-id="${itemId}"]`);
         if (itemElement) {
@@ -192,7 +193,7 @@ class CartManager {
             }, 300);
         }
     }
-
+    // update the cart method
     updateCart() {
         //calculate totals
         this.calculateTotals();
@@ -203,7 +204,7 @@ class CartManager {
         //update cart badge
         this.updateCartBadge();
     }
-
+    // calculation of subtotal, shipping, discount, and total method
     calculateTotals() {
         this.state.subtotal = this.state.items.reduce((sum, item) => 
             sum + (item.price * item.quantity), 0);
@@ -234,7 +235,7 @@ class CartManager {
         console.log(`Discount: ${this.state.discount}`);
         console.log(`Total: ${this.state.total}`);
     }
-
+    // cart items render method
     render() {
         if (!this.cartItems) return;
         //clear current items
@@ -263,7 +264,7 @@ class CartManager {
         itemElement.querySelector('.item-price').textContent = this.formatPrice(item.price * item.quantity);
         this.cartItems.appendChild(itemElement);
     }
-
+    // update summary method
     updateSummary() {
         document.getElementById('cartSubtotal').textContent = this.formatPrice(this.state.subtotal);
         document.getElementById('shippingCost').textContent = this.formatPrice(this.state.shipping);
@@ -271,7 +272,7 @@ class CartManager {
             this.state.discount > 0 ? `-${this.formatPrice(this.state.discount)}` : '$0';
         document.getElementById('cartTotal').textContent = this.formatPrice(this.state.total);
     }
-
+    // method to open cart sidebar
     openCart() {
         if (this.cartSidebar && this.cartOverlay) {
             this.cartSidebar.classList.add('active');
@@ -279,7 +280,7 @@ class CartManager {
             document.body.style.overflow = 'hidden';
         }
     }
-
+    // method to close cart sidebar
     closeCart() {
         if (this.cartSidebar && this.cartOverlay) {
             this.cartSidebar.classList.remove('active');
@@ -287,7 +288,7 @@ class CartManager {
             document.body.style.overflow = '';
         }
     }
-
+    // notification method
     showNotification(message, type = 'info') {
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
@@ -298,7 +299,7 @@ class CartManager {
             setTimeout(() => notification.remove(), 300);
         }, 3000);
     }
-
+    // method to update cart badge
     updateCartBadge() {
         const badges = document.querySelectorAll('.cart-badge');
         const itemCount = this.state.items.reduce((sum, item) => sum + item.quantity, 0);
@@ -307,7 +308,7 @@ class CartManager {
             badge.style.display = itemCount > 0 ? 'flex' : 'none';
         });
     }
-
+    
     formatPrice(amount) {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',

@@ -3455,8 +3455,7 @@ thead th{
 }
 
 
-/*RESPONSIVE DESIGN*/ /*NOTE: can u consolidate all ur responsive media query here THANKS (one spacing between each html page, no spacing between each style target)*/
-/*responsive design*/
+/*RESPONSIVE DESIGN*/
 @media (max-width: 1024px) {
   /*navbar section styles*/
   .menu-btn{
