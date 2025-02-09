@@ -42,7 +42,7 @@ dotlottie-player {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 1000;
 }
 /*promo bar section styles*/
 .promo-bar{
