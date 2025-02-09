@@ -107,13 +107,13 @@ class ContactManager {
     async loadChatData() {
         try {
             // Replace with your API URL
-            const apiUrl = 'https://mokesell-7cde.restdb.io/rest/chat';  // Example API URL
+            const apiUrl = 'https://mokesell-39a1.restdb.io/rest/chat';  // Example API URL
             
             const response = await fetch(apiUrl, {
                 method: 'GET',  // Using GET method to fetch data
                 headers: {
                     'Content-Type': 'application/json',
-                    "x-apikey": "67a4f3a7fd5d586e56efe120",
+                    "x-apikey": "67a5a5b09c979727011b2a7b",
                     "Cache-Control": "no-cache"
                 }
             });

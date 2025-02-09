@@ -1,8 +1,8 @@
 class GameRewards {
     constructor() {
         // define the API base URL and API key
-        this.apiBaseUrl = "https://mokesell-7cde.restdb.io/rest"/*"https://mokesell-39a1.restdb.io/rest"*/;
-        this.apiKey = "67a4f3a7fd5d586e56efe120"/*"67a5a5b09c979727011b2a7b"*/;
+        this.apiBaseUrl = "https://mokesell-39a1.restdb.io/rest";
+        this.apiKey = "67a5a5b09c979727011b2a7b";
         // define the steps for the game page hero section
         this.steps = [
             {
@@ -89,6 +89,10 @@ class GameRewards {
     fetchVouchers() {
         if (!this.checkLoginStatus()) return;
         let userPoints = parseInt(sessionStorage.getItem("userPoints")) || 0;
+        if(userPoints === 0) {
+            document.getElementById("vouchers").innerHTML = "<p>Not enough points to claim vouchers.</p>";
+            return;
+        }
         console.log("Fectching vouchers for user with points:", userPoints);
         // fetch vouchers from the API
         fetch(`${this.apiBaseUrl}/vouchers`, {
@@ -178,6 +182,8 @@ class GameRewards {
                     this.updateUserPointsToAPI(updatedPoints);
                     // fetch the vouchers again
                     this.fetchVouchers();
+                    //fetch leaderboard again
+                    this.fetchLeaderboard();
                 } else {
                     console.log("Not enough points to claim this voucher.");
                 }
