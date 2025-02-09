@@ -42,7 +42,7 @@ dotlottie-player {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 3;
 }
 /*promo bar section styles*/
 .promo-bar{
@@ -233,7 +233,7 @@ dotlottie-player {
   display: none;
   list-style: none;
   min-width: 150px;
-  z-index: 2;
+  z-index: 4;
 }
 .user-dropdown li{
   padding: 14px;
@@ -449,7 +449,7 @@ dotlottie-player {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
-  z-index: 2;
+  z-index: 4;
   transition: opacity 0.3s ease;
 }
 .popup-overlay.show{
@@ -459,7 +459,7 @@ dotlottie-player {
 #registrationPopup{
   display: none;
   position: fixed;
-  z-index: 3;
+  z-index: 5;
   top: 50%;
   left: 50%;
   width: 80%;
