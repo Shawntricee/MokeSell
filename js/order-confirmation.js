@@ -73,19 +73,19 @@ class OrderConfirmation {
 
     createOrderItemElement(item) {
         const itemDiv = document.createElement('div');
-        itemDiv.className = 'product-card';
+        itemDiv.className = 'order-product-card';
         itemDiv.innerHTML = `
-            <div class="product-image">
+            <div class="order-product-image">
                 <img src="${item.image || '../images/products/placeholder.jpg'}" 
                      alt="${item.title}">
             </div>
-            <div class="product-details">
+            <div class="order-product-details">
                 <div class="product-title">${item.title}</div>
                 <div class="product-meta">
                     <span class="product-size">Quantity: ${item.quantity}</span>
                 </div>
             </div>
-            <div class="product-price">${this.formatPrice(item.price * item.quantity)}</div>
+            <div class="order-product-price">${this.formatPrice(item.price * item.quantity)}</div>
         `;
         
         return itemDiv;
